@@ -30,20 +30,10 @@
     - name: flight_id
       sql:  $$.id
 
-    # if you want to join a table from another database, use sql: parameter.
-    
-    - join: carriers
-      sql_on: $$.carrier=carriers.code
-      #sql: LEFT JOIN flightstats.carriers as carriers ON ontime.carrier=carriers.code
 
     - name: origin
       sets:
         - origin.detail
-
-    - join: origin
-      from: airports
-      sql_on: $$.origin=origin.code
-      fields: [origin.full_name, origin.city, origin.state, origin.count]
           
     - name: destination
       sets:
@@ -53,11 +43,6 @@
       type: list
       list_field: destination
 
-    - join: destination
-      from: airports
-      sql_on: $$.destination=destination.code
-      fields: [destinaiton.full_name, destination.city, destination.state,
-        destination.count]
       
     - name: destination_cities
       type: list
@@ -104,10 +89,7 @@
       type: sum
       sql: $$.distance
 
-    - join: aircraft
-      sql_on: $$.tail_num = aircraft.tail_num
-      #fields: aircraft.export
-      
+     
     - name: plane_age_at_flight
       type: number
       required_joins: [aircraft]

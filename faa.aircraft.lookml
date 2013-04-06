@@ -2,7 +2,7 @@
 - view: aircraft
   sets:
     detail: [tail_number, aircraft_models.detail* plane_year,]
-    export: [plane_year, tail_number, aircraft_models.detail*, count]
+    export: [plane_year, tail_number, count]
 
   fields:
     - name: tail_number
@@ -41,9 +41,7 @@
     - name: city
     - name: state
       
-    - join: aircraft_models
-      using: aircraft_model_code
-      
+
 - view: aircraft_models
   sets:
     detail: [name, manufacturer, seats, engines, count]
@@ -95,9 +93,7 @@
     - name: weight
       type: number
 
-    - join: aircraft_types
-      sql_on: $$.aircraft_type_id = aircraft_types.aircraft_type_id
-      
+     
 - view: aircraft_types
   label: AIRCRAFT MODELS
   fields:

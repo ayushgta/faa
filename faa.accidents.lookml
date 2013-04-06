@@ -110,9 +110,6 @@
     - name: report_status
     - name: publication_date
 
-    - join: aircraft
-      sql_on: registration_number=aircraft.tail_num
-
     - name: amateur_built
       type: yesno
       sql: amateur_built = "Yes"
