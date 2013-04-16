@@ -104,7 +104,6 @@
 
     - measure: late_count
       type: count
-      units: flights
       detail: detail
       filters: 
         arrival_status: Late
@@ -115,7 +114,6 @@
 
     - measure: verylate_count
       type: count
-      units: flights
       detail: detail
       filters: 
         arrival_status: Very Late  
@@ -187,10 +185,10 @@
       sql: ${TABLE}.taxi_in
      
   sets:
-    origin.detail: [origin count, .aircraft_count, .carriers_count, .aircraft_models_count, 
-        .aircraft_models_manufacturer_count]
-    destination.detail: [count, .aircraft_count, .carriers_count, .aircraft_models_count, 
-        .aircraft_models_manufacturer_count]
+    origin.detail: [origin count, aircraft,count, carriers.count, .aircraft_models.count, 
+        aircraft_models.manufacturer_count]
+    destination.detail: [count, aircraft.count, carriers.count, .aircraft_models.count, 
+        aircraft_models.manufacturer_count]
     detail: [tail_num, flight_number, depart_time, carriers.name,  origin, origin.city, destination,  
       destination.city,]
     route_detail: [origin, origin.city, destination, destination.city, carriers.count,

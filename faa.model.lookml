@@ -8,7 +8,7 @@
   sql_table: ontime as flights
   conditionally_filter:
     depart_time: 2001/01/01 for 1 day
-    unless: [flight_id, tail_num]
+    unless: [tail_num]
   joins:
     - join: carriers
       sql_on: flights.carrier=carriers.code
