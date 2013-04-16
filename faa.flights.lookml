@@ -16,9 +16,6 @@
       interval: hour
       sql_start: ${TABLE}.dep_time
       sql_end: ${TABLE}.arr_time
-         
-    - dimension: flight_id
-      sql:  ${TABLE}.id
 
     - dimension: origin
     - dimension: destination
