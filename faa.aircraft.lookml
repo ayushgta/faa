@@ -1,18 +1,13 @@
-
 - view: aircraft
-  sets:
-    detail: [tail_number, aircraft_models.detail* plane_year,]
-    export: [plane_year, tail_number, count]
-
   fields:
-    - name: tail_number
-      sql: $$.tail_num 
+    - dimension: tail_number
+      sql: ${TABLE}.tail_num 
 
-    - name: plane_year
+    - dimension: plane_year
       type: int
       sql: aircraft.year_built+0    # defeat the JDBC automatic conversion to date because of the word 'year'
     
-    - name: had_incident
+    - dimension: had_incident
       type: yesno
       sql: |
         (
@@ -21,45 +16,40 @@
           WHERE aircraft.tail_num=accidents.registration_number 
           LIMIT 1)
     
-    - name: count
+    - measure: count
       type: count_distinct
-      sets:
-        - origin.detail
-        - destination.detail
-        - carriers.detail
-        - models_detail
-      sql: $$.tail_num
+      sql: ${TABLE}.tail_num
       detail: detail
 
-    - name: certification
+    - dimension: certification
             
-    - name: status_code
-    - name: mode_s_code
-    - name: fract_owner
-    - name: owner_name
-      sql: $$.name      
-    - name: city
-    - name: state
+    - dimension: status_code
+    - dimension: mode_s_code
+    - dimension: fract_owner
+    - dimension: owner_name
+      sql: ${TABLE}.name      
+    - dimension: city
+    - dimension: state
       
+  sets:
+    detail: [tail_number, aircraft_models.detail* plane_year,]
+    export: [plane_year, tail_number, count]
+
 
 - view: aircraft_models
-  sets:
-    detail: [name, manufacturer, seats, engines, count]
-    aircraft_maker_detail: [manufacturer, flights.count, carriers.count,
-      aircraft_models.count, origin.count, destinaiton.count]
   fields:
-    - name: manufacturer
+    - dimension: manufacturer
 
-    - name: manufacturer_count
+    - measure: manufacturer_count
       type: count_distinct
       sets:
         - carriers.detail
-      sql: $$.manufacturer
+      sql: ${TABLE}.manufacturer
       detail: aircraft_maker_detail 
 
       # show how to create a like to google.
-    - name: name
-      sql: $$.model
+    - dimension: name
+      sql: ${TABLE}.model
       required_fields: [manufacturer]
       html: |
           <%= linked_value %> 
@@ -70,31 +60,31 @@
             <img src=http://www.google.com/favicon.ico></a>
           <% end %>
 
-    - name: seats
+    - dimension: seats
       type: number
 
-    - name: count
+    - measure: count
       type: count_distinct
-      sets:
-        - origin.detail
-        - destination.detail
-        - carriers.detail
-        - models_detail
-      sql: $$.model
+      sql: ${TABLE}.model
       detail: detail
       
-    - name: engines
+    - dimension: engines
       type: number
 
-    - name: amateur
+    - dimension: amateur
       type: yesno
-      sql: $$.amateur
+      sql: ${TABLE}.amateur
 
-    - name: weight
+    - dimension: weight
       type: number
+
+  sets:
+    detail: [name, manufacturer, seats, engines, count]
+    aircraft_maker_detail: [manufacturer, flights.count, carriers.count,
+      aircraft_models.count, origin.count, destinaiton.count]
 
      
 - view: aircraft_types
   label: AIRCRAFT MODELS
   fields:
-    - name: description
+    - dimension: description
