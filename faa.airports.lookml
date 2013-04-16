@@ -1,41 +1,41 @@
 
 - view: airports
   fields:
-    - dimension: code           # sql defaults to ${TABLE}.code   
-    - dimension: city           # sql defaults to ${TABLE}.city
+    - dimension: code                   # sql defaults to ${TABLE}.code   
+    - dimension: city                   # sql defaults to ${TABLE}.city
     - dimension: state
     - dimension: full_name
 
-    - dimension: facility_type  # rename the sql field.
+    - dimension: facility_type          # rename the sql field.
       sql: ${TABLE}.fac_type
       
-    - dimension: control_tower      # convert a 'Y' in the database
-      type: yesno                   #  to a yesno field.
+    - dimension: control_tower          # convert a 'Y' in the database
+      type: yesno                       #  to a yesno field.
       sql: ${TABLE}.cntl_twr = 'Y'
 
-    - dimension: elevation      # string is default type, numbers need to
-      type: number              #  be declared.
+    - dimension: elevation              # string is default type, numbers need to
+      type: number                      #  be declared.
 
-    - measure: count            # count the number of different
-      type: count_distinct      #  airport codes we encounter.
-      sql: ${TABLE}.code        # generates 'COUNT(DISTINCT airports.code)'
-      detail: detail            # the set of fields to show when we drill
-                                #  into AIRPORTS Count
+    - measure: count                    # count the number of different
+      type: count_distinct              #  airport codes we encounter.
+      sql: ${TABLE}.code                # generates sql - COUNT(DISTINCT airports.code)
+      detail: detail                    # the set of fields to show when we drill
+                                        #  into AIRPORTS Count
 
     - measure: with_control_tower_count
-      type: count_distinct      # Generates:
-      sql: ${TABLE}.code        #  COUNT(DISTINCT CASE WHEN airports.cntl_twr='Y' THEN airports.code ELSE NULL END)
-      detail: detail            # set of fields to drill into
+      type: count_distinct      
+      sql: ${TABLE}.code                #  COUNT(DISTINCT CASE WHEN airports.cntl_twr='Y' THEN airports.code ELSE NULL END)
+      detail: detail                    # set of fields to drill into
       filters:
-        control_tower: Yes      # only count airports with control towers.
+        control_tower: Yes              # only count airports with control towers.
 
     - dimension: avergae_elevation
       type: average
-      sql: ${TABLE}.elevation       # Generates AVG(airports.elevation)
+      sql: ${TABLE}.elevation           # AVG(airports.elevation)
 
     - measure: min_elevation
       type: min
-      sql: ${TABLE}.elevation       # Generates MIN(airports.elevation)
+      sql: ${TABLE}.elevation           # MIN(airports.elevation)
       
     - measure: max_elevation
       type: max
