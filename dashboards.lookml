@@ -1,14 +1,18 @@
 - dashboard: flights_facts
   title: Fun Flight Facts
+  layout: tile
   elements:
 
-    - name: airports_by_facility_type
+    - name: airports_by_elevation_tier
       type: piechart
       base_view: airports
       group: airports.elevation_tier
       measure: airports.count
       sorts: airports.elevation_tier
       ugly_fish: hello
+      height: 3
+      width: 6
+
 
     - name: airports_by_control_tower
       type: piechart
