@@ -7,6 +7,7 @@
       base_view: airports
       group: airports.elevation_tier
       measure: airports.count
+      ugly_fish: hello
 
     - name: airports_by_control_tower
       type: piechart
@@ -26,13 +27,23 @@
       group: origin.city
       measure: flights.count
 
-    - name: california_flights_by_destination
+    - name: california_flights_by_california_destination
       type: piechart
       base_view: flights
       group: destination.city
       measure: flights.count
       filters:
         origin.state: CA
+        destination.state: CA
+
+    - name: california_vs_new_york_vs_texas
+      type: piechart
+      base_view: flights
+      group: origin.state
+      measure: flights.count
+      filters:
+        origin.state: CA,NY,TX
+
 
     - name: flights_by_departure_hour
       type: time_series
