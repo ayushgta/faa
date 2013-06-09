@@ -11,7 +11,7 @@
       sorts: airports.elevation_tier
       ugly_fish: hello
       height: 3
-      width: 6
+      width: 3
 
 
     - name: airports_by_control_tower
@@ -19,18 +19,24 @@
       base_view: airports
       group: airports.control_tower
       measure: airports.count
+      height: 4
+      width: 4
 
     - name: flights_by_carrier
       type: piechart
       base_view: flights
       group: carriers.name
       measure: flights.count
+      height: 5
+      width: 5
 
     - name: flights_by_origin
       type: piechart
       base_view: flights
       group: origin.city
       measure: flights.count
+      height: 3
+      width: 3
 
     - name: california_flights_by_california_destination
       type: piechart
@@ -40,6 +46,8 @@
       filters:
         origin.state: CA
         destination.state: CA
+      height: 4
+      width: 4
 
     - name: california_vs_new_york_vs_texas
       type: piechart
@@ -48,6 +56,8 @@
       measure: flights.count
       filters:
         origin.state: CA,NY,TX
+      height: 3
+      width: 3
 
     - name: flights_by_departure_hour
       type: time_series
