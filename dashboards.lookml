@@ -4,19 +4,58 @@
   tile_size: 100
   elements:
 
+    - name: accidents_by_carrier
+      type: bar
+      base_view: accidents
+      dimension: accidents.air_carrier
+      measures: [accidents.count]
+      filters:
+        accidents.air_carrier: -EMPTY
+      limit: 5
+      width: 4
+      height: 4
+      stacking: normal
+
     - name: flights_by_departure_hour
-      type: scatter
+      type: area
       base_view: flights
       dimension: flights.depart_hour
       measures: [flights.count, flights.late_count, flights.verylate_count]
       filters:
         flights.depart_time: 2001-01-01 for 1 days
       sorts: flights.depart_hour
-      width: 12
-      height: 3
+      width: 4
+      height: 4
+      xAxisLabelsRotation: 45
+
+    - name: flights_by_departure_hour
+      type: bar
+      base_view: flights
+      dimension: flights.depart_hour
+      measures: [flights.count, flights.late_count, flights.verylate_count]
+      filters:
+        flights.depart_time: 2001-01-01 for 1 days
+      sorts: flights.depart_hour
+      width: 8
+      height: 10
+      stacking: normal
+
+
+    - name: flights_by_departure_hour
+      type: area
+      base_view: flights
+      dimension: flights.depart_hour
+      measures: [flights.count, flights.late_count, flights.verylate_count]
+      filters:
+        flights.depart_time: 2001-01-01 for 1 days
+      sorts: flights.depart_hour
+      width: 6
+      height: 4
+      xAxisLabelsRotation: -45
+      stacking: percent
 
     - name: airports_by_elevation_tier
-      type: piechart
+      type: pie
       base_view: airports
       group: airports.elevation_tier
       measure: airports.count
@@ -26,7 +65,7 @@
       height: 6
 
     - name: airports_by_control_tower
-      type: piechart
+      type: pie
       base_view: airports
       group: airports.control_tower
       measure: airports.count
@@ -34,7 +73,7 @@
       height: 3
 
     - name: california_vs_new_york_vs_texas
-      type: piechart
+      type: pie
       base_view: flights
       group: origin.state
       measure: flights.count
@@ -44,7 +83,7 @@
       height: 2
 
     - name: flights_by_carrier
-      type: piechart
+      type: pie
       base_view: flights
       group: carriers.name
       measure: flights.count
@@ -52,7 +91,7 @@
       height: 3
 
     - name: flights_by_origin
-      type: piechart
+      type: pie
       base_view: flights
       group: origin.city
       measure: flights.count
@@ -60,7 +99,7 @@
       height: 4
 
     - name: california_flights_by_california_destination
-      type: piechart
+      type: pie
       base_view: flights
       group: destination.city
       measure: flights.count
