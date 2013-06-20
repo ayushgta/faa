@@ -4,6 +4,14 @@
   tile_size: 100
   elements:
 
+    - name: state
+      type: lookup
+      base_view: airports
+      dimension: airports.state
+      default: CA,NY
+      height: 1
+      width: 1
+
     - name: accidents_by_carrier
       type: bar
       base_view: accidents
@@ -23,6 +31,8 @@
       measures: [flights.count, flights.late_count, flights.verylate_count]
       filters:
         flights.depart_time: 2001-01-01 for 1 days
+      linked_filters:
+        origin.state: state
       sorts: flights.depart_hour
       width: 4
       height: 4
