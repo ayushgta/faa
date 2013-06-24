@@ -4,31 +4,76 @@
   tile_size: 100
   elements:
 
+    - name: number_of_flights
+      type: single_value
+      base_view: flights
+      measure: flights.flight_number_count
+      width: 4
+      height: 2
+
+    - name: number_of_accidents
+      type: single_value
+      base_view: accidents
+      measure: accidents.count
+      filters:
+        accidents.air_carrier: -EMPTY
+      width: 4
+      height: 2
+      
+    - name: total_fatalities
+      type: single_value
+      base_view: accidents
+      measure: accidents.total_fatalities
+      width: 4
+      height: 2
+
     - name: accidents_by_carrier
-      type: bar
+      type: line
+      base_view: accidents
+      dimension: accidents.air_carrier
+      measures: [accidents.count, accidents.total_fatalities]
+      filters:
+        accidents.air_carrier: -EMPTY
+      limit: 6
+      width: 6
+      height: 4
+      legendAlign: 'right'
+
+    - name: accidents_by_carrier_2
+      type: column
       base_view: accidents
       dimension: accidents.air_carrier
       measures: [accidents.count]
       filters:
         accidents.air_carrier: -EMPTY
-      limit: 5
-      width: 10
+      limit: 6
+      width: 6
       height: 4
-      stacking: normal
+      
+    - name: accidents_by_carrier_3
+      type: scatter
+      base_view: accidents
+      dimension: accidents.air_carrier
+      measures: [accidents.count]
+      filters:
+        accidents.air_carrier: -EMPTY
+      limit: 6
+      width: 6
+      height: 4
 
-    - name: flights_by_departure_hour
-      type: area
+    - name: flights_by_departure_hour_unstacked
+      type: line
       base_view: flights
       dimension: flights.depart_hour
       measures: [flights.count, flights.late_count, flights.verylate_count]
       filters:
         flights.depart_time: 2001-01-01 for 1 days
       sorts: flights.depart_hour
-      width: 8
+      width: 6
       height: 4
       xAxisLabelsRotation: 45
-
-    - name: flights_by_departure_hour
+      
+    - name: flights_by_departure_hour_normal
       type: area
       base_view: flights
       dimension: flights.depart_hour
@@ -36,20 +81,20 @@
       filters:
         flights.depart_time: 2001-01-01 for 1 days
       sorts: flights.depart_hour
-      width: 5
+      width: 6
       height: 4
       xAxisLabelsRotation: -45
-      stacking: percent
-
-    - name: flights_by_departure_hour
-      type: column
+      stacking: normal
+      
+    - name: flights_by_departure_hour_percent
+      type: area
       base_view: flights
       dimension: flights.depart_hour
       measures: [flights.count, flights.late_count, flights.verylate_count]
       filters:
         flights.depart_time: 2001-01-01 for 1 days
       sorts: flights.depart_hour
-      width: 13
+      width: 6
       height: 4
       stacking: percent
 
@@ -60,8 +105,8 @@
       measure: airports.count
       sorts: airports.elevation_tier
       ugly_fish: hello
-      width: 6
-      height: 6
+      width: 3
+      height: 3
 
     - name: airports_by_control_tower
       type: pie
@@ -86,7 +131,7 @@
       base_view: flights
       group: carriers.name
       measure: flights.count
-      width: 6
+      width: 3
       height: 3
 
     - name: flights_by_origin
@@ -94,7 +139,7 @@
       base_view: flights
       group: origin.city
       measure: flights.count
-      width: 6
+      width: 3
       height: 3
 
     - name: california_flights_by_california_destination
@@ -105,12 +150,5 @@
       filters:
         origin.state: CA
         destination.state: CA
-      width: 6
+      width: 3
       height: 3
-
-    # - name: flight_today
-    #   type: number
-    #   base_view: flights
-    #   field: flights.count
-    #   filters:
-    #     flights.depart_time: "2001-01-01 for 1 days"
