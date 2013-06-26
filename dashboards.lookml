@@ -4,10 +4,20 @@
   tile_size: 100
   elements:
 
+    - name: table_test
+      type: table
+      base_view: flights
+      dimensions: [flights.depart_hour]
+      measures: [flights.count, flights.late_count, flights.verylate_count]
+      width: 7
+      height: 6
+
     - name: number_of_flights
       type: single_value
       base_view: flights
       measure: flights.flight_number_count
+      filters:
+        origin.state: CA
       width: 4
       height: 2
 
@@ -37,7 +47,7 @@
       limit: 6
       width: 6
       height: 4
-      legendAlign: 'right'
+
 
     - name: accidents_by_carrier_2
       type: column
