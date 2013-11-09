@@ -54,9 +54,11 @@
       sql: number_of_fatalities
 
     - measure: total_fatalities
+      label: Total Fatalities
       type: sum
       units: people
       sql: ${number_fatal_injuries}
+      
       
     - dimension: number_serious_injuries
       type: number
@@ -110,6 +112,7 @@
       sql: amateur_built = "Yes"
 
     - measure: count
+      label: Number of Accidents
       type: count
       units: accidents
       sets: 
@@ -172,7 +175,3 @@
     detail: [event_id, event_date, registration_number, aircraft_models.manufacturer, 
       investigation_type, 
       severity, number_injured, number_fatal_injuries, aircraft_damage,air_carrier]
-    
-
-      
-

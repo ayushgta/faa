@@ -1,5 +1,14 @@
 
 - view: flights
+  derived_table:
+    # remove some bogus flights.
+    sql: |
+        SELECT * 
+        FROM ontime 
+        WHERE dep_time > '1960-01-01'
+    sortkeys: [dep_time]
+    persist_for: 24 hours
+    
   fields:
     - dimension: tail_num    
   
@@ -11,12 +20,6 @@
     - dimension: arr_time
       type: datetime
   
-    - dimension: scheduled_duration
-      type: duration
-      interval: hour
-      sql_start: ${TABLE}.dep_time
-      sql_end: ${TABLE}.arr_time
-
     - dimension: origin
     - dimension: destination
 
@@ -59,6 +62,11 @@
 
     - dimension: distance
       sql: ${TABLE}.distance
+  
+    - dimension: distance_tiered
+      type: tier
+      sql: ${distance}
+      tiers: [100,200,400,600,800,1200,1600,3200]
 
     - measure: total_distance
       type: sum
@@ -109,8 +117,9 @@
         arrival_status: Late
 
     - measure: percent_late
-      type: percentage
-      sql: ${late_count}/${count}
+      type: number
+      sql: 100.0 * ${late_count}/NULLIF(${count},0)
+      decimals: 2
 
     - measure: verylate_count
       type: count
@@ -211,4 +220,4 @@
       sql: ${TABLE}.code
       detail: detail
   sets:
-    detail: [code, name]
+    detail: [code, name, flights.count, origin.count, destination.count]

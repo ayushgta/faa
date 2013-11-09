@@ -1,7 +1,9 @@
 
 - view: airports
   fields:
-    - dimension: code                   # sql defaults to ${TABLE}.code   
+    - dimension: code                   # sql defaults to ${TABLE}.code  
+      primary_key: true
+      
     - dimension: city                   # sql defaults to ${TABLE}.city
     - dimension: state
     - dimension: full_name
@@ -17,14 +19,12 @@
       type: number                      #  be declared.
 
     - measure: count                    # count the number of different
-      type: count_distinct              #  airport codes we encounter.
-      sql: ${TABLE}.code                # generates sql - COUNT(DISTINCT airports.code)
+      type: count                       #  airport codes we encounter.
       detail: detail                    # the set of fields to show when we drill
                                         #  into AIRPORTS Count
 
     - measure: with_control_tower_count
-      type: count_distinct      
-      sql: ${TABLE}.code                #  COUNT(DISTINCT CASE WHEN airports.cntl_twr='Y' THEN airports.code ELSE NULL END)
+      type: count     
       detail: detail                    # set of fields to drill into
       filters:
         control_tower: Yes              # only count airports with control towers.

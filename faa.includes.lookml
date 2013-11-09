@@ -2,4 +2,4 @@
 - include: faa.aircraft
 - include: faa.accidents
 - include: faa.flights
-# fdhjsklfsd
+- include: dashboards

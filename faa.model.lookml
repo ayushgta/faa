@@ -1,14 +1,11 @@
 - scoping: true
-- connection: faa
+- connection: red_flight
 
-- include: faa.includes
+- include: "*.lookml"
 
 - base_view: flights
   view: flights
-  sql_table: ontime as flights
-  conditionally_filter:
-    depart_time: 2001/01/01 for 1 day
-    unless: [tail_num]
+  sql_always_where: dep_time > '1960-01-01'
   joins:
     - join: carriers
       sql_on: flights.carrier=carriers.code
@@ -49,8 +46,8 @@
       sql_on: aircraft_models.aircraft_type_id = aircraft_types.aircraft_type_id
       required_joins: [aircraft_models]
  
-- base_view: accidents
-  view: accidents
-  joins:
-    - join: aircraft
-      sql_on: registration_number=aircraft.tail_num
+# - base_view: accidents
+#   view: accidents
+#   joins:
+#     - join: aircraft
+#       sql_on: registration_number=aircraft.tail_num
