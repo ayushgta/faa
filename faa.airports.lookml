@@ -29,7 +29,7 @@
       filters:
         control_tower: Yes              # only count airports with control towers.
 
-    - dimension: avergae_elevation
+    - dimension: average_elevation
       type: average
       sql: ${TABLE}.elevation           # AVG(airports.elevation)
 

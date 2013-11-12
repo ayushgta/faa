@@ -67,7 +67,7 @@
       type: tier
       sql: ${distance}
       tiers: [100,200,400,600,800,1200,1600,3200]
-
+      
     - measure: total_distance
       type: sum
       sql: ${TABLE}.distance

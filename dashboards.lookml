@@ -4,6 +4,16 @@
   tile_size: 100
   elements:
 
+    - name: flight_and_carriers_by_year
+      type: table
+      base_view: flights
+      dimensions: [carriers.name]
+      pivots: [flights.depart_year]
+      measures: [flights.count]
+      limit: 500
+      width: 8
+      height: 5
+    
     - name: number_of_flights_from_CA
       type: single_value
       base_view: flights
