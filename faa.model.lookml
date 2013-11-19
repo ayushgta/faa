@@ -24,6 +24,9 @@
       sql_on: flights.tail_num = aircraft.tail_num
       fields: aircraft.export
 
+    - join: aircraft_flights_facts
+      sql_foreign_key: flights.tail_num
+
     - join: aircraft_models
       using: aircraft_model_code
       required_joins: [aircraft]
@@ -45,7 +48,10 @@
     - join: aircraft_types
       sql_on: aircraft_models.aircraft_type_id = aircraft_types.aircraft_type_id
       required_joins: [aircraft_models]
- 
+
+    - join: aircraft_flights_facts
+      sql_foreign_key: aircraft.tail_num
+
 # - base_view: accidents
 #   view: accidents
 #   joins:

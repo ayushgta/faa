@@ -7,7 +7,7 @@
         FROM ontime 
         WHERE dep_time > '1960-01-01'
     sortkeys: [dep_time]
-    persist_for: 24 hours
+    persist_for: 2000 hours
     
   fields:
     - dimension: tail_num    
