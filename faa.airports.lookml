@@ -29,12 +29,6 @@
       filters:
         control_tower: Yes              # only count airports with control towers.
 
-    - measure: without_control_tower_count
-      type: count     
-      detail: detail                    # set of fields to drill into
-      filters:
-        control_tower: No
-
     - dimension: average_elevation
       type: average
       sql: ${TABLE}.elevation           # AVG(airports.elevation)
