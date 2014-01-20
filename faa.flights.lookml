@@ -7,7 +7,7 @@
         FROM ontime 
         WHERE dep_time > '1960-01-01'
     sortkeys: [dep_time]
-    persist_for: 2000 hours
+    sql_trigger_value: SELECT max(dep_time) FROM ontime
     
   fields:
     - dimension: tail_num    
