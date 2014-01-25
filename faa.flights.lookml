@@ -107,8 +107,8 @@
         arrival_status: OnTime
 
     - measure: percent_ontime
-      type: percentage
-      sql: ${ontime_count}/${count}
+      type: number
+      sql: 100.0 * ${ontime_count}/NULLIF(${count},0)
 
     - measure: late_count
       type: count
@@ -128,8 +128,8 @@
         arrival_status: Very Late  
 
     - measure: percent_verylate
-      type: percentage
-      sql: ${verylate_count}/${count}
+      type: number
+      sql: 100.0 * ${verylate_count}/NULLIF(${count},0)
   
     - dimension: cancelled
       type: yesno
@@ -155,7 +155,7 @@
     - measure: percent_complete
       type: number
       decimals: 2
-      sql: 1.0 - ${percent_cancelled}
+      sql: 100.0 - ${percent_cancelled}
 
     - measure: diverted_count
       type: count
