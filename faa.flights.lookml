@@ -7,7 +7,8 @@
         FROM ontime 
         WHERE dep_time > '1960-01-01'
     sortkeys: [dep_time]
-    sql_trigger_value: SELECT COUNT(*) FROM ontime
+    persist_for: 5000
+#     sql_trigger_value: SELECT COUNT(*) FROM ontime
     
   fields:
     - dimension: tail_num    
