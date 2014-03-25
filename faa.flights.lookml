@@ -59,6 +59,15 @@
     - measure: total_flight_time
       type: sum
       sql: ${TABLE}.flight_time
+      
+    - measure: city.count
+      type: count_distinct
+      sql: ${destination.city}
+      required_joins: [destination]  
+      detail: 
+        - destination.full_name
+        - destination.city
+        - destination.state
 
     - dimension: distance
       sql: ${TABLE}.distance
