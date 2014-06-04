@@ -2,6 +2,7 @@
   title: Fun Flight Facts
   layout: tile
   tile_size: 100
+  auto_run: false
   elements:
 
     - name: flight_and_carriers_by_year
