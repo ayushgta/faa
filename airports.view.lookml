@@ -47,6 +47,11 @@
         Medium: ${elevation} BETWEEN 3000 and 7999
         else: Low
         
+    - dimension: location
+      type: location
+      sql_longitude: ${TABLE}.longitude
+      sql_latitude: ${TABLE}.latitude
+        
     - dimension: elevation_tier
       type: tier
       sql: ${elevation}
@@ -54,6 +59,6 @@
       
   # Fields to show when drilling.
   sets:
-    detail: [code, city, state, full_name, control_tower, facility_type]
+    detail: [code, city, state, full_name, control_tower, facility_type, location]
   
   
