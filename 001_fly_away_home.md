@@ -16,7 +16,7 @@ origin and destination airports). And asking questions about aircraft accidents 
 
 Follow along with the queries below. 
 
-[All the explorations start here](/explore/faa/accidents)
+## [Explore Airports](/explore/faa/accidents)
 
 
 ## How many accidents are in our database?
