@@ -1,16 +1,12 @@
 
-#
-# Accident reporting...
-#
-# 
-
 - view: accidents
   fields:
     
     - dimension: event_id
+      primary_key: true
       html: |
-        <%= linked_value %> 
-        <a href=http://www.ntsb.gov/aviationquery/brief.aspx?ev_id=<%= value %> >
+        {{ linked_value }}
+        <a href="http://www.ntsb.gov/aviationquery/brief.aspx?ev_id={{ value }}" >
            <img src=/images/arrow-black-right.png></a>
 
     - dimension: registration_number
@@ -112,12 +108,7 @@
       sql: amateur_built = "Yes"
 
     - measure: count
-      label: Number of Accidents
       type: count
-      units: accidents
-      sets: 
-        - aircraft_models.detail
-        - aircraft.detail
       detail: detail
 
     - measure: amateur_built_count
@@ -172,6 +163,11 @@
         severity: Fatal
 
   sets: 
-    detail: [event_id, event_date, registration_number, aircraft_models.manufacturer, 
-      investigation_type, 
-      severity, number_injured, number_fatal_injuries, aircraft_damage,air_carrier]
+    detail: 
+      - event_id
+      - event_date
+      - registration_number
+      - location
+      - aircraft_models.manufacturer
+      - investigation_type
+      - severity
