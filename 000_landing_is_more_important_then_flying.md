@@ -26,8 +26,7 @@ Results in:
 <iframe height=450 width=300 src='/embed/private/faa/airports?fields=airports.state,airports.count'>
 </iframe>
 
-It looks like Texas has almost twice as many airports as california.  Want to see where they are? 
-If you want to see a list of the airports, just click the number.  For example clicking the 890 across from IL will show you a list of airports.
+It looks like Texas has almost twice as many airports as california.  Want to see where they are?  If you want to see a list of the airports, just click the number.  For example clicking the 890 across from IL will show you a list of airports.
 
 <iframe height=450 width=700 src='/embed/private/faa/airports?fields=airports.detail*&f[airports.state]=IL&limit=500'>
 </iframe>
@@ -42,10 +41,7 @@ it will modify your query to be limited what you clicked on.  Click on "HELIPORT
 Notice what happens? Now we only see heleports in the list.   Could we have written this query directly?  Yes.  
 Simply selecting the fields and filters in the explore plage would yeild these results.
 
-In Looker every query leads to many, many more queries.
-Whenever you click on a link in a table in llooker, you are writing a new query.  The entire query is encoded in the URL of the link.  
-Looker figures out queries you might want to execute and writes the them all for you so you can have a web browsing like experience when 
-viewing your data.
+In Looker every query leads to many, many more queries. Whenever you click on a link in a table in llooker, you are writing a new query.  The entire query is encoded in the URL of the link.  Looker figures out queries you might want to execute and writes the them all for you so you can have a web browsing like experience when  viewing your data.
 
 Let's go back to our airport State List.
 
