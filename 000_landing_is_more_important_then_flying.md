@@ -1,8 +1,7 @@
 # Landing is more important than Flying
 
-Who knew there were so many airports in the USA?  I guess, when you need a place to land, you need a place to land.  Exactly how many airports are there?  Let's llooker and see.  All the queries start here:
-
-## [Explore Airports](/explore/faa/airports)
+Who knew there were so many airports in the USA?  I guess, when you need a place to land, you 
+need a place to land.  Exactly how many airports are there?  Let's **Looker** and see.  All the queries **[start here](/explore/faa/airports)**:
 
 Let's count airports.  Simply select AIRPORTS Count and run the query.
 
@@ -54,7 +53,7 @@ Challenge:  How many of each facility type are there in the US?
 
 See if you can make a report that looks like this?  Start here  [Explore Airports](/explore/faa/airports)
 
-<iframe height=450 width=300 src='/embed/private/faa/airports?fields=airports.facility_type,airports.count'>
+<iframe height=300 width=300 src='/embed/private/faa/airports?fields=airports.facility_type,airports.count'>
 </iframe>
 
 ## How do the states compare?
@@ -74,8 +73,10 @@ is a col (pivot facility type).
 
 Challenges Queries: ([Start Here](/explore/faa/airports))
 
-How many airports have control towers in the US?
-What city in texas has the most heliports?
-How many Heliports have control towers?
-Where is the highest facility in the US?
-Where is the highest airport?
+How many airports have control towers in the US? [answer](/explore/faa/airports?fields=airports.with_control_tower_count)
+What city in texas has the most heliports? [answer](/explore/faa/airports?show=data,fields&vis=%7B"type":"looker_column"%7D&fields=airports.city,airports.count&f%5Bairports.facility_type%5D=HELIPORT++++++&f%5Bairports.state%5D=TX&sorts=airports.count+desc)
+How many Heliports have control towers? [answer](/explore/faa/airports?show=data,fields&vis=%7B"type":"looker_column"%7D&fields=airports.count&f%5Bairports.facility_type%5D=HELIPORT++++++&sorts=airports.count+desc&f%5Bairports.control_tower%5D=yes)
+Where is the highest facility in the US? [answer](/explore/faa/airports?show=data,fields&vis=%7B"type":"looker_column"%7D&fields=airports.code,airports.full_name,airports.elevation,airports.state&limit=5&sorts=airports.elevation+desc)
+Where is the highest airport? [amswer](/explore/faa/airports?show=data,fields&vis=%7B"type":"looker_column"%7D&fields=airports.code,airports.full_name,airports.elevation,airports.state,airports.facility_type&limit=5&sorts=airports.elevation+desc&f%5Bairports.facility_type%5D=AIRPORT)
+
+
