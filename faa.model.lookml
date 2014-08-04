@@ -7,20 +7,19 @@
 
 - base_view: flights
   view: flights
-  sql_always_where: dep_time > '1960-01-01'
   joins:
     - join: carriers
       sql_on: flights.carrier=carriers.code
 
     - join: origin
       from: airports
-      sql_on: flights.origin=origin.code
-      fields: [full_name, city, state, count]
+      foreign_key: origin
+      fields: [full_name, city, state, count, location]
 
     - join: destination
       from: airports
-      sql_on: flights.destination=destination.code
-      fields: [full_name, city, state, count]
+      foreign_key: destination
+      fields: [full_name, city, state, count, location]
 
     - join: aircraft
       sql_on: flights.tail_num = aircraft.tail_num
