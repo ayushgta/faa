@@ -1,7 +1,6 @@
 # Landing is more important than Flying
 
-Who knew there were so many airports in the USA?  I guess, when you need a place to land, you 
-need a place to land.  Exactly how many airports are there?  Let's **Looker** and see.  All the queries **[start here](/explore/faa/airports)**:
+Who knew there were so many airports in the USA?  I guess, when you need a place to land, you  need a place to land.  Exactly how many airports are there?  Let's **Looker** and see.  All the queries **[start here](/explore/faa/airports)**:
 
 Let's count airports.  Simply select AIRPORTS Count and run the query.
 
@@ -32,8 +31,7 @@ It looks like Texas has almost twice as many airports as california.  Want to se
 </iframe>
 
 
-You will notice that some of the airports are Heliports, some are Airports and some are Seaplane bases.  If you click on any of the types, 
-it will modify your query to be limited what you clicked on.  Click on "HELIPORT'.  
+You will notice that some of the airports are Heliports, some are Airports and some are Seaplane bases.  If you click on any of the types,  it will modify your query to be limited what you clicked on.  Click on "HELIPORT'.  
 
 <iframe height=450 width=700 src='/embed/private/faa/airports?fields=airports.detail*&f[airports.state]=IL&f[airports.facility_type]=HELIPORT&limit=500'>
 </iframe>
@@ -59,9 +57,7 @@ Looker has a powerful feature that lets you turn any grouped attribute into a co
 <iframe height=450 width=700 src='/embed/private/faa/airports?fields=airports.state,airports.facility_type,airports.count'>
 </iframe>
 
-Notice that each of the facility types are repeated for each state (that's what relational grouping does).  It would be much easier 
-to read this if the facilities were columns instead of being repeated for for each state. We re-edit the the query so that Facility type 
-is a col (pivot facility type).  
+Notice that each of the facility types are repeated for each state (that's what relational grouping does).  It would be much easier  to read this if the facilities were columns instead of being repeated for for each state. We re-edit the the query so that Facility type is a col (pivot facility type).  
 
 <iframe height=450 width=700 src='/embed/private/faa/airports?fields=airports.state,airports.facility_type,airports.count&pivots=airports.facility_type'>
 </iframe>
