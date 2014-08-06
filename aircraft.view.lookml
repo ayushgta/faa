@@ -54,8 +54,8 @@
       html: |
         {{ linked_value }}
         {% if value %}
-          <a style="color:#bbb;float-right;" href='http://www.google.com/search?q={{row["aircraft_models.manufacturer"]}}+{{value}}'>
-            (Google)
+          <a style="color:#bbb;float:right;" target="_blank" href='http://www.google.com/search?q={{row["aircraft_models.manufacturer"]}}+{{value}}'>
+            Google
           </a>
         {% endif %}
 
