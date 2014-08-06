@@ -52,13 +52,12 @@
       sql: ${TABLE}.model
       required_fields: [manufacturer]
       html: |
-          <%= linked_value %> 
-          <% if row["manufacturer"] %>
-            <a href='http://www.google.com/search?q=<%= 
-              row["aircraft_models.manufacturer"] + "+" + value 
-            %>'>
-            <img src=http://www.google.com/favicon.ico></a>
-          <% end %>
+        {{ linked_value }}
+        {% if value %}
+          <a style="color:#bbb;float-right;" href='http://www.google.com/search?q={{row["aircraft_models.manufacturer"]}}+{{value}}'>
+            (Google)
+          </a>
+        {% endif %}
 
     - dimension: seats
       type: number
