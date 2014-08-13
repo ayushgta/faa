@@ -33,8 +33,12 @@ Try an easy one.
 
 results in:
 
-<iframe height=150 width=200 frameBorder=0 src='/embed/private/faa/accidents?show=data,fields&vis=%7B"type":"table"%7D&fields=accidents.count&sorts=accidents.count+desc'>
-</iframe>
+<look height="100" width="200">
+  model: faa
+  base_view: accidents
+  measures: accidents.count
+</look>
+
 
 
 ## Are there more or less accidents over time?
@@ -50,8 +54,16 @@ To see this, we want to group the accidents by year (combine all the accident ro
 
 Results in:
 
-<iframe height=400 width=700 frameBorder=0 src='/embed/private/faa/accidents?show=vis,data,fields&vis=%7B"type":"looker_line","show_null_labels":false,"show_null_points":true%7D&fields=accidents.event_year,accidents.count&sorts=accidents.event_year'>
-</iframe>
+
+<look height="400" width="100%">
+  model: faa
+  type: looker_line
+  base_view: accidents
+  dimensions: accidents.event_year
+  measures: accidents.count
+  sorts: accidents.event_year
+</look>
+
 
 ## Get rid of the noise?
 
@@ -68,8 +80,17 @@ Good news, it looks like a downward trend. It looks like we don't have good data
  
 Results in:
 
-<iframe height=400 width=700 frameBorder=0 src='/embed/private/faa/accidents?show=vis,data,fields&vis=%7B"type":"looker_line","show_null_labels":false,"show_null_points":true%7D&fields=accidents.event_year,accidents.count&sorts=accidents.event_year&f%5Baccidents.event_year%5D=1982+to'>
-</iframe>
+<look height="400" width="100%">
+  model: faa
+  type: looker_line
+  base_view: accidents
+  dimensions: accidents.event_year
+  measures: accidents.count
+  filters:
+    accidents.event_year: 1982 to
+  sorts: accidents.event_year
+</look>
+
 
 ## Nice downward trend, but are we safer? Let's look at fatalities.
 
@@ -89,8 +110,17 @@ that might help us: 'Fatal Accidents Count' and 'Total Fatalities'.
 
 Results in:
 
-<iframe height=400 width=700 frameBorder=0 src='/embed/private/faa/accidents?show=vis,data,fields&vis=%7B"type":"looker_line","show_null_labels":false,"show_null_points":true%7D&fields=accidents.event_year,accidents.count,accidents.total_fatalities,accidents.fatal_accidents_count&sorts=accidents.event_year&f%5Baccidents.event_year%5D=1982+to'>
-</iframe>
+<look height="400" width="100%">
+  model: faa
+  type: looker_line
+  base_view: accidents
+  dimensions: accidents.event_year
+  measures: [accidents.count,accidents.total_fatalities,accidents.fatal_accidents_count]
+  filters:
+    accidents.event_year: 1982 to
+  sorts: accidents.event_year
+</look>
+
 
 Looks like a nice downward trend of both accidents and fatal accidents.  But it does 
 look like 1996 was a bad year to fly.
@@ -117,8 +147,14 @@ result set to 10 results.
       ACCIDENTS Count (decending)
     Limit: 10
 
-<iframe height=300 width=300 frameBorder=0 src='/embed/private/faa/accidents?fields=accidents.registration_number,accidents.count&limit=10&sorts=accidents.count+desc&show=data,fields&vis=%7B"type":"table","show_null_labels":false%7D'>
-</iframe>
+<look height="400" width="100%">
+  model: faa
+  base_view: accidents
+  dimensions: accidents.registration_number
+  measures: accidents.count
+  sorts: accidents.count desc
+</look>
+
 
 The first 4 results are junk. Row #1, tail number is listed as 'None', Row #2 it has 
 been omitted, Row #3, is Unknown, Row #4 is some USAF aircraft, but starting with row #5 
@@ -126,8 +162,13 @@ we get to our first actual plane. Yes, there is an aircraft that has crashed 8 t
 urns out this haunted Cessna has been flying around Alaska injuring people for years. 
 Clicking on the '8' in row 5 to see the detail.
 
-<iframe height=400 width=700 frameBorder=0 src='/embed/private/faa/accidents?fields=accidents.event_id,accidents.event_date,accidents.registration_number,accidents.location,accidents.investigation_type,accidents.severity&f%5Baccidents.registration_number%5D=N20752&limit=500&show=data,fields&vis=%7B"type":"table"%7D&sorts=accidents.event_date+desc'>
-</iframe>
+<look height="400" width="100%">
+  model: faa
+  base_view: accidents
+  dimensions: accidents.detail*
+  filters:
+    accidents.registration_number: N20752
+</look>
 
 
 Clicking on any of the triangles will take you to the NTSB accident reports.

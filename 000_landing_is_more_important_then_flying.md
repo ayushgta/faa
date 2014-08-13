@@ -8,8 +8,11 @@ Let's count airports.  Simply select AIRPORTS Count and run the query.
       AIRPORTS Airports
 
 
-<iframe height=150 width=200 frameBorder=0 src='/embed/private/faa/airports?show=data,fields&fields=airports.count'>
-</iframe>
+<look height="75" width="200">
+  model: faa
+  base_view: airports
+  measures: airports.count
+</look>
 
 Wow, 19,793.  That's a lot of airports.  Wonder where they are?  Let's see which state they are in.  We'll just group the airports by state and sort by the # Airpors descending (from Largest to Smallest).
 
@@ -22,19 +25,35 @@ Wow, 19,793.  That's a lot of airports.  Wonder where they are?  Let's see which
 
 Results in:
 
-<iframe height=450 width=300 frameBorder=0 src='/embed/private/faa/airports?fields=airports.state,airports.count'>
-</iframe>
+<look height="500" width="300">
+  model: faa
+  base_view: airports
+  dimensions: airports.state
+  measures: airports.count
+</look>
 
 It looks like Texas has almost twice as many airports as california.  Want to see where they are?  If you want to see a list of the airports, just click the number.  For example clicking the 890 across from IL will show you a list of airports.
 
-<iframe height=450 width=700 frameBorder=0 src='/embed/private/faa/airports?fields=airports.detail*&f[airports.state]=IL&limit=500'>
-</iframe>
+<look height="450" width="100%">
+  model: faa
+  base_view: airports
+  dimensions: airports.detail*
+  filters:
+    airports.state: IL
+</look>
 
 
 You will notice that some of the airports are Heliports, some are Airports and some are Seaplane bases.  If you click on any of the types,  it will modify your query to be limited what you clicked on.  Click on "HELIPORT'.  
  
-<iframe height=450 width=700 frameBorder=0 src='/embed/private/faa/airports?fields=airports.detail*&f[airports.state]=IL&f[airports.facility_type]=HELIPORT&limit=500'>
-</iframe>
+<look height="450" width="100%">
+  model: faa
+  base_view: airports
+  dimensions: airports.detail*
+  filters:
+    airports.state: IL
+    airports.facility_type: HELIPORT
+</look>
+
 
 Notice what happens? Now we only see heleports in the list.   Could we have written this query directly?  Yes.  
 Simply selecting the fields and filters in the explore plage would yeild these results.
@@ -47,23 +66,38 @@ Challenge:  How many of each facility type are there in the US?
 
 See if you can make a report that looks like this?  Start here  [Explore Airports](/explore/faa/airports)
 
-<iframe height=300 width=300 frameBorder=0 src='/embed/private/faa/airports?fields=airports.facility_type,airports.count'>
-</iframe>
+<look height="200" width="100%">
+  model: faa
+  base_view: airports
+  dimensions: airports.facility_type
+  measures: airports.count
+</look>
+
 
 ## How do the states compare?
 
 Looker has a powerful feature that lets you turn any grouped attribute into a column.  First, let's add Airport State to the above report.  
 
-<iframe height=450 width=700 frameBorder=0 src='/embed/private/faa/airports?fields=airports.state,airports.facility_type,airports.count'>
-</iframe>
+<look height="300" width="100%">
+  model: faa
+  base_view: airports
+  dimensions: [airports.state, airports.facility_type]
+  measures: airports.count
+</look>
+
 
 Notice that each of the facility types are repeated for each state (that's what relational grouping does).  It would be much easier  to read this if the facilities were columns instead of being repeated for for each state. We re-edit the the query so that Facility type is a col (pivot facility type).  
 
-<iframe height=450 width=700 frameBorder=0 src='/embed/private/faa/airports?fields=airports.state,airports.facility_type,airports.count&pivots=airports.facility_type'>
-</iframe>
+<look height="300" width="100%">
+  model: faa
+  base_view: airports
+  dimensions: [airports.state, airports.facility_type]
+  pivots: airports.facility_type
+  measures: airports.count
+</look>
 
 
-Challenges Queries: ([Start Here](/explore/faa/airports))
+### Challenges Queries: ([Start Here](/explore/faa/airports))
 
 How many airports have control towers in the US? [answer](/explore/faa/airports?fields=airports.with_control_tower_count)
 What city in texas has the most heliports? [answer](/explore/faa/airports?show=data,fields&vis=%7B"type":"looker_column"%7D&fields=airports.city,airports.count&f%5Bairports.facility_type%5D=HELIPORT++++++&f%5Bairports.state%5D=TX&sorts=airports.count+desc)
