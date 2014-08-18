@@ -8,7 +8,7 @@ Let's count airports.  Simply select AIRPORTS Count and run the query.
       AIRPORTS Airports
 
 
-<look height="75" width="200">
+<look height="75">
   model: faa
   base_view: airports
   measures: airports.count
@@ -25,7 +25,7 @@ Wow, 19,793.  That's a lot of airports.  Wonder where they are?  Let's see which
 
 Results in:
 
-<look height="500" width="300">
+<look height="200">
   model: faa
   base_view: airports
   dimensions: airports.state
@@ -34,7 +34,7 @@ Results in:
 
 It looks like Texas has almost twice as many airports as california.  Want to see where they are?  If you want to see a list of the airports, just click the number.  For example clicking the 890 across from IL will show you a list of airports.
 
-<look height="450" width="100%">
+<look height="200" width="100%">
   model: faa
   base_view: airports
   dimensions: airports.detail*
@@ -45,7 +45,7 @@ It looks like Texas has almost twice as many airports as california.  Want to se
 
 You will notice that some of the airports are Heliports, some are Airports and some are Seaplane bases.  If you click on any of the types,  it will modify your query to be limited what you clicked on.  Click on "HELIPORT'.  
  
-<look height="450" width="100%">
+<look height="200" width="100%">
   model: faa
   base_view: airports
   dimensions: airports.detail*
@@ -78,7 +78,7 @@ See if you can make a report that looks like this?  Start here  [Explore Airport
 
 Looker has a powerful feature that lets you turn any grouped attribute into a column.  First, let's add Airport State to the above report.  
 
-<look height="300" width="100%">
+<look height="200" width="100%">
   model: faa
   base_view: airports
   dimensions: [airports.state, airports.facility_type]
