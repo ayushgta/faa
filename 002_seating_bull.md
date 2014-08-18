@@ -1,23 +1,17 @@
 # Seating Bull
 
-We should be able to tell the economies of resort towns (especially relatively isolated ones) by their air traffic. 
-Particularly, the number of seats on planes in a given day/week/month/year should be able to tell us how 
-much air capacity there is to get there and over time.
+We should be able to tell the economies of resort towns (especially relatively isolated ones) by their air traffic. Particularly, the number of seats on planes in a given day/week/month/year should be able to tell us how much air capacity there is to get there and over time.
 
 
-We get from Flights to the registered aircraft via the plane's tail number and particular aircraft to 
-aircraft model via the aircraft model code, we can know the number of seats on a given plane. 
+We get from Flights to the registered aircraft via the plane's tail number and particular aircraft to aircraft model via the aircraft model code, we can know the number of seats on a given plane. 
 
-Adding up these seats should give us the total air capacity going into or out of a city at any given
-time.
+Adding up these seats should give us the total air capacity going into or out of a city at any giventime.
 
-Looker's flights database has 3 tables that need to be combined to give us this data. Flights, Aircraft and 
-Aircraft Models.
+Looker's flights database has 3 tables that need to be combined to give us this data. Flights, Aircraft and Aircraft Models.
 
 flights -> aircraft-> aircraft->model-> # seats.
 
-These relations were setup when the flight Looker was built so we don't need to other then select 
-the measure.
+These relations were setup when the flight Looker was built so we don't need to other then select the measure.
 
 ## Let's count seats.
 
@@ -36,9 +30,7 @@ We select flights.  Let's count Flights and Seats.
   measures: [flights.count, flights.total_seats]
 </look>
 
-We can see, for all time we have 38M flights with a total seating capacity for the time of our data is about 
-4B seats. Seating capacity is determined by summng the seating capacity of the individual aircraft on
-a per flight basis.
+We can see, for all time we have 38M flights with a total seating capacity for the time of our data is about 4B seats. Seating capacity is determined by summng the seating capacity of the individual aircraft on a per flight basis.
 
 The SQL that Looker for this query is:
 
@@ -51,9 +43,7 @@ The SQL that Looker for this query is:
 
 ## Where is my Vail?
 
-I know there is an airport near Vail, Colorado , but I don't know the code or remember the name. I can 
-Looker the code up by filtering flights to Colorado and looking for Destinations and the full name of the 
-airport and city and location.
+I know there is an airport near Vail, Colorado , but I don't know the code or remember the name. I can Looker the code up by filtering flights to Colorado and looking for Destinations and the full name of the airport and city and location.
 
 <look height="250" width="100%">
   model: faa
@@ -83,9 +73,7 @@ I click on EGE and we are looking at just Vail flights. For all time there are 7
 
 ## Not all days are created equal
 
-Let's checkout different days of the week.  Lets look forward a week and group by Day of the week.  
-We should be able to see if there are any differences. 
-it for good measure.
+Let's checkout different days of the week.  Lets look forward a week and group by Day of the week.  We should be able to see if there are any differences. it for good measure.
 
 ## Saturday is big
 
@@ -104,8 +92,7 @@ We see that saturday has 2x the number of flights as wednesday (the smallest day
 
 #### Add a little seasoning?
 
-Vale is a ski resort, right?  Let's look at flights by week for the whole year.  Lets pivot the day of week and pivot 
-pivot the month number.
+Vale is a ski resort, right?  Let's look at flights by week for the whole year.  Lets pivot the day of week and pivot the month number.
 
 
 <look height="350" width="100%">
@@ -133,8 +120,7 @@ And as a Graph:
 </look>
 
 
-Look at that!  We can clearly se that in December, January, Febuary and March are when the planes fly, and the
-And the planes fly most on Saturday.
+Look at that!  We can clearly se that in December, January, Febuary and March are when the planes fly, and the And the planes fly most on Saturday.
 
 ## Daddy, Where do I come from?
 
@@ -158,8 +144,7 @@ We can see a trend in that there are very few flights from west coast cities.  N
 
 ## Vale really is special.
 
-Looking at another city with the same lens doesn't yeild the same trends.  Looking at RNO for example, 
-winter/summer doesn't seem to effect the number of seats.
+Looking at another city with the same lens doesn't yeild the same trends.  Looking at RNO for example, winter/summer doesn't seem to effect the number of seats.
 
 <look height="350" width="100%">
   model: faa
