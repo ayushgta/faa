@@ -41,9 +41,8 @@
     - dimension: carrier
 
     - dimension: flight_number
-      postgres_sql: ${TABLE}.carrier || ${TABLE}.flight_num
-      mysql_sql: CONCAT(${TABLE}.carrier, ${TABLE}.flight_num)
-
+      sql: ${TABLE}.carrier || ${TABLE}.flight_num
+    
     - measure: flight_number_count
       type: count_distinct
       sql: ${flight_number}
