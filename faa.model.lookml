@@ -53,9 +53,9 @@
     - join: aircraft_flights_facts
       sql_foreign_key: aircraft.tail_num
 
-- base_view: accidents
-  connection: faa
-  view: accidents
-  joins:
-    - join: aircraft
-      sql_on: registration_number=aircraft.tail_num
+# - base_view: accidents
+#   connection: faa
+#   view: accidents
+#   joins:
+#     - join: aircraft
+#       sql_on: registration_number=aircraft.tail_num

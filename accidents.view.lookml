@@ -1,4 +1,3 @@
-
 - view: accidents
   fields:
     
