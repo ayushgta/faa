@@ -11,7 +11,7 @@ Looker's flights database has 3 tables that need to be combined to give us this 
 
 flights -> aircraft-> aircraft->model-> # seats.
 
-These relations were setup when the flight Looker was built so we don't need to other then select the measure.
+These relations were setup when the flight Looker was built so we don't need to other than select the measure.
 
 ## Let's count seats.
 
@@ -156,7 +156,3 @@ Looking at another city with the same lens doesn't yeild the same trends.  Looki
   filters:
     flights.destination: RNO
 </look>
-
-
-
-
