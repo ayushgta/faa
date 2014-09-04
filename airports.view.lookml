@@ -52,6 +52,12 @@
       sql_longitude: ${TABLE}.longitude
       sql_latitude: ${TABLE}.latitude
         
+    - dimension: elevation_tier2
+      type: tier
+      sql: ${elevation}
+      tiers: [0, 100, 5000, 6000]
+              
+        
     - dimension: elevation_tier
       type: tier
       sql: ${elevation}

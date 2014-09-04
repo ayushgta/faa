@@ -139,7 +139,8 @@
     - measure: percent_verylate
       type: number
       sql: 100.0 * ${verylate_count}/NULLIF(${count},0)
-  
+      decimals: 2
+      
     - dimension: cancelled
       type: yesno
       sql: ${arrival_status} = 'Cancelled'
