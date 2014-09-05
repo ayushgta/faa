@@ -122,7 +122,7 @@ Looks like a nice downward trend of both accidents and fatal accidents.  But it 
 
 ## Find outliers with sorting
 
-Often, times you want to find the 'most' or 'best' or 'busiest' of something. Airplanes can crash more then once (actually, this is an incident database, so many aren't crashes). What is the most time an airplane has crashed?
+Often, times you want to find the 'most' or 'best' or 'busiest' of something. Airplanes can crash more than once (actually, this is an incident database, so many aren't crashes). What is the most time an airplane has crashed?
 
 To solve this, we are going to group the accidents by 'registration_number' (this is also called Tail Number). This is the unique identifier the FAA assigns to airplanes. And we are going to count up the '# Accidents'. Because most of the planes have just 1 accident, we are going to sort the result set by # accidents descending (from largest to smallest).  We only want to look at the top contenders so we are going to limit the result set to 10 results.
 
@@ -161,4 +161,3 @@ Pretty amazing.  This one aircraft has had 8 incidents.  I'm not sure I'd get on
 Sorting is a powerful relational querying tool. Using it, we can put the thing we are most interested in at the top of the report.
 
 Later, we'll talk about how to eliminate 'Junk' from our queries.
-

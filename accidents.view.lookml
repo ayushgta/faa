@@ -1,4 +1,3 @@
-
 - view: accidents
   fields:
     
@@ -67,7 +66,7 @@
       sql: ${TABLE}.number_of_minor_injuries
 
 
-    # Is there more then one model of this aircraft?
+    # Is there more than one model of this aircraft?
     - dimension: oneoff_multi
       label: ACCIDENTS One off/Multi
       sql: |

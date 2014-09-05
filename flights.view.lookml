@@ -117,6 +117,7 @@
 
     - measure: percent_ontime
       type: number
+      format: '%0.2f%'
       sql: 100.0 * ${ontime_count}/NULLIF(${count},0)
 
     - measure: late_count
@@ -128,7 +129,7 @@
     - measure: percent_late
       type: number
       sql: 100.0 * ${late_count}/NULLIF(${count},0)
-      decimals: 2
+      format: '%0.2f%'
 
     - measure: verylate_count
       type: count
@@ -138,6 +139,7 @@
 
     - measure: percent_verylate
       type: number
+      format: '%0.2f%'
       sql: 100.0 * ${verylate_count}/NULLIF(${count},0)
       decimals: 2
       
