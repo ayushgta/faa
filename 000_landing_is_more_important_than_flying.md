@@ -1,6 +1,6 @@
 # Landing is more important than Flying
 
-Who knew there were so many airports in the USA?  I guess, when you need a place to land, you  need a place to land.  Exactly how many airports are there?  Let's **Looker** and see.  All the queries **[start here](/explore/faa/airports)**:
+Who knew there were so many airports in the USA?  I guess, when you need a place to land, you  need a place to land.  Exactly how many airports are there?  Let's **Looker** and see.  All the queries **[start here](/explore/faa/airports)**: 
 
 Let's count airports.  Simply select AIRPORTS Count and run the query.
 
