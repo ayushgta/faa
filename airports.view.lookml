@@ -33,6 +33,15 @@
       type: average
       sql: ${TABLE}.elevation           # AVG(airports.elevation)
 
+
+    - measure: max_elevation
+      type: number
+      sql: MAX(${TABLE}.elevation)
+
+    - measure: min_elevation
+      type: number
+      sql: MIN(${TABLE}.elevation)
+
     - dimension: elevation_range
       sql_case:
         High: ${elevation} > 8000
