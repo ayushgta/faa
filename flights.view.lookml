@@ -17,6 +17,11 @@
       type: time
       timeframes: [time, date, hour, hod, dow, dow_num, tod, week, month_num, month, year]
       sql: ${TABLE}.dep_time
+  
+    - dimension_group: intended_depart
+      type: time
+      timeframes: [time, date, hour, hod, dow, dow_num, tod, week, month_num, month, year]
+      sql: DATEADD(min, -${depart_delay}, ${TABLE}.dep_time)
 
     - dimension: arr_time
       type: datetime
