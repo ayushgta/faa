@@ -42,18 +42,17 @@
   view: aircraft
   joins:
     - join: aircraft_models
-      using: aircraft_model_code
-       
-    - join: aircraft_types
-      sql_on: aircraft_models.aircraft_type_id = aircraft_types.aircraft_type_id
-      required_joins: [aircraft_models]
+      foreign_key: aircraft.aircraft_model_code
 
+    - join: aircraft_types
+      foreign_key: aircraft_models.aircraft_type_id
+ 
     - join: aircraft_flights_facts
-      sql_foreign_key: aircraft.tail_num
+      foreign_key: aircraft.tail_number
 
 - base_view: accidents
   connection: faa
   view: accidents
   joins:
     - join: aircraft
-      sql_on: registration_number=aircraft.tail_num
+      foreign_key: registration_number
