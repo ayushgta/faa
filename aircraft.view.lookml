@@ -2,6 +2,7 @@
   fields:
     - dimension: tail_number
       sql: ${TABLE}.tail_num 
+      primary_key: true
 
     - dimension: plane_year
       type: int
@@ -24,6 +25,7 @@
     - dimension: certification
             
     - dimension: status_code
+    - dimension: aircraft_model_code
     - dimension: mode_s_code
     - dimension: fract_owner
     - dimension: owner_name
@@ -33,11 +35,14 @@
       
   sets:
     detail: [tail_number, aircraft_models.detail* plane_year,]
-    export: [plane_year, tail_number, count]
+    export: [plane_year, tail_number, count, aircraft_model_code]
 
 
 - view: aircraft_models
   fields:
+    - dimension: aircraft_model_code
+      primary_key: true
+      
     - dimension: manufacturer
 
     - measure: manufacturer_count
@@ -76,6 +81,8 @@
 
     - dimension: weight
       type: number
+      
+    - dimension: aircraft_type_id
 
   sets:
     detail: [name, manufacturer, seats, engines, count]
@@ -86,4 +93,10 @@
 - view: aircraft_types
   label: AIRCRAFT MODELS
   fields:
+    - dimension: aircraft_type_id
+      primary_key: true
     - dimension: description
+    
+    
+    
+    
