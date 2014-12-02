@@ -14,9 +14,13 @@
     - dimension: tail_num    
   
     - dimension_group: depart
+      label: test
       type: time
-      timeframes: [time, date, hour, hod, dow, dow_num, tod, week, month_num, month, year]
+      timeframes: [time, date, hour, hod, dow, dow_num, tod, week, month_num, month, year, time_of_day]
       sql: ${TABLE}.dep_time
+      
+    - dimension: day_of_week_depart
+      sql: ${depart_dow}
   
     - dimension_group: intended_depart
       type: time
@@ -200,6 +204,15 @@
     - dimension: taxi_in_time
       type: number
       sql: ${TABLE}.taxi_in
+      
+    - measure: percent_of_total_late
+      type: percent_of_total
+      direction: column 
+      sql: ${late_count}
+      
+    - measure: percent_of_previous_late
+      type: percent_of_previous
+      sql: ${late_count}
      
   sets:
     origin.detail: [origin count, aircraft,count, carriers.count, .aircraft_models.count, 
@@ -217,6 +230,10 @@
   fields:
     - dimension: code 
       primary_key: true
+      sql: |
+        CASE WHEN ${TABLE}.code IS NULL THEN 'No Carrier'
+        ELSE ${TABLE}.code
+        END
       
     - dimension: name
       sql: ${TABLE}.nickname
