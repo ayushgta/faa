@@ -142,7 +142,7 @@ Don't mess with Texas.  Looks like the two of the top three origins are from Tex
 
 We can see a trend in that there are very few flights from west coast cities.  Not concrete, but it helps form an opinion.
 
-## Vale really is special.
+## Vail really is special.
 
 Looking at another city with the same lens doesn't yeild the same trends.  Looking at RNO for example, winter/summer doesn't seem to effect the number of seats.
 
