@@ -1,23 +1,23 @@
-# Seating Bull
+# Example 3: Seating Bull
 
-We should be able to tell the economies of resort towns (especially relatively isolated ones) by their air traffic. Particularly, the number of seats on planes in a given day/week/month/year should be able to tell us how much air capacity there is to get there and over time.
+We should be able to understand the economies of resort towns (especially relatively isolated ones) by their air traffic. We can do this by looking at the number of seats on planes flying into them on a given day/week/month/year, showing us how much capacity there is to get to that town over time.
 
+In order to find this information, we need data that is stored in a few different tables in the database. 
 
-We get from Flights to the registered aircraft via the plane's tail number and particular aircraft to aircraft model via the aircraft model code, we can know the number of seats on a given plane. 
+- The flights table has the list of flights into resort cities
+- The aircraft_facts table has the number of seats on each plane
 
-Adding up these seats should give us the total air capacity going into or out of a city at any giventime.
+But we can't just pull information from those two tables without relating them to each other first, and in this case we even need a third table to complete the relationship.
 
-Looker's flights database has 3 tables that need to be combined to give us this data. Flights, Aircraft and Aircraft Models.
+These relationships are called **joins** in both SQL and in LookML. In SQL, every time you want to ask a new question that requires information in more than one table, you have to re-write the join for those tables. Luckily, in LookML, you only have to define joins ONCE and they get reused behind the scenes over and over. In this case, these joins were setup when this Looker model was built, so as explorers, all we have to do is start asking questions!
 
-flights -> aircraft-> aircraft->model-> # seats.
-
-These relations were setup when the flight Looker was built so we don't need to other than select the measure.
+Quick tip: the ALL CAPS word at the beginning of a field name tells you which view a field comes from. Remember that a view name in a Looker model maps to a table in the underlying database.
 
 ## Let's count seats.
 
-To play along with this analysis  start **[from here](/explore/faa/flights)**.
+To play along with this analysis start by selecting **[Explore Flights](/explore/faa/flights)**.
 
-We select flights.  Let's count Flights and Seats.
+Let's count Flights and Seats.
 
     Measures:
       FLIGHTS Counts 
@@ -30,9 +30,9 @@ We select flights.  Let's count Flights and Seats.
   measures: [flights.count, flights.total_seats]
 </look>
 
-We can see, for all time we have 38M flights with a total seating capacity for the time of our data is about 4B seats. Seating capacity is determined by summng the seating capacity of the individual aircraft on a per flight basis.
+In our database, we have 38M flights with a total seating capacity of 4B seats. Seating capacity is determined by summing the seating capacity of the individual aircraft on a per flight basis.
 
-The SQL that Looker for this query is:
+The SQL that Looker creates for this query is:
 
 <sql height="200" width="100%">
   model: faa
@@ -43,7 +43,7 @@ The SQL that Looker for this query is:
 
 ## Where is my Vail?
 
-I know there is an airport near Vail, Colorado , but I don't know the code or remember the name. I can Looker the code up by filtering flights to Colorado and looking for Destinations and the full name of the airport and city and location.
+Say we know there is an airport near Vail, Colorado, but we don't know the airport code or remember the name of the airport. We can Looker up the code by filtering the destination state to Colorado, and adding the dimensions for the destination city and destination location.
 
 <look height="250" width="100%">
   model: faa
@@ -55,9 +55,9 @@ I know there is an airport near Vail, Colorado , but I don't know the code or re
 </look>
 
 
-Clicking on the map links and looking around, I see that [Eagle is pretty close to Vale](http://osm.org/go/T2ABCb--?node=106849952).
+In our Looker results, there are links to maps. By clicking on them and looking around, we can see that [Eagle is pretty close to Vail](http://osm.org/go/T2ABCb--?node=106849952).
 
-I click on EGE and we are looking at just Vail flights. For all time there are 7889 flights going into Vail.
+By clicking on the airport code for Eagle, EGE, we are just looking at flights to Vail. For all time there are 7889 flights going into Vail.
 
 <look height="175" width="100%">
   model: faa
@@ -73,9 +73,7 @@ I click on EGE and we are looking at just Vail flights. For all time there are 7
 
 ## Not all days are created equal
 
-Let's checkout different days of the week.  Lets look forward a week and group by Day of the week.  We should be able to see if there are any differences. it for good measure.
-
-## Saturday is big
+Let's checkout different days of the week.  To do so, we'll click on the dimension called Depart DOW Num to group by the day of the week.  
 
 <look height="250" width="100%">
   model: faa
@@ -87,12 +85,12 @@ Let's checkout different days of the week.  Lets look forward a week and group b
 </look>
 
 
-We see that saturday has 2x the number of flights as wednesday (the smallest day), but 3x the number of seats.  There must be some big planes come in saturday.  Sunday is also big.  The other weekdays are also pretty small.
+We see that Saturday has 2x the number of flights as Wednesday, but 3x the number of seats.  Some big planes must come in Saturdays. We can see that Sunday is also big, but weekdays are pretty small.
 
 
-#### Add a little seasoning?
+#### How about a little seasoning?
 
-Vale is a ski resort, right?  Let's look at flights by week for the whole year.  Lets pivot the day of week and pivot the month number.
+Vale is a ski resort, right? That means we should see seasonal variation in the flight capacities. Let's add in the month number to look at flights for the whole year. Test your pivoting skills by applying pivots for the day of week. Your results should look like the below:
 
 
 <look height="350" width="100%">
@@ -106,7 +104,7 @@ Vale is a ski resort, right?  Let's look at flights by week for the whole year. 
 </look>
 
 
-And as a Graph:
+Remember that we can also look at any results that have dimensions and measures as a chart:
 
 <look height="350" width="100%">
   model: faa
@@ -120,11 +118,11 @@ And as a Graph:
 </look>
 
 
-Look at that!  We can clearly se that in December, January, Febuary and March are when the planes fly, and the And the planes fly most on Saturday.
+There you go!  We can clearly see that December, January, Febuary and March are when planes fly, and that planes fly most on Saturday.
 
-## Daddy, Where do I come from?
+## Where are all those skiiers coming from?
 
-Let's take a look at where all these Vail lovers come from.  Groping by Origin City.  And we'll get a multi year look.
+Let's take a look at where all these Vail lovers come from.  The best way to start a new exploration. We'll select origin city (a dimension) and continue to use flight counts as our measure. By not including a filter that specifies a year, we're inherently looking at all-time data from our database. This means we have a multi year look.
 
 <look height="350" width="100%">
   model: faa
@@ -138,13 +136,13 @@ Let's take a look at where all these Vail lovers come from.  Groping by Origin C
 </look>
 
 
-Don't mess with Texas.  Looks like the two of the top three origins are from Texas (Dallas and Houston).  Since we don't have complete flight information for each individual, we have to assume that people are flying though hubs like Minneapolis and Atlanta.  
+It looks like the two of the top three origins are from Texas - Dallas and Houston.  Since we don't have complete flight information for each individual, we have to assume that people are flying through hubs like Minneapolis and Atlanta.  
 
-We can see a trend in that there are very few flights from west coast cities.  Not concrete, but it helps form an opinion.
+We can see a trend in that there are very few flights from West Coast cities.  Not concrete, but it helps form an opinion.
 
 ## Vail really is special.
 
-Looking at another city with the same lens doesn't yeild the same trends.  Looking at RNO for example, winter/summer doesn't seem to effect the number of seats.
+Looking at another destination city with the same lens doesn't yield the same trends.  For example, when looking at RNO, we see that winter versus summer doesn't seem to affect the number of seats.
 
 <look height="350" width="100%">
   model: faa
@@ -156,3 +154,5 @@ Looking at another city with the same lens doesn't yeild the same trends.  Looki
   filters:
     flights.destination: RNO
 </look>
+
+[Continue to Example 4](003_411_on_911.md) or [Return to the Learn Homepage](000_index.md)  
