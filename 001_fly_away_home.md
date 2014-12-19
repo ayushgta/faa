@@ -1,6 +1,6 @@
-# Example 2: Fly Away Home, Safely
+# Lesson 2: Fly Away Home, Safely
 
-Let's learn a little bit more about the data we're exploring. [Somewhere on the net](http://www.ntsb.gov/aviationquery/index.aspx), we found a copy of the FAA database in SQL. This database contains data about:
+To ask great questions, it's important to know what data you have to explore. Let's learn a little bit more about our data. [Somewhere on the net](http://www.ntsb.gov/aviationquery/index.aspx), we found a copy of the FAA database in SQL. This database contains data about:
 
 + 38M flights
 + 376K airplane registrations
@@ -8,9 +8,7 @@ Let's learn a little bit more about the data we're exploring. [Somewhere on the 
 + 70K accidents
 + and more.
 
-This is an awesome database for test queries beacuse it's large enough to be challenging to query. The data is inter-related, meaning we can make challenging joins. A **join** is a way to connect two tables within a database so that we can explore all of their data together. Here, flights have joins for both origin and destination airports. 
-
-Remember, every exploration begins with a question, and here's ours: what's the deal with airline accidents?
+Remember, every exploration begins with a question, and here's ours: what's the deal with those 70K airline accidents?
 
 Because we're asking questions about accidents, we select [Explore Accidents](/explore/faa/accidents) to target the data that we are looking at.
 
@@ -32,7 +30,6 @@ results in:
 </look>
 
 
-
 ## Are there more or less accidents over time?
 
 To see this, we want to group the accidents by year (combine all the accident rows with the same year) and compute the number of accidents for each combined group.  Sort the results by year, so we can see this change over time. Below, we have expressed the results as a line graph. A line graph requires one dimension and one measure.
@@ -41,7 +38,7 @@ To see this, we want to group the accidents by year (combine all the accident ro
       ACCIDENTS Event Year
     Measures: 
       ACCIDENTS Count
-    Sort: 
+    Sorts: 
       ACCIDENTS Event Year 
 
 Results in:
@@ -57,17 +54,17 @@ Results in:
 </look>
 
 
-## Can we get rid of the noise?
+## Can we get rid of the useless data?
 
 Good news - it looks like a downward trend, except we don't really have good data before 1982. It would be useful to clean up the query so that we only see data from 1982 to 2010. To do this, we need to filter the data. **Filter** allows us to look only at a subset of the information that exists in the database. Just like pivots, you can filter data by selecting "filter" from the gear icon next to the dimension or by selecting "filter" from next to the field name on the left side of the screen.
 
-    Filter:
+    Filters:
       ACCIDENTS Event Year: 1982 to
     Dimensions: 
       ACCIDENTS Event Year
     Measures: 
       ACCIDENTS Count
-    Sort: 
+    Sorts: 
       ACCIDENTS Event Year 
  
 Results in:
@@ -84,11 +81,11 @@ Results in:
 </look>
 
 
-## But are we safer? Let's look at fatalities.
+## Are fatalities following the same trend as accidents?
 
 Let's see if Fatalities have declined the way that accidents have. We can add a couple of measures that might help us: 'Fatal Accidents Count' and 'Total Fatalities'. Note that as we add more measures to a graph, each measure appears separately.
 
-    Filter:
+    Filters:
       ACCIDENTS Event Year: 1982 to
     Dimensions: 
       ACCIDENTS Event Year
@@ -96,7 +93,7 @@ Let's see if Fatalities have declined the way that accidents have. We can add a 
       ACCIDENTS Count
       ACCIDENTS Fatal Accidents Count
       ACCIDENTS Total Fatalities
-    Sort: 
+    Sorts: 
       ACCIDENTS Event Year 
 
 Results in:
@@ -116,7 +113,7 @@ Results in:
 A nice downward trend for both accidents and fatal accidents!  It does look like 1996 was a bad year to fly, though...
 
 
-## Find outliers with sorting
+## What about outliers?
 
 Often, times you want to find the 'most' or 'best' or 'busiest' of something. Airplanes can crash more than once (actually, this is an incident database, so many aren't crashes). What is the most times an airplane has crashed?
 
@@ -126,7 +123,7 @@ To solve this, we are going to group the accidents by 'registration_number' (thi
       ACCIDENTS Registration Number
     Measures:  
       ACCIDENTS Count
-    Sort: 
+    Sorts: 
       ACCIDENTS Count (decending)
     Row Limit: 10
 
@@ -156,4 +153,4 @@ Pretty amazing.  This one aircraft has had 8 incidents.  I'm not sure I'd get on
 As you can see, sorting is a powerful relational querying tool. Using it, we can put the thing we are most interested in at the top of the report.
 
 
-[Continue to Example 3](002_seating_bull.md) or [Return to the Learn Homepage](000_index.md)
+[Continue to Lesson 3](002_seating_bull.md) or [Return to the Learn Homepage](000_index.md)

@@ -1,4 +1,4 @@
-# Example 3: Seating Bull
+# Lesson 3: Seating Bull
 
 We should be able to understand the economies of resort towns (especially relatively isolated ones) by their air traffic. We can do this by looking at the number of seats on planes flying into them on a given day/week/month/year, showing us how much capacity there is to get to that town over time.
 
@@ -19,11 +19,6 @@ To play along with this analysis start by selecting **[Explore Flights](/explore
 
 Let's count Flights and Seats.
 
-    Measures:
-      FLIGHTS Counts 
-      FLIGHTS Total Seats
-      
-
 <look height="100" width="300">
   model: faa
   base_view: flights
@@ -40,10 +35,10 @@ The SQL that Looker creates for this query is:
   measures: [flights.count, flights.total_seats]
 </sql>
 
-
-## Where is my Vail?
+## How do we find airports?
 
 Say we know there is an airport near Vail, Colorado, but we don't know the airport code or remember the name of the airport. We can Looker up the code by filtering the destination state to Colorado, and adding the dimensions for the destination city and destination location.
+
 
 <look height="250" width="100%">
   model: faa
@@ -71,7 +66,7 @@ By clicking on the airport code for Eagle, EGE, we are just looking at flights t
 
 
 
-## Not all days are created equal
+## What's the busiest day?
 
 Let's checkout different days of the week.  To do so, we'll click on the dimension called Depart DOW Num to group by the day of the week.  
 
@@ -88,7 +83,7 @@ Let's checkout different days of the week.  To do so, we'll click on the dimensi
 We see that Saturday has 2x the number of flights as Wednesday, but 3x the number of seats.  Some big planes must come in Saturdays. We can see that Sunday is also big, but weekdays are pretty small.
 
 
-#### How about a little seasoning?
+## Do seasons matter?
 
 Vale is a ski resort, right? That means we should see seasonal variation in the flight capacities. Let's add in the month number to look at flights for the whole year. Test your pivoting skills by applying pivots for the day of week. Your results should look like the below:
 
@@ -140,7 +135,7 @@ It looks like the two of the top three origins are from Texas - Dallas and Houst
 
 We can see a trend in that there are very few flights from West Coast cities.  Not concrete, but it helps form an opinion.
 
-## Vail really is special.
+## Are all cities the same?
 
 Looking at another destination city with the same lens doesn't yield the same trends.  For example, when looking at RNO, we see that winter versus summer doesn't seem to affect the number of seats.
 
@@ -155,4 +150,4 @@ Looking at another destination city with the same lens doesn't yield the same tr
     flights.destination: RNO
 </look>
 
-[Continue to Example 4](003_411_on_911.md) or [Return to the Learn Homepage](000_index.md)  
+[Continue to Lesson 4](003_411_on_911.md) or [Return to the Learn Homepage](000_index.md)  
