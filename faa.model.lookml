@@ -5,7 +5,7 @@
 
 - include: "*.lookml"
 
-- base_view: flights
+- explore: flights
   view: flights
   joins:
     - join: carriers
@@ -35,10 +35,10 @@
       foreign_key: aircraft_models.aircraft_type_id
  
      
-- base_view: airports
+- explore: airports
   view: airports
   
-- base_view: aircraft
+- explore: aircraft
   view: aircraft
   joins:
     - join: aircraft_models
@@ -50,7 +50,7 @@
     - join: aircraft_flights_facts
       foreign_key: aircraft.tail_number
 
-- base_view: accidents
+- explore: accidents
   connection: faa
   view: accidents
   joins:
