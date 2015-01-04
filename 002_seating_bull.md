@@ -107,6 +107,7 @@ Remember that we can also look at any results that have dimensions and measures 
   base_view: flights
   dimensions: [flights.depart_dow_num, flights.depart_month_num]
   pivots: flights.depart_dow_num
+  sorts: [flights.depart_month_num]
   measures: [flights.count]
   filters:
     flights.destination: EGE
