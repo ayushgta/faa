@@ -15,7 +15,8 @@ Where is the highest facility in the US? [answer](/explore/faa/airports?show=dat
 
 Where is the highest airport? [answer](/explore/faa/airports?show=data,fields&vis=%7B"type":"looker_column"%7D&fields=airports.code,airports.full_name,airports.elevation,airports.state,airports.facility_type&limit=5&sorts=airports.elevation+desc&f%5Bairports.facility_type%5D=AIRPORT)
 
-Which state has the heliport at the higest elevation?
+Which state has the heliport at the highest elevation?
 [answer](/x/JW9KmMf)
 
 
+[Go on to Module 2](/stories/lookml_design_patterns/000a_explore_looker.md) or [Return to the Learn Homepage](/stories/lookml_design_patterns/000_index.md)

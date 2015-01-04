@@ -1,4 +1,4 @@
-# Lesson 2: Fly Away Home, Safely
+# Lesson 1.2: Fly Away Home, Safely
 
 To ask great questions, it's important to know what data you have to explore. Let's learn a little bit more about our data. [Somewhere on the net](http://www.ntsb.gov/aviationquery/index.aspx), we found a copy of the FAA database in SQL. This database contains data about:
 
@@ -153,4 +153,4 @@ Pretty amazing.  This one aircraft has had 8 incidents.  I'm not sure I'd get on
 As you can see, sorting is a powerful relational querying tool. Using it, we can put the thing we are most interested in at the top of the report.
 
 
-[Continue to Lesson 3](002_seating_bull.md) or [Return to the Learn Homepage](000_index.md)
+[Continue to Lesson 1.3](002_seating_bull.md) or [Return to the Learn Homepage](/stories/lookml_design_patterns/000_index.md)

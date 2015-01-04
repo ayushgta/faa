@@ -1,4 +1,4 @@
-# Lesson 3: Seating Bull
+# Lesson 1.3: Seating Bull
 
 We should be able to understand the economies of resort towns (especially relatively isolated ones) by their air traffic. We can do this by looking at the number of seats on planes flying into them on a given day/week/month/year, showing us how much capacity there is to get to that town over time.
 
@@ -150,4 +150,4 @@ Looking at another destination city with the same lens doesn't yield the same tr
     flights.destination: RNO
 </look>
 
-[Continue to Lesson 4](003_411_on_911.md) or [Return to the Learn Homepage](000_index.md)  
+[Continue to Lesson 1.4](003_411_on_911.md) or [Return to the Learn Homepage](/stories/lookml_design_patterns/000_index.md)

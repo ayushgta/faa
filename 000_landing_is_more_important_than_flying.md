@@ -1,4 +1,4 @@
-# Lesson 1: Landing is more important than Flying
+# Lesson 1.1: Landing is more important than Flying
 
 In Looker, all questions start on the explore page. Each **explore** starts from one **view** in the model, which is the same as saying one table in the underlying database. The explore that we are in matters - it dictates what information is available to us. 
 
@@ -120,4 +120,4 @@ Notice that each of the facility types are repeated for each state (that's what 
 You just learned a new skill! **Pivot** is a way to sort data to make viewing tables easier. You can pivot by any dimension in the query by clicking on the gear icon next to the field name (it appears when you hover) and selecting pivot or by clicking on "pivot" next to the field name in the field picker.
 
 
- [Continue to Lesson 2](001_fly_away_home.md) or [Return to the Learn Homepage](000_index.md)  
+ [Continue to Lesson 1.2](001_fly_away_home.md) or [Return to the Learn Homepage](/stories/lookml_design_patterns/000_index.md)
