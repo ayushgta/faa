@@ -153,4 +153,4 @@ Pretty amazing.  This one aircraft has had 8 incidents.  I'm not sure I'd get on
 As you can see, sorting is a powerful relational querying tool. Using it, we can put the thing we are most interested in at the top of the report.
 
 
-[Continue to Lesson 1.3](002_seating_bull.md) or [Return to the Learn Homepage](/stories/lookml_design_patterns/000_index.md)
+[**Continue to Lesson 1.3**](002_seating_bull.md) or [Return to the Learn Homepage](/stories/lookml_design_patterns/000_index.md)

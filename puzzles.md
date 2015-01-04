@@ -19,4 +19,4 @@ Which state has the heliport at the highest elevation?
 [answer](/x/JW9KmMf)
 
 
-[Go on to Module 2](/stories/lookml_design_patterns/000a_explore_looker.md) or [Return to the Learn Homepage](/stories/lookml_design_patterns/000_index.md)
+[**Go on to Module 2**](/stories/lookml_design_patterns/000a_explore_looker.md) or [Return to the Learn Homepage](/stories/lookml_design_patterns/000_index.md)

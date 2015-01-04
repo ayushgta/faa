@@ -151,4 +151,4 @@ Looking at another destination city with the same lens doesn't yield the same tr
     flights.destination: RNO
 </look>
 
-[Continue to Lesson 1.4](003_411_on_911.md) or [Return to the Learn Homepage](/stories/lookml_design_patterns/000_index.md)
+[**Continue to Lesson 1.4**](003_411_on_911.md) or [Return to the Learn Homepage](/stories/lookml_design_patterns/000_index.md)
