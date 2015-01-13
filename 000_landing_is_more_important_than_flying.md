@@ -2,9 +2,10 @@
 
 In Looker, all questions start on the explore page. Each **explore** starts from one **view** in the model, which is the same as saying one table in the underlying database. The explore that we are in matters - it dictates what information is available to us. 
 
-Here, we start by selecting **[Explore Airports](/explore/faa/airports)**. That means all the information we are about to look at comes from the airports table in the FAA's database. By starting here, we'll be able to see any information that pertains to a U.S. airport - takeoffs, landings, and so forth. What we WON'T be able to see, for example,  are airlines that don't operate flights in the USA. That's because they won't have any data related to a U.S. airport.
+Here, we start by selecting **[Explore Airports](/explore/faa/airports)**. That means all the information we are about to look at comes from the airports table in the FAA's database. By starting here, we'll be able to see any information that pertains to an airport in the FAA database - takeoffs, landings, and so forth. We won't see any information pertaining to airports *outside* of the FAA database. In this case, that means foreign airports. 
 
-A few more terms to know: 
+### Important Terms in Looker
+Knowing the following terms will make navigating Looker much easier. Throughout these pages, important terms that you should know will be **bolded.**
 
 - A **field** is either a dimension or a measure.
 - A **dimension** is what you group or slice data by; 
@@ -12,13 +13,14 @@ A few more terms to know:
 - The **field picker**, a column found on the left side of the page, contains all of the available dimensions and measures in the current explore
 
 Now let's get to it! We'll start where any good exploration begins - with a question, also called a **query**:
+<br />
 
-## How many airports are in the US?
+## How many American airports are there?
 
 To find out, we'll count airports. Remember, a count is a measure. We simply select AIRPORTS Count and **run** the query.
 
     Measures:  
-      AIRPORTS Airports
+      AIRPORTS Count
 
 
 <look height="75">
@@ -29,17 +31,19 @@ To find out, we'll count airports. Remember, a count is a measure. We simply sel
 
 Wow, 19,793.  That's a lot of airports.  Where are all of those?  Let's see which state they are in.  
 
-## How many airports are in each state? 
+## How many airports are in each state & which has the most? 
 
-To do this, we select a dimension called AIRPORT State. This will group the airports by state. It would also be fun to know which state has the most airports, so we'll click on the column header for the AIRPORTS Count to sort by the number of airports, descending (from largest to smallest).
+To do this, we select a dimension called AIRPORT State, which adds that dimension into our table. When we run the query, we see the 19,793 airports broken out over different states.
+
+Then, to find out which state has the most airports, we simply **sort** the data. All we need to do is click on the column header for amount that we want to sort by. In this case, that is the AIRPORTS Count column, which will sort by the number of airports, descending (from largest to smallest).
 
     Dimensions: 
       AIRPORTS State
     Measures: 
-      AIRPORTS Count
+      AIRPORTS Count  
     Sorts: 
       AIRPORTS Count (Descending)
-
+ 
 
 <look height="200">
   model: faa
@@ -48,7 +52,9 @@ To do this, we select a dimension called AIRPORT State. This will group the airp
   measures: airports.count
 </look>
 
-It looks like Texas has almost twice as many airports as California! Where do they keep all those?  You can see the list of airports in any state by clicking the number across from it in the AIRPORTS Count column.  For example clicking the 890 across from IL will show you a list of airports there. Showing this additional information about a part of a returned query is also called a **drill** into the data.
+
+It looks like Texas has almost twice as many airports as California! Where do they keep all those?  You can see the list of airports in any state by clicking the corresponding number in the AIRPORTS Count column. For example clicking the 890 across from IL will show you a list of airports there. Showing this additional information about a part of a returned query is also called a **drill** into the data.
+
 
 <look height="200" width="100%">
   model: faa
