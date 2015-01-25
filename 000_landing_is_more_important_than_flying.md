@@ -81,7 +81,7 @@ You will notice that some of the airports are Heliports, some are Airports and s
 Notice what happens? Now we only see heliports in the list.   Could we have written this query directly?  Yes!  
 Simply selecting the fields and filters in the explore plage would also yield these results.
 
-In Looker, every query leads to many, many more queries. Whenever you click on a link in a table in Looker, you are writing a new query.  The entire query is encoded in the URL of the link.  Looker figures out queries you might want to execute and writes the them all for you so you can have a web browsing experience when viewing your data.
+In Looker, every query leads to many, many more queries. Whenever you click on a link in a table in Looker, you are writing a new query.  The entire query is encoded in the URL of the link.  Looker figures out queries you might want to execute and writes them all for you so you can have a web browsing experience when viewing your data.
 
 ## What's the breakdown of airport types?
 
