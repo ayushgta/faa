@@ -11,13 +11,27 @@
 #     sql_trigger_value: SELECT COUNT(*) FROM ontime
     
   fields:
-    - dimension: tail_num    
+  
+    - measure: plane_year_to_break
+      label: CAPSTHING
+      type: sum
+      sql: ${aircraft.plane_year}
+      
+    - dimension: tail_num
+      # primary_key: true
   
     - dimension_group: depart
       label: test
       type: time
-      timeframes: [time, date, hour, hod, dow, dow_num, tod, week, month_num, month, year, time_of_day]
+      timeframes: [time, date, hour, hod, dow, dow_num, tod, week, month_num, month, year, time_of_day, hour_of_day]
       sql: ${TABLE}.dep_time
+      
+    - filter: date_filter
+      
+    - dimension: date_filter_test
+      type: yesno
+      sql: |
+        {% condition date_filter %} ${depart_date} {% endcondition %} OR NULL
       
     - dimension: day_of_week_depart
       sql: ${depart_dow}
@@ -71,6 +85,14 @@
 
     - dimension: distance
       sql: ${TABLE}.distance
+      
+    - dimension: distance_break
+      type: int
+      sql: ${TABLE}.distance
+      
+#     - measure: distance_break_sum
+#       type: sum_distinct
+#       sql: ${distance_break}
   
     - dimension: distance_tiered
       type: tier
@@ -213,6 +235,11 @@
     - measure: percent_of_previous_late
       type: percent_of_previous
       sql: ${late_count}
+      
+      #Nicole Breaking Things
+    - measure: type_number_to_break
+      type: number
+      sql: ${taxi_out_time} - ${taxi_in_time}
      
   sets:
     origin.detail: [origin count, aircraft,count, carriers.count, .aircraft_models.count, 
