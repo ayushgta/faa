@@ -12,10 +12,7 @@
     
   fields:
   
-    - measure: plane_year_to_break
-      label: CAPSTHING
-      type: sum
-      sql: ${aircraft.plane_year}
+  
       
     - dimension: tail_num
       # primary_key: true
@@ -86,13 +83,9 @@
     - dimension: distance
       sql: ${TABLE}.distance
       
-    - dimension: distance_break
-      type: int
-      sql: ${TABLE}.distance
+ 
       
-#     - measure: distance_break_sum
-#       type: sum_distinct
-#       sql: ${distance_break}
+
   
     - dimension: distance_tiered
       type: tier
@@ -236,10 +229,7 @@
       type: percent_of_previous
       sql: ${late_count}
       
-      #Nicole Breaking Things
-    - measure: type_number_to_break
-      type: number
-      sql: ${taxi_out_time} - ${taxi_in_time}
+ 
      
   sets:
     origin.detail: [origin count, aircraft,count, carriers.count, .aircraft_models.count, 
