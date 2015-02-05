@@ -52,7 +52,7 @@
       sql: ${TABLE}.manufacturer
       detail: aircraft_maker_detail 
 
-      # show how to create a like to google.
+      # show how to create a link to google.
     - dimension: name
       sql: ${TABLE}.model
       required_fields: [manufacturer]
