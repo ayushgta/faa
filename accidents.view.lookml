@@ -46,7 +46,8 @@
     - dimension: number_fatal_injuries
       type: number
       units: people
-      sql: number_of_fatalities
+      sql: NULLIF(${TABLE}.number_of_fatalities, '')
+#       sql: ${TABLE}.number_of_fatalities
 
     - measure: total_fatalities
       label: Total Fatalities

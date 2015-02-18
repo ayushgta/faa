@@ -103,7 +103,7 @@ Results in:
   type: looker_line
   base_view: accidents
   dimensions: accidents.event_year
-  measures: [accidents.count,accidents.total_fatalities,accidents.fatal_accidents_count]
+  measures: [accidents.count, accidents.total_fatalities, accidents.fatal_accidents_count]
   filters:
     accidents.event_year: 1982 to
   sorts: accidents.event_year

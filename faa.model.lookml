@@ -51,7 +51,7 @@
       foreign_key: aircraft.tail_number
 
 - explore: accidents
-  connection: faa
+#   connection: faa
   view: accidents
   joins:
     - join: aircraft
