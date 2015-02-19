@@ -253,7 +253,7 @@
         END
       
     - dimension: name
-      sql: ${TABLE}.nickname
+      sql: TRIM(${TABLE}.nickname)
 
     - dimension: names
       type: list
