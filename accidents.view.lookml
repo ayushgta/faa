@@ -13,7 +13,7 @@
       
     - dimension_group: event
       type: time
-      timeframes: [time, date, dow, week, month, month_num, year]
+      timeframes: [time, date, day_of_week, week, month, month_num, year]
       sql: event_date
 
     - dimension: severity
@@ -109,19 +109,19 @@
 
     - measure: count
       type: count
-      detail: detail
+      drill_fields: detail
 
     - measure: amateur_built_count
       type: count
       units: accidents
       filters: 
         amateur_built: "Yes"
-      detail: detail
+      drill_fields: detail
 
     - measure: country_count
-      type: count
-      sql: DISTINCT country
-      detail: {base: [country, count, total_fatalities]}
+      type: count_distinct
+      sql: ${country}
+      drill_fields: {base: [country, count, total_fatalities]}
   
     - measure: percent_amateur_built
       type: percentage
@@ -132,33 +132,33 @@
       units: accidents
       filters: 
         country: United States
-      detail: [detail*, -country]
+      drill_fields: [detail*, -country]
 
     - measure: minor_accidents_count
       type: count
       units: accidents
-      detail: detail
+      drill_fields: detail
       filters: 
         severity: Minor
 
     - measure: incident_accidents_count
       type: count
       units: accidents
-      detail: detail
+      drill_fields: detail
       filters: 
         severity: Incident
 
     - measure: serious_accidents_count
       type: count
       units: accidents
-      detail: detail
+      drill_fields: detail
       filters: 
         severity: Serious
 
     - measure: fatal_accidents_count
       type: count
       units: accidents
-      detail: detail
+      drill_fields: detail
       filters: 
         severity: Fatal
 

@@ -25,7 +25,7 @@ results in:
 
 <look height="100" width="200">
   model: faa
-  base_view: accidents
+  explore: accidents
   measures: accidents.count
 </look>
 
@@ -47,7 +47,7 @@ Results in:
 <look height="400" width="100%">
   model: faa
   type: looker_line
-  base_view: accidents
+  explore: accidents
   dimensions: accidents.event_year
   measures: accidents.count
   sorts: accidents.event_year
@@ -72,7 +72,7 @@ Results in:
 <look height="400" width="100%">
   model: faa
   type: looker_line
-  base_view: accidents
+  explore: accidents
   dimensions: accidents.event_year
   measures: accidents.count
   filters:
@@ -101,7 +101,7 @@ Results in:
 <look height="400" width="100%">
   model: faa
   type: looker_line
-  base_view: accidents
+  explore: accidents
   dimensions: accidents.event_year
   measures: [accidents.count, accidents.total_fatalities, accidents.fatal_accidents_count]
   filters:
@@ -129,7 +129,7 @@ To solve this, we are going to group the accidents by 'registration_number' (thi
 
 <look height="400" width="100%">
   model: faa
-  base_view: accidents
+  explore: accidents
   dimensions: accidents.registration_number
   measures: accidents.count
   sorts: accidents.count desc
@@ -140,7 +140,7 @@ The first 4 results are junk. In row 1, the tail number is listed as 'None'; in 
 
 <look height="400" width="100%">
   model: faa
-  base_view: accidents
+  explore: accidents
   dimensions: accidents.detail*
   filters:
     accidents.registration_number: N20752

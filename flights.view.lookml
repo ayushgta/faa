@@ -18,9 +18,8 @@
       # primary_key: true
   
     - dimension_group: depart
-      label: test
       type: time
-      timeframes: [time, date, hour, hod, dow, dow_num, tod, week, month_num, month, year, time_of_day, hour_of_day]
+      timeframes: [time, date, hour, hour_of_day, day_of_week, day_of_week_index, time_of_day, week, month_num, month, year]
       sql: ${TABLE}.dep_time
       
     - filter: date_filter
@@ -31,11 +30,11 @@
         {% condition date_filter %} ${depart_date} {% endcondition %} OR NULL
       
     - dimension: day_of_week_depart
-      sql: ${depart_dow}
+      sql: ${depart_day_of_week}
   
     - dimension_group: intended_depart
       type: time
-      timeframes: [time, date, hour, hod, dow, dow_num, tod, week, month_num, month, year]
+      timeframes: [time, date, hour, hour_of_day, day_of_week, day_of_week_index, time_of_day, week, month_num, month, year]
       sql: DATEADD(min, -${depart_delay}, ${TABLE}.dep_time)
 
     - dimension: arr_time
@@ -56,7 +55,7 @@
     - measure: routes_count
       type: count_distinct
       sql: CONCAT_WS("|", origin, destination)
-      detail: route_detail
+      drill_fields: route_detail
 
     - dimension: carrier
 
@@ -66,7 +65,7 @@
     - measure: flight_number_count
       type: count_distinct
       sql: ${flight_number}
-      detail: flight_num_detail 
+      drill_fields: flight_num_detail 
 
     - dimension: time
       type: number
@@ -122,11 +121,11 @@
         
     - measure: count
       type: count
-      detail: detail
+      drill_fields: detail
 
     - measure: ontime_count
       type: count
-      detail: detail
+      drill_fields: detail
       filters: 
         arrival_status: OnTime
 
@@ -137,7 +136,7 @@
 
     - measure: late_count
       type: count
-      detail: detail
+      drill_fields: detail
       filters: 
         arrival_status: Late
 
@@ -148,7 +147,7 @@
 
     - measure: verylate_count
       type: count
-      detail: detail
+      drill_fields: detail
       filters: 
         arrival_status: Very Late  
 
@@ -164,13 +163,13 @@
   
     - measure: cancelled_count
       type: count
-      detail: detail
+      drill_fields: detail
       filters: 
         cancelled: Yes  
 
     - measure: not_cancelled_count
       type: count
-      detail: detail
+      drill_fields: detail
       filters: 
         cancelled: No 
 
@@ -186,7 +185,7 @@
 
     - measure: diverted_count
       type: count
-      detail: detail
+      drill_fields: detail
       filters: 
         arrival_status: Diverted
         
@@ -255,13 +254,14 @@
     - dimension: name
       sql: TRIM(${TABLE}.nickname)
 
-    - dimension: names
+    - measure: names
       type: list
       list_field: name
 
     - measure: count
       type: count_distinct
       sql: ${TABLE}.code
-      detail: detail
+      drill_fields: detail
+      
   sets:
     detail: [code, name, flights.count, origin.count, destination.count]

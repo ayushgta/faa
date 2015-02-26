@@ -25,7 +25,7 @@ To find out, we'll count airports. Remember, a count is a measure. We simply sel
 
 <look height="75">
   model: faa
-  base_view: airports
+  explore: airports
   measures: airports.count
 </look>
 
@@ -47,7 +47,7 @@ Then, to find out which state has the most airports, we simply **sort** the data
 
 <look height="200">
   model: faa
-  base_view: airports
+  explore: airports
   dimensions: airports.state
   measures: airports.count
 </look>
@@ -58,7 +58,7 @@ It looks like Texas has almost twice as many airports as California! Where do th
 
 <look height="200" width="100%">
   model: faa
-  base_view: airports
+  explore: airports
   dimensions: airports.detail*
   filters:
     airports.state: IL
@@ -70,7 +70,7 @@ You will notice that some of the airports are Heliports, some are Airports and s
  
 <look height="200" width="100%">
   model: faa
-  base_view: airports
+  explore: airports
   dimensions: airports.detail*
   filters:
     airports.state: IL
@@ -99,7 +99,7 @@ Now let's find out how many of each type of airport there are:
 
 <look height="200" width="100%">
   model: faa
-  base_view: airports
+  explore: airports
   dimensions: airports.facility_type
   measures: airports.count
 </look>
@@ -108,7 +108,7 @@ But what if, as above, we want to know how these are broken down by state? Add A
 
 <look height="200" width="100%">
   model: faa
-  base_view: airports
+  explore: airports
   dimensions: [airports.state, airports.facility_type]
   measures: airports.count
 </look>
@@ -117,7 +117,7 @@ Notice that each of the facility types are repeated for each state (that's what 
 
 <look height="300" width="100%">
   model: faa
-  base_view: airports
+  explore: airports
   dimensions: [airports.state, airports.facility_type]
   pivots: airports.facility_type
   measures: airports.count

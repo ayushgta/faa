@@ -20,7 +20,7 @@
     - measure: count
       type: count_distinct
       sql: ${TABLE}.tail_num
-      detail: detail
+      drill_fields: detail
 
     - dimension: certification
             
@@ -50,7 +50,7 @@
       sets:
         - carriers.detail
       sql: ${TABLE}.manufacturer
-      detail: aircraft_maker_detail 
+      drill_fields: aircraft_maker_detail 
 
       # show how to create a link to google.
     - dimension: name
@@ -70,7 +70,7 @@
     - measure: count
       type: count_distinct
       sql: ${TABLE}.model
-      detail: detail
+      drill_fields: detail
       
     - dimension: engines
       type: number

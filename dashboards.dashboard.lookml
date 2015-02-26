@@ -6,7 +6,7 @@
 
     - name: flight_and_carriers_by_year
       type: table
-      base_view: flights
+      explore: flights
       dimensions: [carriers.name]
       pivots: [flights.depart_year]
       measures: [flights.count]
@@ -16,7 +16,7 @@
     
     - name: number_of_flights_from_CA
       type: single_value
-      base_view: flights
+      explore: flights
       measures: [flights.count]
       filters:
         origin.state: CA
@@ -24,22 +24,21 @@
       height: 2
       
     - name: flights_by_departure_hour_lax
-      type: area
-      base_view: flights
-      dimensions: flights.depart_hod
+      type: looker_area
+      explore: flights
+      dimensions: flights.depart_hour_of_day
       measures: [flights.count, flights.late_count, flights.verylate_count]
       filters:
-        flight.destination: LAX
-      sorts: flights.depart_hod
+        flights.destination: LAX
+      sorts: flights.depart_hour_of_day
       width: 8
       height: 4
-      xAxisLabelsRotation: -45
       stacking: normal
       y_axis_combined: true
 
     - name: flight_count_comparison_of_california_vs_new_york_vs_texas
       type: pie
-      base_view: flights
+      explore: flights
       dimensions: origin.state
       measures: flights.count
       filters:
@@ -50,7 +49,7 @@
  
     - name: california_flights_by_california_destination
       type: pie
-      base_view: flights
+      explore: flights
       dimensions: destination.city
       measures: flights.count
       filters:
@@ -61,7 +60,7 @@
       
     - name: flight_summary_stats
       type: table
-      base_view: flights
+      explore: flights
       dimensions: [flights.depart_month]
       measures: [flights.count, flights.late_count, flights.verylate_count]
       width: 7
@@ -69,7 +68,7 @@
 
 #     - name: top_5_carriers_by_accidents
 #       type: column
-#       base_view: accidents
+#       explore: accidents
 #       dimension: accidents.air_carrier
 #       measures: [accidents.count, accidents.total_fatalities]
 #       filters:
@@ -81,11 +80,10 @@
 #  
 #     - name: total_number_of_accidents
 #       type: single_value
-#       base_view: accidents
+#       explore: accidents
 #       measure: accidents.count
 #       filters:
 #         accidents.air_carrier: -EMPTY
 #       width: 5
 #       height: 2
 # 
-

@@ -21,7 +21,7 @@ Let's count Flights and Seats.
 
 <look height="100" width="300">
   model: faa
-  base_view: flights
+  explore: flights
   measures: [flights.count, flights.total_seats]
 </look>
 
@@ -31,7 +31,7 @@ The SQL that Looker creates for this query is:
 
 <sql height="200" width="100%">
   model: faa
-  base_view: flights
+  explore: flights
   measures: [flights.count, flights.total_seats]
 </sql>
 
@@ -42,7 +42,7 @@ Say we know there is an airport near Vail, Colorado, but we don't know the airpo
 
 <look height="250" width="100%">
   model: faa
-  base_view: flights
+  explore: flights
   dimensions: [destination.city, flights.destination, destination.location]
   measures: [flights.count, flights.total_seats]
   filters:
@@ -56,7 +56,7 @@ By clicking on the airport code for Eagle, EGE, we are just looking at flights t
 
 <look height="175" width="100%">
   model: faa
-  base_view: flights
+  explore: flights
   dimensions: [destination.city, flights.destination, destination.location]
   measures: [flights.count, flights.total_seats]
   filters:
@@ -72,7 +72,7 @@ Let's checkout different days of the week.  To do so, we'll click on the dimensi
 
 <look height="250" width="100%">
   model: faa
-  base_view: flights
+  explore: flights
   dimensions: flights.depart_dow_num
   measures: [flights.count]
   filters:
@@ -90,7 +90,7 @@ Vale is a ski resort, right? That means we should see seasonal variation in the 
 
 <look height="350" width="100%">
   model: faa
-  base_view: flights
+  explore: flights
   dimensions: [flights.depart_dow_num, flights.depart_month_num]
   pivots: flights.depart_dow_num
   measures: [flights.count]
@@ -104,7 +104,7 @@ Remember that we can also look at any results that have dimensions and measures 
 <look height="350" width="100%">
   model: faa
   type: looker_column
-  base_view: flights
+  explore: flights
   dimensions: [flights.depart_dow_num, flights.depart_month_num]
   pivots: flights.depart_dow_num
   sorts: [flights.depart_month_num]
@@ -123,7 +123,7 @@ Let's take a look at where all these Vail lovers come from.  The best way to sta
 <look height="350" width="100%">
   model: faa
   type: looker_column
-  base_view: flights
+  explore: flights
   dimensions: [origin.city]
   pivots: flights.depart_dow_num
   measures: [flights.count]
@@ -143,7 +143,7 @@ Looking at another destination city with the same lens doesn't yield the same tr
 <look height="350" width="100%">
   model: faa
   type: looker_column
-  base_view: flights
+  explore: flights
   dimensions: [flights.depart_dow_num, flights.depart_month_num]
   pivots: flights.depart_dow_num
   measures: [flights.count]
