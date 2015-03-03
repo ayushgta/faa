@@ -11,9 +11,7 @@
 #     sql_trigger_value: SELECT COUNT(*) FROM ontime
     
   fields:
-  
-  
-      
+
     - dimension: tail_num
       # primary_key: true
   
@@ -58,6 +56,13 @@
       drill_fields: route_detail
 
     - dimension: carrier
+      sql: ${TABLE}.carrier
+      html: |
+        {{ linked_value }}
+        <a href="/dashboards/faa/carrier_dashboard?carrier_filter={{ value | encode_uri }}" target="_new" > 
+        <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>
+  
+
 
     - dimension: flight_number
       sql: ${TABLE}.carrier || ${TABLE}.flight_num
@@ -82,10 +87,6 @@
     - dimension: distance
       sql: ${TABLE}.distance
       
- 
-      
-
-  
     - dimension: distance_tiered
       type: tier
       sql: ${distance}
@@ -94,8 +95,7 @@
     - measure: total_distance
       type: sum
       sql: ${TABLE}.distance
-
-     
+      
     - dimension: plane_age_at_flight
       type: number
       required_joins: [aircraft]
@@ -182,6 +182,7 @@
       type: number
       decimals: 2
       sql: 100.0 - ${percent_cancelled}
+      format: '%0.2f%'
 
     - measure: diverted_count
       type: count
@@ -253,6 +254,11 @@
       
     - dimension: name
       sql: TRIM(${TABLE}.nickname)
+      html: |
+        {{ linked_value }}
+        <a href="/dashboards/faa/carrier_dashboard?carrier_filter={{ value | encode_uri }}" target="_new" > 
+        <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>
+  
 
     - measure: names
       type: list
