@@ -1,4 +1,7 @@
-- dashboard: faa
+
+#--------------------------------------------------
+
+- dashboard: faa_demo
   title: FAA Demo Dashboard
   layout: grid
   rows:
@@ -10,6 +13,8 @@
       height: 400
     - elements: [accidents_purpose_of_flight, flight_count_depart_year]
       height: 400 
+    - elements: [flightcount_carrier_pivotflights_table, flightcount_carrier_pivotflights]
+      height: 400
     - elements: [flightcount_manuafacturer_pivotflights]
       height: 600
     
@@ -193,6 +198,48 @@
     listen: 
       state: origin.state 
       date: flights.depart_date
+      
+  - name: flightcount_carrier_pivotflights
+    title: Carrier Flight Count by Flight Distance 
+    type: looker_column
+    model: faa
+    explore: flights
+    dimensions: [aircraft_flights_facts.distance_per_flight_tier, carriers.name]
+    pivots: [aircraft_flights_facts.distance_per_flight_tier]
+    measures: [flights.count]
+    sorts: [flights.count desc 0]
+    limit: 500
+    total: false
+    stacking: ''
+    show_value_labels: false
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    show_null_labels: false
+    listen: 
+      state: origin.state 
+      date: flights.depart_date
+
+  - name: flightcount_carrier_pivotflights_table
+    title: Carrier Flight Count by Flight Distance 
+    type: table
+    model: faa
+    explore: flights
+    dimensions: [aircraft_flights_facts.distance_per_flight_tier, carriers.name]
+    pivots: [aircraft_flights_facts.distance_per_flight_tier]
+    measures: [flights.count]
+    sorts: [flights.count desc 0]
+    limit: 500
+    total: false
+    listen: 
+      state: origin.state 
+      date: flights.depart_date
+
 
   - name: flightcount_manuafacturer_pivotflights_topten
     title: Flight Count For Top Ten Aircraft Manaufacturers on Lifetime Flights
@@ -225,9 +272,7 @@
       date: flights.depart_date
 
 
-
-
-
+#---------------------------------------------------
 
 - dashboard: carrier_dashboard
   title: Carrier Dashboard
@@ -235,9 +280,7 @@
   rows:
     - elements: [carrier_flight_count, carrier_flights_ontime_percent, carrier_flight_averageseats]
       height: 220
-    - elements: [carrier_flights_ontime_percent]
-      height: 400
-    - elements: [flightcount_manuafacturer_pivotflights_topten]
+    - elements: [flightcount_manuafacturer_pivotflights_topten, flight_destination_count_byregion]
       height: 400
 
   filters:
@@ -246,6 +289,13 @@
     type: field_filter
     explore: flights
     field: carriers.name
+ 
+  - name: carrier_state
+    title: "Carrier"
+    type: field_filter
+    explore: flights
+    field: origin.state
+
 
   elements:
  
@@ -258,6 +308,7 @@
     font_size: medium
     listen: 
       carrier_filter: carriers.name
+      carrier_state: carriers.name
 
   
   - name: carrier_flights_ontime_percent
@@ -311,6 +362,47 @@
     listen: 
       carrier_filter: carriers.name
 
+  - name: flight_destination_count_byregion
+    title: Regional Flight Destination Count
+    type: looker_geo_coordinates
+    model: faa
+    explore: flights
+    dimensions: [destination.location]
+    measures: [flights.count]
+    sorts: [flights.count desc]
+    limit: 500
+    total: false
+    map: usa
+    map_projection: ''
+    loading: false
+    listen: 
+      carrier_filter: carriers.name
 
-    
-    
+
+
+
+
+#-----------------------------------------
+- dashboard: manufacturer
+  title: Manufacturer
+  layout: grid
+  rows:
+    - elements: [flight_count_by_manufacturer]
+      height: 220
+
+  filters:
+  - name: manufacturer
+    title: "Manufacturer"
+    type: field_filter
+    explore: flights
+    field: aircraft_models.manufacturer
+
+  elements:
+  - name: flight_count_by_manufacturer
+    title: Flight Count
+    type: single_value
+    model: faa
+    explore: flights
+    measures: [flights.count]
+    listen: 
+      manufacturer: aircraft_models.manufacturer
