@@ -70,8 +70,9 @@
     pivots: [flights.arrival_status]
     measures: [flights.count]
     colors: ['#485963','#fcd15c','#00b2d8','#446c80',orange, redorange]
-    filters:
-      flights.depart_date: '2005'
+    listen:
+      date: flights.depart_date
+      state: origin.state 
     sorts: [flights.depart_month desc]
     limit: 500
     total: false
