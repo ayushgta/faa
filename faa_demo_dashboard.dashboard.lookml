@@ -2,7 +2,7 @@
 #--------------------------------------------------
 
 - dashboard: faa_demo
-  title: Travel Pulse
+  title: Travel Overview
   layout: tile
   tile_size: 100
     
