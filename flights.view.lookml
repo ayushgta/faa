@@ -39,21 +39,18 @@
       type: datetime
   
     - dimension: origin
+      sql: ${TABLE}.origin
+    
     - dimension: destination
+      sql: ${TABLE}.destination
 
-    - measure: destinations_list
-      type: list
-      list_field: destination
+    - dimension: route
+      sql: ${origin} ||'|'|| ${destination}
       
-    - measure: destination_cities
-      type: list
-      list_field: destination.city
-      required_joins: [destination]
-
     - measure: routes_count
       type: count_distinct
-      sql: CONCAT_WS("|", origin, destination)
-      drill_fields: route_detail
+      sql: ${route}
+      drill_fields: route_detail*
 
     - dimension: carrier
       sql: ${TABLE}.carrier
@@ -61,8 +58,6 @@
         {{ linked_value }}
         <a href="/dashboards/faa/carrier_dashboard?carrier_filter={{ value | encode_uri }}" target="_new" > 
         <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>
-  
-
 
     - dimension: flight_number
       sql: ${TABLE}.carrier || ${TABLE}.flight_num
@@ -70,7 +65,7 @@
     - measure: flight_number_count
       type: count_distinct
       sql: ${flight_number}
-      drill_fields: flight_num_detail 
+      drill_fields: flight_num_detail*
 
     - dimension: time
       type: number
@@ -95,20 +90,6 @@
     - measure: total_distance
       type: sum
       sql: ${TABLE}.distance
-      
-    - dimension: plane_age_at_flight
-      type: number
-      required_joins: [aircraft]
-      sql: IF(aircraft.year_built>1950, (YEAR(dep_time)*1.0 - aircraft.year_built), NULL)
-      
-    - dimension: page_age_at_flight_tier
-      type: tier
-      sql: ${plane_age_at_flight}
-      tiers: [2,4,8,16,32]
-      
-    - measure: weighted_plane_age
-      type: average
-      sql: ${plane_age_at_flight}
 
     - dimension: arrival_status
       sql_case:
@@ -121,11 +102,11 @@
         
     - measure: count
       type: count
-      drill_fields: detail
+      drill_fields: detail*
 
     - measure: ontime_count
       type: count
-      drill_fields: detail
+      drill_fields: detail*
       filters: 
         arrival_status: OnTime
 
@@ -136,7 +117,7 @@
 
     - measure: late_count
       type: count
-      drill_fields: detail
+      drill_fields: detail*
       filters: 
         arrival_status: Late
 
@@ -169,7 +150,7 @@
 
     - measure: not_cancelled_count
       type: count
-      drill_fields: detail
+      drill_fields: detail*
       filters: 
         cancelled: No 
 
@@ -186,7 +167,7 @@
 
     - measure: diverted_count
       type: count
-      drill_fields: detail
+      drill_fields: detail*
       filters: 
         arrival_status: Diverted
         
@@ -242,32 +223,3 @@
       count]
        
       
-- view: carriers
- 
-  fields:
-    - dimension: code 
-      primary_key: true
-      sql: |
-        CASE WHEN ${TABLE}.code IS NULL THEN 'No Carrier'
-        ELSE ${TABLE}.code
-        END
-      
-    - dimension: name
-      sql: TRIM(${TABLE}.nickname)
-      html: |
-        {{ linked_value }}
-        <a href="/dashboards/faa/carrier_dashboard?carrier_filter={{ value | encode_uri }}" target="_new" > 
-        <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>
-  
-
-    - measure: names
-      type: list
-      list_field: name
-
-    - measure: count
-      type: count_distinct
-      sql: ${TABLE}.code
-      drill_fields: detail
-      
-  sets:
-    detail: [code, name, flights.count, origin.count, destination.count]

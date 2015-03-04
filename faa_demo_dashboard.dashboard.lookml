@@ -2,31 +2,18 @@
 #--------------------------------------------------
 
 - dashboard: faa_demo
-  title: FAA Demo Dashboard
-  layout: grid
-  rows:
-    - elements: [airports_count,flights_percent_completed_ontime, airports_max_elevation]
-      height: 220
-    - elements: [accident_count_by_state_geomap, airport_count_location_geomap]
-      height: 400
-    - elements: [flights_count_carriers_top10, flightcount_manuafacturer_pivotflights_topten]
-      height: 400
-    - elements: [accidents_purpose_of_flight, flight_count_depart_year]
-      height: 400 
-    - elements: [flightcount_carrier_pivotflights_table, flightcount_carrier_pivotflights]
-      height: 400
-    - elements: [flightcount_manuafacturer_pivotflights]
-      height: 600
+  title: Travel Pulse
+  layout: tile
+  tile_size: 100
     
   filters:
   - name: date
     title: "Date"
     type: date_filter
-    #default_value: Last 90 Days
-    #can't specify a default value -- no recent data from DB 
+    default_value: 2005
     
   - name: state
-    title: "State / Region"
+    title: "Origin State"
     type: field_filter
     explore: airports
     field: airports.state
@@ -35,15 +22,18 @@
   elements:
 
   - name: airports_count
-    title: Number of Airports
+    title: Number of Flights
     type: single_value
     model: faa
-    explore: airports
-    measures: [airports.count]
+    explore: flights
+    measures: [flights.count]
     total: false
     font_size: medium
     listen:
-      state: airports.state
+      state: origin.state
+      date: flights.depart_date
+    width: 4
+    height: 3
 
   - name: flights_percent_completed_ontime
     title: Percent of Flights Completed On Time
@@ -51,44 +41,102 @@
     explore: flights
     measures: [flights.percent_ontime]
     listen:
-      #state: flights.destination_state
       state: origin.state
       date: flights.depart_date
+    width: 4
+    height: 3
       
-  - name: airports_max_elevation
-    title: Airport Max Elevation
+  - name: total_routes
+    title: Total Routes
     type: single_value
     model: faa
-    explore: airports
-    measures: [airports.max_elevation]
-    sorts: [airports.max_elevation desc]
+    explore: flights
+    measures: [flights.routes_count]
+    sorts: [flights.routes_count desc]
     limit: 500
     total: false
     listen:
-      state: airports.state
+      state: origin.state
+      date: flights.depart_date
+    width: 4
+    height: 3
   
-  - name: accident_count_by_state_geomap
-    title: Accident Count by State
+  - name: add_a_unique_name_869
+    title: Monthly Flights by Status
+    type: looker_area
+    model: faa
+    explore: flights
+    dimensions: [flights.arrival_status, flights.depart_month]
+    pivots: [flights.arrival_status]
+    measures: [flights.count]
+    colors: ['#485963','#fcd15c','#00b2d8','#446c80',orange, redorange]
+    filters:
+      flights.depart_date: '2005'
+    sorts: [flights.depart_month desc]
+    limit: 500
+    total: false
+    show_null_points: true
+    show_value_labels: false
+    show_view_names: true
+    stacking: normal
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    point_style: none
+    interpolation: linear
+
+  - name: add_a_unique_name_368
+    title: Monthly Flight Count
+    type: looker_column
+    model: faa
+    explore: flights
+    dimensions: [flights.depart_month]
+    measures: [flights.count]
+    sorts: [flights.depart_month]
+    listen: 
+      date: flights.depart_date
+      state: origin.state 
+    limit: 500
+    reference_lines:
+      - value: [median]
+        label: Median
+#         color: "#Ef7F0F"
+    total: false
+    stacking: ''
+    show_value_labels: false
+    show_null_labels: false
+    show_view_names: true
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_gridlines: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_gridlines: true
+    show_dropoff: false
+    hide_legend: true
+    show_null_points: true
+    x_axis_scale: auto
+
+  - name: add_a_unique_name_638
+    title: Flight Count by Origin State
     type: looker_geo_choropleth
     model: faa
-    explore: accidents
-    dimensions: [aircraft.state]
-    measures: [accidents.count]
-    sorts: [accidents.count desc]
+    explore: flights
+    dimensions: [origin.state]
+    measures: [flights.count]
+    sorts: [flights.count desc]
+    colors: orange
     limit: 500
     total: false
-    quantize_colors: false
-    inner_border_color: ''
-    empty_color: ''
-    colors: ['#ff0000']
     map: usa
     map_projection: ''
+    quantize_colors: false
     loading: false
-    listen:
-      state: aircraft.state
-      date: accidents.event_date
-  
-  
+    outer_border_color: orange
   
   - name: airport_count_location_geomap
     title: Airport Count by Location
@@ -97,6 +145,7 @@
     explore: airports
     dimensions: [airports.location]
     measures: [airports.count]
+    point_color: '#00b2d8'
     sorts: [airports.count desc]
     limit: 500
     total: false
@@ -106,171 +155,47 @@
     listen:
       state: airports.state
 
-
-
-  - name: flights_count_carriers_top10
-    title: Flight Count for the Top 10 Carriers
-    type: looker_pie
+  - name: add_a_unique_name_318
+    title: Top 10 Carriers by Flight Count
+    type: looker_column
     model: faa
     explore: flights
     dimensions: [carriers.name]
-    measures: [flights.count]
-    filters:
-      carriers.name: ''
+    measures: [flights.count, flights.average_seats]
     sorts: [flights.count desc]
+    colors: ['#485963','#00b2d8','#446c80',orange, redorange]
     limit: 10
-    total: false
-    show_null_points: true
-    inner_radius: 50
-    hide_legend: false
     listen:
       state: origin.state
       date: flights.depart_date
-
-
-
-  - name: flight_count_depart_year
-    title: Flight Count By Year
-    type: looker_column
-    model: faa
-    explore: flights
-    dimensions: [flights.depart_year]
-    measures: [flights.count]
-    sorts: [flights.depart_year]
-    limit: 500
     total: false
     stacking: ''
     show_value_labels: false
-    show_null_labels: false
-    show_view_names: true
-    show_x_axis_label: true
-    show_x_axis_ticks: true
     x_axis_gridlines: false
+    x_axis_label_rotation: -30
+    y_axis_gridlines: true
+    show_view_names: true
     show_y_axis_labels: true
     show_y_axis_ticks: true
-    y_axis_gridlines: true
-    show_dropoff: true
-    hide_legend: true
-    show_null_points: true
+    show_x_axis_label: true
+    show_x_axis_ticks: true
     x_axis_scale: auto
-    listen:
-      state: origin.state
-      date: flights.depart_date
-      
+    show_null_labels: false
+
   
-  - name: accidents_purpose_of_flight
-    title: Fight Accidents by Reason
-    type: looker_donut_multiples
-    model: faa
-    explore: accidents
-    dimensions: [accidents.purpose_of_flight, accidents.severity]
-    pivots: [accidents.severity]
-    measures: [accidents.count]
-    filters:
-      accidents.purpose_of_flight: -EMPTY
-    sorts: [accidents.count desc 2]
-    limit: 6
-    total: false
-    show_null_labels: false
-    show_value_labels: false
-    show_view_names: true
-    stacking: normal
-    show_null_points: true
-    listen: 
-      state: aircraft.state 
-      date: accidents.event_date
-    
-
-  - name: flightcount_manuafacturer_pivotflights
-    title: Flight Count By Aircraft Manaufacturer on Lifetime Flights
+  - name: add_a_unique_name_820
+    title: Carrier Stats
     type: table
     model: faa
     explore: flights
-    dimensions: [aircraft_models.manufacturer, aircraft_flights_facts.lifetime_flights_tier]
-    pivots: [aircraft_flights_facts.lifetime_flights_tier]
-    measures: [flights.count]
-    filters:
-      flights.depart_month: 10 years ago for 1 year
-    sorts: [flights.count desc 0]
-    limit: 25
-    total: false
-    row_total: right
-    listen: 
-      state: origin.state 
-      date: flights.depart_date
-      
-  - name: flightcount_carrier_pivotflights
-    title: Carrier Flight Count by Flight Distance 
-    type: looker_column
-    model: faa
-    explore: flights
-    dimensions: [aircraft_flights_facts.distance_per_flight_tier, carriers.name]
-    pivots: [aircraft_flights_facts.distance_per_flight_tier]
-    measures: [flights.count]
-    sorts: [flights.count desc 0]
+    dimensions: [carriers.name]
+    measures: [flights.count, flights.percent_ontime, flights.average_seats]
+    sorts: [flights.count desc]
     limit: 500
-    total: false
-    stacking: ''
-    show_value_labels: false
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    show_null_labels: false
-    listen: 
-      state: origin.state 
+    listen:
+      state: origin.state
       date: flights.depart_date
-
-  - name: flightcount_carrier_pivotflights_table
-    title: Carrier Flight Count by Flight Distance 
-    type: table
-    model: faa
-    explore: flights
-    dimensions: [aircraft_flights_facts.distance_per_flight_tier, carriers.name]
-    pivots: [aircraft_flights_facts.distance_per_flight_tier]
-    measures: [flights.count]
-    sorts: [flights.count desc 0]
-    limit: 500
     total: false
-    listen: 
-      state: origin.state 
-      date: flights.depart_date
-
-
-  - name: flightcount_manuafacturer_pivotflights_topten
-    title: Flight Count For Top Ten Aircraft Manaufacturers on Lifetime Flights
-    type: looker_area
-    model: faa
-    explore: flights
-    dimensions: [aircraft_models.manufacturer, aircraft_flights_facts.lifetime_flights_tier]
-    pivots: [aircraft_flights_facts.lifetime_flights_tier]
-    measures: [flights.count]
-    filters:
-      flights.depart_month: 10 years ago for 1 year
-    sorts: [flights.count desc 0]
-    limit: 10
-    total: false
-    stacking: normal
-    show_value_labels: false
-    show_view_names: true
-    x_axis_gridlines: false
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_gridlines: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    show_null_points: true
-    interpolation: linear
-    x_axis_scale: auto
-    point_style: none
-    listen: 
-      state: origin.state 
-      date: flights.depart_date
-
 
 #---------------------------------------------------
 
@@ -280,21 +205,21 @@
   rows:
     - elements: [carrier_flight_count, carrier_flights_ontime_percent, carrier_flight_averageseats]
       height: 220
-    - elements: [flightcount_manuafacturer_pivotflights_topten, flight_destination_count_byregion]
+    - elements: [test, flight_destination_count_byregion]
       height: 400
 
   filters:
-  - name: carrier_filter
+
+  - name: date
+    title: "Date"
+    type: date_filter
+    default_value: 2005
+  
+  - name: carrier
     title: "Carrier"
     type: field_filter
     explore: flights
     field: carriers.name
- 
-  - name: carrier_state
-    title: "Carrier"
-    type: field_filter
-    explore: flights
-    field: origin.state
 
 
   elements:
@@ -307,9 +232,8 @@
     measures: [flights.count]
     font_size: medium
     listen: 
-      carrier_filter: carriers.name
-      carrier_state: carriers.name
-
+      carrier: carriers.name
+      date: flights.depart_date
   
   - name: carrier_flights_ontime_percent
     title: Carrier Percent of Flights OnTime
@@ -318,8 +242,9 @@
     explore: flights
     measures: [flights.percent_ontime]
     font_size: medium
-    listen: 
-      carrier_filter: carriers.name
+    listen:   
+      carrier: carriers.name
+      date: flights.depart_date
   
   
   - name: carrier_flight_averageseats
@@ -329,21 +254,26 @@
     explore: flights
     measures: [flights.average_seats]
     font_size: medium
-    listen: 
-      carrier_filter: carriers.name
+    listen:   
+      carrier: carriers.name
+      date: flights.depart_date
       
 
-  - name: flightcount_manuafacturer_pivotflights_topten
-    title: Flight Count For Top Ten Aircraft Manaufacturers on Lifetime Flights
-    type: looker_area
+  - name: test
+    title: Flights by Manufacturer
+    type: looker_column
     model: faa
     explore: flights
-    dimensions: [aircraft_models.manufacturer, aircraft_flights_facts.lifetime_flights_tier]
-    pivots: [aircraft_flights_facts.lifetime_flights_tier]
+    dimensions: [aircraft_models.manufacturer, flights.depart_month]
+    pivots: [aircraft_models.manufacturer]
     measures: [flights.count]
     filters:
-      flights.depart_month: 10 years ago for 1 year
+      aircraft_models.manufacturer: -NULL
+    listen:   
+      carrier: carriers.name
+      date: flights.depart_date
     sorts: [flights.count desc 0]
+    colors: ['#485963','#fcd15c','#00b2d8','#446c80',orange, redorange]
     limit: 10
     total: false
     stacking: normal
@@ -355,12 +285,12 @@
     y_axis_gridlines: true
     show_y_axis_labels: true
     show_y_axis_ticks: true
+    x_axis_scale: auto
     show_null_points: true
     interpolation: linear
-    x_axis_scale: auto
     point_style: none
-    listen: 
-      carrier_filter: carriers.name
+    show_null_labels: false
+
 
   - name: flight_destination_count_byregion
     title: Regional Flight Destination Count
@@ -375,8 +305,9 @@
     map: usa
     map_projection: ''
     loading: false
-    listen: 
-      carrier_filter: carriers.name
+    listen:   
+      carrier: carriers.name
+      date: flights.depart_date
 
 
 
