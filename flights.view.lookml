@@ -45,7 +45,7 @@
       sql: ${TABLE}.destination
 
     - dimension: route
-      sql: ${origin} ||'|'|| ${destination}
+      sql: ${origin} ||'-->'|| ${destination}
       
     - measure: routes_count
       type: count_distinct
