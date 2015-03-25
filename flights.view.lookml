@@ -14,6 +14,7 @@
 
     - dimension: tail_num
       # primary_key: true
+      # testtesttest
   
     - dimension_group: depart
       type: time
