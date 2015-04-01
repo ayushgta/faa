@@ -118,7 +118,7 @@
 
     - measure: percent_ontime
       type: number
-      value_format: '#.00%'
+      value_format: '#.00\%'
       sql: 100.0 * ${ontime_count}/NULLIF(${count},0)
 
     - measure: late_count
@@ -130,7 +130,7 @@
     - measure: percent_late
       type: number
       sql: 100.0 * ${late_count}/NULLIF(${count},0)
-      value_format: '#.00%'
+      value_format: '#.00\%'
 
     - measure: verylate_count
       type: count
@@ -140,7 +140,7 @@
 
     - measure: percent_verylate
       type: number
-      value_format: '#.00%'
+      value_format: '#.00\%'
       sql: 100.0 * ${verylate_count}/NULLIF(${count},0)
       decimals: 2
       
@@ -169,7 +169,7 @@
       type: number
       decimals: 2
       sql: 100.0 - ${percent_cancelled}
-      value_format: '#.00%'
+      value_format: '#.00\%'
 
     - measure: diverted_count
       type: count
