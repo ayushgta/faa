@@ -13,14 +13,12 @@
       foreign_key: flights.carrier
 
     - join: origin
-      from: airports
+      from: commercial_airports
       foreign_key: origin
-      fields: [code, full_name, city, state, count, location]
 
     - join: destination
-      from: airports
+      from: commercial_airports
       foreign_key: destination
-      fields: [code, full_name, city, state, count, location]
 
     - join: aircraft
       foreign_key: flights.tail_num
