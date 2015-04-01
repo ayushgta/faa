@@ -26,13 +26,11 @@
         else: Fatal
       
     - dimension: number_injured
-      units: people
       type: number
       sql: ${number_serious_injuries} + ${number_minor_injuries}
 
     - measure: total_injured
       type: sum
-      units: people
       sql: ${number_injured}
 
     - dimension: uninjured
@@ -40,36 +38,30 @@
 
     - measure: total_uninjured
       type: sum
-      units: people
       sql: ${uninjured}
 
     - dimension: number_fatal_injuries
       type: number
-      units: people
       sql: NULLIF(${TABLE}.number_of_fatalities, '')
 #       sql: ${TABLE}.number_of_fatalities
 
     - measure: total_fatalities
       label: Total Fatalities
       type: sum
-      units: people
       sql: ${number_fatal_injuries}
       
       
     - dimension: number_serious_injuries
       type: number
-      units: people
       sql: ${TABLE}.number_of_serious_injuries
 
     - dimension: number_minor_injuries
       type: number
-      units: people
       sql: ${TABLE}.number_of_minor_injuries
 
 
     # Is there more than one model of this aircraft?
-    - dimension: oneoff_multi
-      label: ACCIDENTS One off/Multi
+    - dimension: one_off_or_multi
       sql: |
         (SELECT IF(COUNT(*) > 1, "Multi", "One off") 
          FROM accidents a 
@@ -113,7 +105,6 @@
 
     - measure: amateur_built_count
       type: count
-      units: accidents
       filters: 
         amateur_built: "Yes"
       drill_fields: detail
@@ -124,40 +115,35 @@
       drill_fields: {base: [country, count, total_fatalities]}
   
     - measure: percent_amateur_built
-      type: percentage
-      sql: ${amateur_built_count}/${count}
+      type: number
+      sql: 100.0* ${amateur_built_count}/NULLIF(${count},0)
 
     - measure: us_accidents_count
       type: count
-      units: accidents
       filters: 
         country: United States
       drill_fields: [detail*, -country]
 
     - measure: minor_accidents_count
       type: count
-      units: accidents
       drill_fields: detail
       filters: 
         severity: Minor
 
     - measure: incident_accidents_count
       type: count
-      units: accidents
       drill_fields: detail
       filters: 
         severity: Incident
 
     - measure: serious_accidents_count
       type: count
-      units: accidents
       drill_fields: detail
       filters: 
         severity: Serious
 
     - measure: fatal_accidents_count
       type: count
-      units: accidents
       drill_fields: detail
       filters: 
         severity: Fatal
