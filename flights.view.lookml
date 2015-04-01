@@ -41,9 +41,13 @@
   
     - dimension: origin
       sql: ${TABLE}.origin
+      suggest_explore: airport_code
+      suggest_dimension: airport_code.code
     
     - dimension: destination
       sql: ${TABLE}.destination
+      suggest_explore: airport_code
+      suggest_dimension: airport_code.code
 
     - dimension: route
       sql: ${origin} ||'-->'|| ${destination}
