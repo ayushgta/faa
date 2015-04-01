@@ -2,6 +2,7 @@
 - connection: red_flight
 - persist_for: 2000 hours
 - template: liquid
+#- case_sensitive: false
 
 - include: "*.lookml"
 
@@ -14,12 +15,12 @@
     - join: origin
       from: airports
       foreign_key: origin
-      fields: [full_name, city, state, count, location]
+      fields: [code, full_name, city, state, count, location]
 
     - join: destination
       from: airports
       foreign_key: destination
-      fields: [full_name, city, state, count, location]
+      fields: [code, full_name, city, state, count, location]
 
     - join: aircraft
       foreign_key: flights.tail_num

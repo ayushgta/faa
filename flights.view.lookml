@@ -41,13 +41,13 @@
   
     - dimension: origin
       sql: ${TABLE}.origin
-      suggest_explore: airport_code
-      suggest_dimension: airport_code.code
+      suggest_dimension: origin.code
+      description: the three letter code (in CAPs) of the airport
     
     - dimension: destination
       sql: ${TABLE}.destination
-      suggest_explore: airport_code
-      suggest_dimension: airport_code.code
+      suggest_dimension: destination.code
+      description: the three letter code (in CAPs) of the airport
 
     - dimension: route
       sql: ${origin} ||'-->'|| ${destination}
@@ -59,6 +59,7 @@
 
     - dimension: carrier
       sql: ${TABLE}.carrier
+      suggest_dimension: carriers.code
       html: |
         {{ linked_value }}
         <a href="/dashboards/faa/carrier_dashboard?carrier_filter={{ value | encode_uri }}" target="_new" > 
