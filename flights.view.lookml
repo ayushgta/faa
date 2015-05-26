@@ -163,12 +163,13 @@
     - measure: percent_cancelled
       type: number
       decimals: 2
-      sql: 100.0 * ${cancelled_count}/${count}
+      sql: 100.00 * ${cancelled_count}/${count}
+      value_format: '#.00\%'
 
     - measure: percent_complete
       type: number
       decimals: 2
-      sql: 100.0 - ${percent_cancelled}
+      sql: 100.00 - ${percent_cancelled}
       value_format: '#.00\%'
 
     - measure: diverted_count
