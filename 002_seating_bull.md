@@ -68,19 +68,19 @@ By clicking on the airport code for Eagle, EGE, we are just looking at flights t
 
 ## What's the busiest day?
 
-Let's checkout different days of the week.  To do so, we'll click on the dimension called Depart DOW Num to group by the day of the week.  
+Let's checkout different days of the week.  To do so, we'll click on the dimension called Depart Day of Week to group by the day of the week.  
 
 <look height="250" width="100%">
   model: faa
   explore: flights
-  dimensions: flights.depart_dow_num
+  dimensions: flights.depart_day_of_week
   measures: [flights.count]
   filters:
     flights.destination: EGE
 </look>
 
 
-We see that Saturday has 2x the number of flights as Wednesday, but 3x the number of seats.  Some big planes must come in Saturdays. We can see that Sunday is also big, but weekdays are pretty small.
+We see that Saturday has the most activity, and flights look like they gear up toward the end of the week and into the weekend.
 
 
 ## Do seasons matter?
