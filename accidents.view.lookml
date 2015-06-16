@@ -31,7 +31,7 @@
 
     - measure: total_injured
       type: sum
-      sql: ${number_injured}/3
+      sql: ${number_injured}
 
     - dimension: uninjured
       sql: ${TABLE}.number_of_uninjured
