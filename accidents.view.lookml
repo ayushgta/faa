@@ -13,8 +13,8 @@
       
     - dimension_group: event
       type: time
-      timeframes: [time, date, dow, week, month, month_num, year]
-      sql: event_date
+      timeframes: [time, date, day_of_week, week, month, month_num, year]
+      sql: ${table}.event_date
 
     - dimension: severity
       sql_case: 
