@@ -120,6 +120,16 @@
       value_format: '#.00\%'
       sql: 100.0 * ${ontime_count}/NULLIF(${count},0)
 
+    - measure: ontime_facts
+      type: number
+      sql: ${percent_ontime}
+      html: | 
+        <div style="width:100%; text-align: right;">
+          Ontime Count: {{ ontime_count._linked_value }}
+          <br/>
+          Percent Ontime: {{ percent_ontime._linked_value }}
+        </div> 
+        
     - measure: late_count
       type: count
       drill_fields: detail*
