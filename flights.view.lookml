@@ -125,9 +125,9 @@
       sql: ${percent_ontime}
       html: | 
         <div style="width:100%; text-align: right;">
-          {{ ontime_count._linked_value }}
+          Ontime Count: {{ ontime_count._linked_value }}
           <br/>
-          {{ percent_ontime._linked_value }}
+          Percent Ontime: {{ percent_ontime._linked_value }}
         </div> 
         
     - measure: late_count
