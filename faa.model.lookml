@@ -4,7 +4,8 @@
 - template: liquid
 #- case_sensitive: false
 
-- include: "*.lookml"
+- include: "*.view.lookml"
+- include: "*.dashboard.lookml"
 
 - explore: flights
   view: flights
