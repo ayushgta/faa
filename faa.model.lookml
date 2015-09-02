@@ -11,29 +11,35 @@
   view: flights
   joins:
     - join: carriers
-      foreign_key: flights.carrier
+      sql_on: ${flights.carrier} = ${carriers.code}
+      relationship: many_to_one
 
     - join: origin
       from: commercial_airports
-      foreign_key: origin
+      sql_on: ${flights.origin} = ${origin.code}
+      relationship: many_to_one
 
     - join: destination
       from: commercial_airports
-      foreign_key: destination
+      sql_on: ${flights.destination} = ${destination.code}
+      relationship: many_to_one
 
     - join: aircraft
-      foreign_key: flights.tail_num
+      sql_on: ${flights.tail_num} = ${aircraft.tail_number}
+      relationship: many_to_one
       fields: aircraft.export
 
     - join: aircraft_flights_facts
-      foreign_key: flights.tail_num
+      sql_on: ${flights.tail_num} = ${aircraft_flights_facts.tail_num}
+      relationship: many_to_one
 
     - join: aircraft_models
-      foreign_key: aircraft.aircraft_model_code
+      sql_on: ${aircraft.aircraft_model_code} = ${aircraft_models.aircraft_model_code}
+      relationship: many_to_one
 
     - join: aircraft_types
-      foreign_key: aircraft_models.aircraft_type_id
- 
+      sql_on: ${aircraft_models.aircraft_type_id} = ${aircraft_types.aircraft_type_id}
+      relationship: many_to_one
      
 - explore: airports
   view: airports
@@ -42,17 +48,21 @@
   view: aircraft
   joins:
     - join: aircraft_models
-      foreign_key: aircraft.aircraft_model_code
+      sql_on: ${aircraft.aircraft_model_code} = ${aircraft_models.aircraft_model_code}
+      relationship: many_to_one
 
     - join: aircraft_types
-      foreign_key: aircraft_models.aircraft_type_id
+      sql_on: ${aircraft_models.aircraft_type_id} = ${aircraft_types.aircraft_type_id}
+      relationship: many_to_one
  
     - join: aircraft_flights_facts
-      foreign_key: aircraft.tail_number
-
+      sql_on: ${aircraft.tail_number} = ${aircraft_flights_facts.tail_num}
+      relationship: many_to_one
+      
 - explore: accidents
 #   connection: faa
   view: accidents
   joins:
     - join: aircraft
-      foreign_key: registration_number
+      sql_on: ${accidents.registration_number} = ${aircraft.tail_number}
+      relationship: many_to_one
