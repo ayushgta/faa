@@ -11,9 +11,12 @@
     
   fields:
 
+    - dimension: id2_primary_key
+      sql: ${TABLE}.id2
+      primary_key: true
+      hidden: true
+
     - dimension: tail_num
-      # primary_key: true
-      # testtesttest
   
     - dimension_group: depart
       type: time
