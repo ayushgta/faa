@@ -88,6 +88,7 @@
       sql: ${TABLE}.flight_time
 
     - dimension: distance
+      type: number
       sql: ${TABLE}.distance
       
     - dimension: distance_tiered

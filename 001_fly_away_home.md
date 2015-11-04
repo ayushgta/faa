@@ -136,7 +136,7 @@ To solve this, we are going to group the accidents by 'registration_number' (thi
 </look>
 
 
-The first 4 results are junk. In row 1, the tail number is listed as 'None'; in row 2, it has been omitted; in row 3, it is Unknown; and row 4 is some USAF aircraft. At row 5 we get to our first actual plane. Wow - there is an aircraft that has crashed 8 times. Turns out this haunted Cessna has been flying around Alaska injuring people for years. Remember, clicking on (or drilling into) the '8' in row 5 will show additional details. 
+The first 4 results are junk. In row 1, the tail number is listed as 'None'; in row 2, it has been omitted; in row 3, it is Unknown; in row 4, it is UNK; and row 5 is some USAF aircraft. At row 6 we get to our first actual plane. Wow - there is an aircraft that has crashed 8 times. Turns out this haunted Cessna has been flying around Alaska injuring people for years. Remember, clicking on (or drilling into) the '8' in row 5 will show additional details. 
 
 <look height="400" width="100%">
   model: faa
