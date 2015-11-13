@@ -16,11 +16,6 @@
       timeframes: [time, date, day_of_week, week, month, month_num, year]
       sql: event_date
 
-    - dimension: coordinates
-      type: location
-      sql_latitude: CASE WHEN ${TABLE}.latitude != '' THEN ${TABLE}.latitude::float ELSE NULL END
-      sql_longitude: CASE WHEN ${TABLE}.longitude != '' THEN ${TABLE}.longitude::float ELSE NULL END    
-    
     - dimension: severity
       sql_case: 
         Incident: |
