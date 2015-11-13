@@ -12,7 +12,7 @@
       sql: TRIM(${TABLE}.nickname)
       html: |
         {{ linked_value }}
-        <a href="/dashboards/faa/carrier_dashboard?carrier_filter={{ value | encode_uri }}" target="_new" > 
+        <a href="/dashboards/faa/carrier_dashboard?carrier={{ value | encode_uri }}" target="_new" > 
         <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>
 
     - measure: count

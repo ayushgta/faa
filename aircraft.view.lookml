@@ -1,3 +1,4 @@
+
 - view: aircraft
   fields:
     - dimension: tail_number
@@ -8,14 +9,14 @@
       type: int
       sql: aircraft.year_built+0    # defeat the JDBC automatic conversion to date because of the word 'year'
     
-    - dimension: had_incident
-      type: yesno
-      sql: |
-        (
-          SELECT event_id 
-          FROM accidents 
-          WHERE aircraft.tail_num=accidents.registration_number 
-          LIMIT 1)
+#     - dimension: had_incident
+#       type: yesno
+#       sql: |
+#         (
+#           SELECT event_id 
+#           FROM accidents 
+#           WHERE aircraft.tail_num=accidents.registration_number 
+#           LIMIT 1)
     
     - measure: count
       type: count_distinct

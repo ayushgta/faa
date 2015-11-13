@@ -1,4 +1,3 @@
-
 - view: flights
   derived_table:
     # remove some bogus flights.
@@ -12,9 +11,12 @@
     
   fields:
 
+    - dimension: id2_primary_key
+      sql: ${TABLE}.id2
+      primary_key: true
+      hidden: true
+
     - dimension: tail_num
-      # primary_key: true
-      # testtesttest
   
     - dimension_group: depart
       type: time
@@ -86,6 +88,7 @@
       sql: ${TABLE}.flight_time
 
     - dimension: distance
+      type: number
       sql: ${TABLE}.distance
       
     - dimension: distance_tiered
@@ -121,6 +124,16 @@
       value_format: '#.00\%'
       sql: 100.0 * ${ontime_count}/NULLIF(${count},0)
 
+    - measure: ontime_facts
+      type: number
+      sql: ${percent_ontime}
+      html: | 
+        <div style="width:100%; text-align: right;">
+          Ontime Count: {{ ontime_count._linked_value }}
+          <br/>
+          Percent Ontime: {{ percent_ontime._linked_value }}
+        </div> 
+        
     - measure: late_count
       type: count
       drill_fields: detail*
@@ -163,12 +176,13 @@
     - measure: percent_cancelled
       type: number
       decimals: 2
-      sql: 100.0 * ${cancelled_count}/${count}
+      sql: 100.00 * ${cancelled_count}/${count}
+      value_format: '#.00\%'
 
     - measure: percent_complete
       type: number
       decimals: 2
-      sql: 100.0 - ${percent_cancelled}
+      sql: 100.00 - ${percent_cancelled}
       value_format: '#.00\%'
 
     - measure: diverted_count
@@ -228,4 +242,6 @@
     route_detail: [origin, origin.city, destination, destination.city, carriers.count,
       count]
        
+      
+#a change
       
