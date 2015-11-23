@@ -1,5 +1,5 @@
 # Lesson 1.2: Fly Away Home, Safely
-
+ 
 To ask great questions, it's important to know what data you have to explore. Let's learn a little bit more about our data. [Somewhere on the net](http://www.ntsb.gov/aviationquery/index.aspx), we found a copy of the FAA database in SQL. This database contains data about:
 
 + 38M flights

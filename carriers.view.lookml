@@ -1,5 +1,5 @@
 - view: carriers
- 
+  
   fields:
     - dimension: code 
       primary_key: true

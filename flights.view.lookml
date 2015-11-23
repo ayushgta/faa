@@ -233,12 +233,12 @@
  
      
   sets:
-    origin.detail: [origin count, aircraft,count, carriers.count, .aircraft_models.count, 
+    origin.detail: [origin count, aircraft.count, carriers.count, aircraft_models.count, 
         aircraft_models.manufacturer_count]
-    destination.detail: [count, aircraft.count, carriers.count, .aircraft_models.count, 
+    destination.detail: [count, aircraft.count, carriers.count, aircraft_models.count, 
         aircraft_models.manufacturer_count]
     detail: [tail_num, flight_number, depart_time, carriers.name,  origin, origin.city, destination,  
-      destination.city,]
+      destination.city]
     route_detail: [origin, origin.city, destination, destination.city, carriers.count,
       count]
        

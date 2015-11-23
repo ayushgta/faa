@@ -22,7 +22,7 @@
       type: location
       sql_longitude: ${TABLE}.longitude
       sql_latitude: ${TABLE}.latitude
-      
+       
     - measure: count
       type: count
       drill_fields: [code, city, state, full_name, flights.count]
