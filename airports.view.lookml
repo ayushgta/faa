@@ -22,6 +22,13 @@
       type: count                       #  airport codes we encounter.
       drill_fields: detail                    # the set of fields to show when we drill
                                         #  into AIRPORTS Count
+                                        
+    - measure: count_test                    # count the number of different
+      type: count                       #  airport codes we encounter.
+      #drill_fields: detail                    # the set of fields to show when we drill
+                                        #  into AIRPORTS Count                
+      filters:
+        state: TX
 
     - measure: with_control_tower_count
       type: count     
