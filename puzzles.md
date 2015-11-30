@@ -1,5 +1,5 @@
 # Puzzles 
-
+ 
 Time to test your skills! 
 
 Start by selecting [Explore Airports](/explore/faa/airports) to complete the following puzzles. 

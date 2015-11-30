@@ -9,7 +9,7 @@
       GROUP BY tail_num
     sortkeys: [tail_num]
     persist_for: 2000 hours
-
+ 
   fields:
     - dimension: tail_num
       primary_key: true

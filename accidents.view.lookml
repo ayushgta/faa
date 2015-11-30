@@ -108,13 +108,13 @@
 
     - measure: count
       type: count
-      drill_fields: detail
+      drill_fields: detail*
 
     - measure: amateur_built_count
       type: count
       filters: 
         amateur_built: "Yes"
-      drill_fields: detail
+      drill_fields: detail*
 
     - measure: country_count
       type: count_distinct
@@ -133,25 +133,25 @@
 
     - measure: minor_accidents_count
       type: count
-      drill_fields: detail
+      drill_fields: detail*
       filters: 
         severity: Minor
 
     - measure: incident_accidents_count
       type: count
-      drill_fields: detail
+      drill_fields: detail*
       filters: 
         severity: Incident
 
     - measure: serious_accidents_count
       type: count
-      drill_fields: detail
+      drill_fields: detail*
       filters: 
         severity: Serious
 
     - measure: fatal_accidents_count
       type: count
-      drill_fields: detail
+      drill_fields: detail*
       filters: 
         severity: Fatal
 

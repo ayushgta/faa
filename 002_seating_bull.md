@@ -30,7 +30,7 @@ In our database, we have 38M flights with a total seating capacity of 4B seats. 
 The SQL that Looker creates for this query is:
 
 <sql height="200" width="100%">
-  model: faa
+  model: faa #-
   explore: flights
   measures: [flights.count, flights.total_seats]
 </sql>
@@ -52,7 +52,7 @@ Say we know there is an airport near Vail, Colorado, but we don't know the airpo
 
 In our Looker results, there are links to maps. By clicking on them and looking around, we can see that [Eagle is pretty close to Vail](http://osm.org/go/T2ABCb--?node=106849952).
 
-By clicking on the airport code for Eagle, EGE, we are just looking at flights to Vail. For all time there are 7889 flights going into Vail.
+By clicking on the airport code for Eagle, EGE, we are just looking at flights to Vail. For all time there are 7,889 flights going into Vail.
 
 <look height="175" width="100%">
   model: faa
@@ -91,8 +91,8 @@ Vale is a ski resort, right? That means we should see seasonal variation in the 
 <look height="350" width="100%">
   model: faa
   explore: flights
-  dimensions: [flights.depart_dow_num, flights.depart_month_num]
-  pivots: flights.depart_dow_num
+  dimensions: [flights.depart_day_of_week_index, flights.depart_month_num]
+  pivots: flights.depart_day_of_week_index
   measures: [flights.count]
   filters:
     flights.destination: EGE
