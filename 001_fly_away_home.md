@@ -146,9 +146,6 @@ The first 4 results are junk. In row 1, the tail number is listed as 'None'; in 
     accidents.registration_number: N20752
 </look>
 
-
-Clicking on any of the triangles will take you to the NTSB accident reports.
-
 Pretty amazing.  This one aircraft has had 8 incidents.  I'm not sure I'd get on that one...
 As you can see, sorting is a powerful relational querying tool. Using it, we can put the thing we are most interested in at the top of the report.
 

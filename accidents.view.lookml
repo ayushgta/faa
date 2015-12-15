@@ -3,10 +3,10 @@
     
     - dimension: event_id
       primary_key: true
-      html: |
-        {{ linked_value }}
-        <a href="http://www.ntsb.gov/aviationquery/brief.aspx?ev_id={{ value }}" >
-           <img src=/images/arrow-black-right.png></a>
+     # html: |
+    #    {{ linked_value }}
+    #    <a href="http://www.ntsb.gov/aviationquery/brief.aspx?ev_id={{ value }}" >
+    #       <img src=/images/arrow-black-right.png></a>
 
     - dimension: registration_number
     - dimension: investigation_type
