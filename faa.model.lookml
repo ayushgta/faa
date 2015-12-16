@@ -7,6 +7,7 @@
 - include: "*.dashboard.lookml"
 
 - explore: flights
+  suggestions: false
   view: flights
   joins:
     - join: carriers
