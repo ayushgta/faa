@@ -8,9 +8,9 @@ Here, we start by selecting **[Explore Airports](/explore/faa/airports)**. That 
 Knowing the following terms will make navigating Looker much easier. Throughout these pages, important terms that you should know will be **bolded.**
 
 - A **field** is either a dimension or a measure.
-- A **dimension** is what you group or slice data by; 
-- A **measure** is an aggregate, like a count, sum or average
-- The **field picker**, a column found on the left side of the page, contains all of the available dimensions and measures in the current explore
+- A **dimension** is what you group or slice data by.
+- A **measure** is an aggregate, like a count, sum or average.
+- The **field picker**, a column found on the left side of the page, contains all of the available dimensions and measures in the current explore.
 
 Now let's get to it! We'll start where any good exploration begins - with a question, also called a **query**:
 <br />
@@ -66,7 +66,7 @@ It looks like Texas has almost twice as many airports as California! Where do th
 
 ## Can we just see a specific type of airport?
 
-You will notice that some of the airports are Heliports, some are Airports and some are Seaplane bases.  If you click on any of the types,  it will modify your query to be limited by what you clicked on.  Click on "HELIPORT'.  
+You will notice that some of the airports are Heliports, some are Airports and some are Seaplane bases.  If you click on any of the types,  it will modify your query to be limited by what you clicked on.  Click on "HELIPORT".  
  
 <look height="200" width="100%">
   model: faa
@@ -79,7 +79,7 @@ You will notice that some of the airports are Heliports, some are Airports and s
 
 
 Notice what happens? Now we only see heliports in the list.   Could we have written this query directly?  Yes!  
-Simply selecting the fields and filters in the explore plage would also yield these results.
+Simply selecting the fields and filters in the explore page would also yield these results.
 
 In Looker, every query leads to many, many more queries. Whenever you click on a link in a table in Looker, you are writing a new query.  The entire query is encoded in the URL of the link.  Looker figures out queries you might want to execute and writes them all for you so you can have a web browsing experience when viewing your data.
 

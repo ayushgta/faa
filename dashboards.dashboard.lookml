@@ -3,7 +3,7 @@
   layout: tile
   tile_size: 100
   elements:
-
+ 
     - name: flight_and_carriers_by_year
       type: table
       explore: flights
