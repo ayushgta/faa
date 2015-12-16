@@ -29,8 +29,18 @@ In our database, we have 38M flights with a total seating capacity of 4B seats. 
 
 The SQL that Looker creates for this query is:
 
-<look-sql height="200" width="100%" from="look1">
-</look-sql>
+```sql
+-- use existing flights in looker_scratch1.LR$KZTEL36IXL1CYCGQ0UNOD_flights
+SELECT 
+  COUNT(*) AS "flights.count",
+  COALESCE(SUM(aircraft_models.seats),0) AS "flights.total_seats"
+FROM looker_scratch1.LR$KZTEL36IXL1CYCGQ0UNOD_flights AS flights
+LEFT JOIN aircraft ON flights.tail_num = aircraft.tail_num
+LEFT JOIN aircraft_models ON aircraft.aircraft_model_code = aircraft_models.aircraft_model_code
+
+ORDER BY 1 DESC
+LIMIT 500
+```
 
 ## How do we find airports?
 
