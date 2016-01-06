@@ -2,6 +2,8 @@
 - connection: red_flight
 - persist_for: 2000 hours
 #- case_sensitive: false
+
+#test
  
 - include: "*.view.lookml"
 - include: "*.dashboard.lookml"
