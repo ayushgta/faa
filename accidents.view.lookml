@@ -72,12 +72,12 @@
 
     - dimension: latitude
       type: number
-      decimals: 4
+      value_format_name: decimal_4
       hidden: true
 
     - dimension: longitude
       type: number
-      decimals: 4
+      value_format_name: decimal_4
       hidden: true
       
     - dimension: coordinates
