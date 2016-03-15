@@ -70,7 +70,6 @@
       
     - measure: seats_by_year
       type: sum_distinct
-      sql_distinct_key: ${aircraft.plane_year}
       sql: ${seats}
 
     - measure: count
