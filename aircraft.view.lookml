@@ -68,8 +68,8 @@
     - dimension: seats
       type: number
       
-    - measure: seats_by_year
-      type: sum_distinct
+    - measure: total_seats
+      type: sum
       sql: ${seats}
 
     - measure: count
