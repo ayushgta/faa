@@ -141,6 +141,12 @@
       drill_fields: detail
       filters: 
         severity: Serious
+        
+    
+    - measure: percent_total_accidents
+      type: number
+      sql: 100.0* ${total_injured}/NULLIF(${count},0)
+      value_format: '0\%'
 
     - measure: fatal_accidents_count
       type: count

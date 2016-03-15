@@ -67,6 +67,11 @@
 
     - dimension: seats
       type: number
+      
+    - measure: seats by year
+      type: sum_distinct
+      sql_distinct_key: ${plane_year}
+      sql: ${seats}
 
     - measure: count
       type: count_distinct
