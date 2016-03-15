@@ -68,9 +68,9 @@
     - dimension: seats
       type: number
       
-    - measure: seats by year
+    - measure: seats_by_year
       type: sum_distinct
-      sql_distinct_key: ${plane_year}
+      sql_distinct_key: ${aircraft.plane_year}
       sql: ${seats}
 
     - measure: count
@@ -93,7 +93,7 @@
   sets:
     detail: [name, manufacturer, seats, engines, count]
     aircraft_maker_detail: [manufacturer, flights.count, carriers.count,
-      aircraft_models.count, origin.count, destinaiton.count]
+      aircraft_models.count, origin.count, destinaiton.count, seats.count]
 
      
 - view: aircraft_types
