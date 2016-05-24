@@ -153,7 +153,6 @@
 
     - measure: percent_verylate
       type: number
-      value_format: '#.00\%'
       sql: 100.0 * ${verylate_count}/NULLIF(${count},0)
       value_format_name: decimal_2
       
@@ -177,13 +176,11 @@
       type: number
       value_format_name: decimal_2
       sql: 100.00 * ${cancelled_count}/${count}
-      value_format: '#.00\%'
 
     - measure: percent_complete
       type: number
       value_format_name: decimal_2
       sql: 100.00 - ${percent_cancelled}
-      value_format: '#.00\%'
 
     - measure: diverted_count
       type: count
