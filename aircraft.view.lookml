@@ -5,9 +5,9 @@
       sql: ${TABLE}.tail_num 
       primary_key: true
 
-    - dimension: plane_year
-      type: number
-      sql: aircraft.year_built+0    # defeat the JDBC automatic conversion to date because of the word 'year'
+ #   - dimension: plane_year
+  #    type: number
+   #   sql: aircraft.year_built+0    # defeat the JDBC automatic conversion to date because of the word 'year'
     
 #     - dimension: had_incident
 #       type: yesno
