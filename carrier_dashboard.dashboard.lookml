@@ -15,6 +15,7 @@
     title: "Date"
     type: date_filter
     default_value: 2005
+    title_text: "date"
   
   - name: carrier
     title: "Carrier"
