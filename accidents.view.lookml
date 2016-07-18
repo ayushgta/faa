@@ -104,7 +104,7 @@
 
     - dimension: amateur_built
       type: yesno
-      sql: amateur_built = "Yes"
+      sql: amateur_built = 'Yes'
 
     - measure: count
       type: count
@@ -113,7 +113,7 @@
     - measure: amateur_built_count
       type: count
       filters: 
-        amateur_built: "Yes"
+        amateur_built: 'Yes'
       drill_fields: detail*
 
     - measure: country_count
