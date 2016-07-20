@@ -6,7 +6,6 @@
 - include: "*.view.lookml"
 - include: "*.dashboard.lookml"
 
-
 - explore: flights
   view: flights
   joins:
