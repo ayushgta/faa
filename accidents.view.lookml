@@ -45,8 +45,8 @@
       sql: NULLIF(${TABLE}.number_of_fatalities, '')
 #       sql: ${TABLE}.number_of_fatalities
 
-    - measure: count_fatal_injuries(TM)
-      type: count
+    - measure: count_distinct_fatal_injuries
+      type: count_distinct
       sql: count(${TABLE}.number_fatal_injuries, '')
 #       sql: ${TABLE}.number_of_fatalities
 
