@@ -45,8 +45,8 @@
       sql: NULLIF(${TABLE}.number_of_fatalities, '')
 #       sql: ${TABLE}.number_of_fatalities
 
-    - meansure: count_fatal_injuries(TM)
-      type: number
+    - measure: count_fatal_injuries(TM)
+      type: count
       sql: count(${TABLE}.number_fatal_injuries, '')
 #       sql: ${TABLE}.number_of_fatalities
 
