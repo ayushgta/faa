@@ -2,10 +2,9 @@
 - connection: red_flight
 - persist_for: 2000 hours
 #- case_sensitive: false
- 
+
 - include: "*.view.lookml"
 - include: "*.dashboard.lookml"
-
 
 - explore: flights
   view: flights
@@ -40,10 +39,10 @@
     - join: aircraft_types
       sql_on: ${aircraft_models.aircraft_type_id} = ${aircraft_types.aircraft_type_id}
       relationship: many_to_one
-     
+
 - explore: airports
   view: airports
-  
+
 - explore: aircraft
   view: aircraft
   joins:
@@ -54,11 +53,11 @@
     - join: aircraft_types
       sql_on: ${aircraft_models.aircraft_type_id} = ${aircraft_types.aircraft_type_id}
       relationship: many_to_one
- 
+
     - join: aircraft_flights_facts
       sql_on: ${aircraft.tail_number} = ${aircraft_flights_facts.tail_num}
       relationship: many_to_one
-      
+
 - explore: accidents
 #   connection: faa
   view: accidents
