@@ -1,6 +1,6 @@
-- scoping: true
 - connection: red_flight
 - persist_for: 2000 hours
+
 #- case_sensitive: false
 
 - include: "*.view.lookml"

@@ -8,6 +8,7 @@
       FROM ontime AS f
       GROUP BY tail_num
     sortkeys: [tail_num]
+    distkey: tail_num
     persist_for: 2000 hours
  
   fields:
