@@ -6,6 +6,13 @@
 - include: "*.view.lookml"
 - include: "*.dashboard.lookml"
 
+- explore: flights_2
+  view: flights
+#   joins:
+#     - join: carriers
+#     sql_on: ${flights.carrier} = ${carriers.code}
+#     relationship: many_to_one
+
 - explore: flights
   view: flights
   joins:
