@@ -1,14 +1,21 @@
 
 - view: aircraft
+#   derived_table: 
+#     sql: SELECT * FROM aircraft WHERE {% condition plane_year %} year_built {% endcondition %} or {% condition thing %} plane_year {% endcondition %}
   fields:
     - dimension: tail_number
-      sql: ${TABLE}.tail_num 
+      sql: ${TABLE}.tail_num   
       primary_key: true
 
     - dimension: plane_year
       type: int
       sql: aircraft.year_built+0    # defeat the JDBC automatic conversion to date because of the word 'year'
+      
     
+    - dimension: thing
+#       hidden: true
+      sql: ${plane_year} + 4
+      
 #     - dimension: had_incident
 #       type: yesno
 #       sql: |

@@ -13,6 +13,7 @@
       
     - dimension_group: event
       type: time
+      convert_tz: false
       timeframes: [time, date, day_of_week, week, month, month_num, year]
       sql: event_date
 
@@ -34,6 +35,7 @@
       sql: ${number_injured}
 
     - dimension: uninjured
+      type: number
       sql: ${TABLE}.number_of_uninjured
 
     - measure: total_uninjured
@@ -82,8 +84,8 @@
       
     - dimension: coordinates
       type: location
-      sql_latitude: CASE WHEN ${TABLE}.latitude != '' THEN ${TABLE}.latitude::float ELSE NULL END
-      sql_longitude: CASE WHEN ${TABLE}.longitude != '' THEN ${TABLE}.longitude::float ELSE NULL END
+      sql_latitude: CASE WHEN ${TABLE}.latitude != '' THEN CAST(${TABLE}.latitude AS DECIMAL(10, 5)) ELSE NULL END
+      sql_longitude: CASE WHEN ${TABLE}.longitude != '' THEN CAST(${TABLE}.longitude AS DECIMAL(10, 5)) ELSE NULL END
 
     - dimension: airport_code      
     - dimension: airport_name
@@ -91,6 +93,8 @@
     - dimension: aircraft_damage
     - dimension: aircraft_category
     - dimension: number_of_engines
+      type: number
+    
     - dimension: engine_type
     - dimension: far_description      
     - dimension: schedule
