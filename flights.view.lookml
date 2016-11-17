@@ -6,7 +6,7 @@
         FROM ontime 
         WHERE dep_time > '1960-01-01'
     sortkeys: [dep_time]
-    distkey: id2_primary_key
+    distkey: id2
     persist_for: 5000 hours
 #     sql_trigger_value: SELECT COUNT(*) FROM ontime
     
