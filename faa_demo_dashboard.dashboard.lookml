@@ -16,6 +16,13 @@
     type: field_filter
     explore: airports
     field: airports.state
+    
+  - name: city_filter
+    title: "Origin City"
+    type: field_filter
+    explore: airports
+    field: airports.city
+    listens_to_filters: [state]
 
 
   elements:
