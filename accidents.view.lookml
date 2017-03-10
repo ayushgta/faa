@@ -72,12 +72,12 @@
     - dimension: latitude
       type: number
       value_format_name: decimal_4
-      hidden: true
+#       hidden: true
 
     - dimension: longitude
       type: number
       value_format_name: decimal_4
-      hidden: true
+#       hidden: true
       
     - dimension: coordinates
       type: location
@@ -103,7 +103,7 @@
 
     - dimension: amateur_built
       type: yesno
-      sql: amateur_built = "Yes"
+      sql: amateur_built = 'Yes'
 
     - measure: count
       type: count
@@ -114,11 +114,6 @@
       filters: 
         amateur_built: "Yes"
       drill_fields: detail*
-
-    - measure: dion_test
-      label: Test of Sum-Count
-      sql: sum(${number_fatal_injuries})/sum({amateur_built_count}
-
 
     - measure: country_count
       type: count_distinct

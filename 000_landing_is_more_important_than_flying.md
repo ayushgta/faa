@@ -13,7 +13,7 @@ Knowing the following terms will make navigating Looker much easier. Throughout 
 - The **field picker**, a column found on the left side of the page, contains all of the available dimensions and measures in the current explore.
 
 Now let's get to it! We'll start where any good exploration begins - with a question, also called a **query**:
-<br />
+<br/>
 
 ## How many American airports are there?
 

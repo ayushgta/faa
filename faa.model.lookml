@@ -6,6 +6,22 @@
 - include: "*.view.lookml"
 - include: "*.dashboard.lookml"
 
+- explore: flights_2
+  view: flights
+  joins:
+    - join: carriers
+      sql_on: ${flights.carrier} = ${carriers.code}
+      relationship: many_to_one
+      
+    - join: aircraft_models
+      sql_on: ${aircraft.aircraft_model_code} = ${aircraft_models.aircraft_model_code}
+      relationship: many_to_one
+      
+    - join: aircraft
+      sql_on: ${flights.tail_num} = ${aircraft.tail_number}
+      relationship: many_to_one
+      fields: aircraft.export
+
 - explore: flights
   view: flights
   joins:
