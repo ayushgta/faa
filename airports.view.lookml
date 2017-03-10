@@ -29,6 +29,10 @@
       filters:
         control_tower: Yes              # only count airports with control towers.
 
+    - measure: test_string_max
+      type: string
+      sql: max(${TABLE}.elevation)           # AVG(airports.elevation)
+
     - measure: average_elevation
       type: average
       sql: ${TABLE}.elevation           # AVG(airports.elevation)
