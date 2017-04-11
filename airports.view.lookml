@@ -43,7 +43,7 @@
 
     - dimension: elevation_range
       sql_case:
-        High: ${elevation} > 8000
+        High: ${elevation} >= 8000
         Medium: ${elevation} BETWEEN 3000 and 7999
         else: Low
         
