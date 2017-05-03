@@ -143,6 +143,18 @@
           Percent Ontime: {{ percent_ontime._linked_value }}
         </div> 
         
+    - measure: ontime_facts_test
+      type: number
+      sql: ${percent_ontime}
+      html: | 
+        <div style="width:100%; text-align: right;"> <details>
+          <summary>Test Expansion</summary>
+          Ontime Count: {{ ontime_count._linked_value }}
+          <br/>
+          Percent Ontime: {{ percent_ontime._linked_value }}
+          </details>
+        </div> 
+        
     - measure: late_count
       type: count
       drill_fields: detail*
