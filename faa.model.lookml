@@ -6,6 +6,9 @@
 - include: "*.view.lookml"
 - include: "*.dashboard.lookml"
 
+- datagroup: faa_datagroup
+  max_cache_age: "1 minute"
+
 - explore: flights
   suggestions: false
   view: flights
