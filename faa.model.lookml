@@ -80,7 +80,7 @@
 # different
   view: accidents
   joins:
-    - join: aircrafty
+    - join: aircrafty2
       sql_on: ${accidents.registration_number} = ${aircraft.tail_number}
       relationship: many_to_one
 
