@@ -83,3 +83,5 @@
     - join: aircrafty
       sql_on: ${accidents.registration_number} = ${aircraft.tail_number}
       relationship: many_to_one
+
+# stuff
