@@ -74,6 +74,7 @@
       sql_on: ${aircraft.tail_number} = ${aircraft_flights_facts.tail_num}
       relationship: many_to_one
 
+
 - explore: accidents
 #   connection: faa
 # different
