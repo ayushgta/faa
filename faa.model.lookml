@@ -75,7 +75,6 @@
       relationship: many_to_one
 
 - explore: accidents
-#   connection: faa
   view: accidents
   joins:
     - join: aircraft
