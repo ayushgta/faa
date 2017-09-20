@@ -76,6 +76,7 @@
 
 - explore: accidents
 #   connection: faa
+# different
   view: accidents
   joins:
     - join: aircraft
