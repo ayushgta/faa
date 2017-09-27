@@ -1,8 +1,8 @@
-view: fact_sessions
-sql_table_name: event_store.fact_sessions_v2
+- view: fact_sessions
+  sql_table_name: event_store.fact_sessions_v2
 # Uncomment the above v2 and comment v1 Basically redirecting looker to use v2 rather than v1
 
-fields:
+  fields:
 
   - dimension: canonical_user_id
     description: "The unique identifier for a user"
@@ -3118,8 +3118,7 @@ fields:
   - dimension: 50_percent_rollout
     hidden: true
 #     type: yesno
-    sql:
-    |
+    sql: |
       CASE WHEN LENGTH(canonical_user_id) < 10 AND MOD(CAST(canonical_user_id as INT), 10) < 5 THEN 1
        ELSE 0
       END
@@ -3134,8 +3133,7 @@ fields:
 
   - dimension: new_nav_5_percent_rollout
     hidden: true
-    sql:
-    |
+    sql: |
       CASE WHEN LENGTH(${canonical_user_id}) < 10 AND MOD(CAST(${canonical_user_id} as INT), 100) < 5 THEN 1
       ELSE 0
       END
@@ -3164,8 +3162,7 @@ fields:
 
   - dimension: new_nav_50_percent_rollout
     hidden: true
-    sql:
-    |
+    sql: |
       CASE WHEN LENGTH(${canonical_user_id}) < 10 AND MOD(CAST(${canonical_user_id} as INT), 100) < 50 THEN 1
       ELSE 0
       END
