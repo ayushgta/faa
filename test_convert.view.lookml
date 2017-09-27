@@ -3147,8 +3147,7 @@
 
   - dimension: new_nav_20_percent_rollout
     hidden: true
-    sql:
-    |
+    sql: |
       CASE WHEN LENGTH(${canonical_user_id}) < 10 AND MOD(CAST(${canonical_user_id} as INT), 100) < 20 THEN 1
       ELSE 0
       END
@@ -3693,6 +3692,3 @@
     description: 'Unique no of times the a unfavorite(unheart) action was performed in a session'
     type: sum
     sql: ${count_of_unfavorites}
-
-
-
