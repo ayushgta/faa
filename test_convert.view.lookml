@@ -247,7 +247,7 @@
 #   - dimension: logged_in_status_indicator
 #     view_label: User Types
 #     label: Indicator Status Logged In (0/1)
-#     #description: Indicates the user/visitor was logged in during the session
+#     description: Indicates the user/visitor was logged in during the session
 #     type: number
 #     sql: |
 #         CASE WHEN ${first_signup_indicator}>0 OR
@@ -259,7 +259,7 @@
 #   - measure: count_of_logged_in_status_indicator
 #     label: Count of Sessions with Status Logged In (0/1)
 #     view_label: User Types
-#     #description: Measurement to count sessions with status = logged_in
+#     description: Measurement to count sessions with status = logged_in
 #     type: sum
 #     sql: |
 #         CASE WHEN ${first_signup_indicator}>0 OR
@@ -269,14 +269,14 @@
 #         END
 
   - dimension: first_visit_indicator
-    #description: Indicates the session is the users first visit to thredUP.com
+    description: Indicates the session is the users first visit to thredUP.com
     label: First Visit Indicator (0/1)
     view_label: User Types
     type: number
     sql: ${TABLE}.first_visit_indicator
 
   - dimension: landing_page_url
-    #description: The first url of the session (don't use before 11/21/2015)
+    description: The first url of the session (don't use before 11/21/2015)
     view_label: Landing Page
     sql: ${TABLE}.landing_page_url
 
@@ -307,22 +307,22 @@
     sql: ${TABLE}.referral_url_lp_utm_campaign
 
   - dimension: referral_url_lp_utm_content
-    #description: Used to differentiate ads
+    description: Used to differentiate ads
     view_label: Landing Page
     sql: ${TABLE}.referral_url_lp_utm_content
 
   - dimension: referral_url_lp_utm_medium
-    #description: Marketing medium - cpc, banner, email
+    description: Marketing medium - cpc, banner, email
     view_label: Landing Page
     sql: ${TABLE}.referral_url_lp_utm_medium
 
   - dimension: referral_url_lp_utm_source
-    #description: Campaign source - where the session came from (google, facebook, etc.)
+    description: Campaign source - where the session came from (google, facebook, etc.)
     view_label: Landing Page
     sql: ${TABLE}.referral_url_lp_utm_source
 
   - dimension: referral_url_lp_utm_term
-    #description: Search keyword
+    description: Search keyword
     view_label: Landing Page
     sql: ${TABLE}.referral_url_lp_utm_term
 
@@ -335,38 +335,38 @@
 
   - dimension: referring_url_utm_content
 #    hidden: true
-    #description: Used to differentiate ads
+    description: Used to differentiate ads
     view_label: Landing Page
     sql: ${TABLE}.referring_url_utm_content
 
   - dimension: referring_url_utm_medium
 #    hidden: true
-    #description: Marketing medium - cpc, banner, email
+    description: Marketing medium - cpc, banner, email
     view_label: Landing Page
     sql: ${TABLE}.referring_url_utm_medium
 
   - dimension: referring_url_utm_source
 #    hidden: true
-    #description: Campaign source - where the session came from (google, facebook, etc.)
+    description: Campaign source - where the session came from (google, facebook, etc.)
     view_label: Landing Page
     sql: ${TABLE}.referring_url_utm_source
 
   - dimension: referring_url_utm_term
 #    hidden: true
-    #description: Search keyword
+    description: Search keyword
     view_label: Landing Page
     sql: ${TABLE}.referring_url_utm_term
 
   - dimension: referring_url_referral_code
 #    hidden: true
-    #description: The session's referral code from Referring URL
+    description: The session's referral code from Referring URL
     view_label: Landing Page
     sql: ${TABLE}.referring_url_referral_code
 
 # End of Additional UTM fields for Referring URL
 
   - dimension_group: session_end
-    #description: The timestamp of the last event/page view of the session
+    description: The timestamp of the last event/page view of the session
     type: time
     timeframes: [raw, time, date, week, month]
     sql: ${TABLE}.session_end
@@ -376,7 +376,7 @@
     primary_key: true
 
   - dimension_group: session_start
-    #description: The timestamp of the first event/page view of the session
+    description: The timestamp of the first event/page view of the session
     type: time
     timeframes: [raw, time, date, week, month, hour_of_day, day_of_week,minute]
     sql: ${TABLE}.session_start
@@ -396,14 +396,14 @@
 
   - dimension: item_order_count_tier
     label: item order count tier
-    #description: 1-2 items, 3-4 items, 4+ items
+    description: 1-2 items, 3-4 items, 4+ items
     type: tier
     tiers: [0,1,3,5]
     style: integer
     sql: ${item_count}
 
   - dimension: total_session_time
-    #description: The difference between the last and the first session timestamp
+    description: The difference between the last and the first session timestamp
     type: number
     value_format_name: decimal_1
     sql: 1.0*${TABLE}.total_session_time
@@ -421,7 +421,7 @@
     sql: (${total_session_time_sum}/${count_of_sessions})/60
 
   - dimension: udo_platform
-    #description: Platform of the session
+    description: Platform of the session
     sql: ${TABLE}.udo_platform
 
 
@@ -431,26 +431,26 @@
     drill_fields: []
 
   - measure: count_of_sessions
-    #description: Measurement to count the number of sessions
+    description: Measurement to count the number of sessions
     type: count_distinct
     sql: ${session_idx}
 
   - measure: count_of_sessions_modal
-    #description: Measurement to count the number of sessions that hit the signup modal
+    description: Measurement to count the number of sessions that hit the signup modal
     type: count_distinct
     sql: ${session_idx}
     filters:
       signup_modal_indicator: 1
 
   - measure: count_of_sessions_not_logged_in_all
-    #description: Measurement to count the number of sessions where user was not logged in
+    description: Measurement to count the number of sessions where user was not logged in
     type: count_distinct
     sql: ${session_idx}
     filters:
       count_of_logged_in_indicator: 0
 
   - measure: count_of_sessions_not_logged_in_modal
-    #description: Measurement to count the number of sessions where user was not logged in
+    description: Measurement to count the number of sessions where user was not logged in
     type: count_distinct
     sql: ${session_idx}
     filters:
@@ -458,31 +458,31 @@
       signup_modal_indicator: 1
 
   - measure: percent_sessions_not_logged_in_modal
-    #description: Measurement to count the number of sessions
+    description: Measurement to count the number of sessions
     type: number
     value_format_name: percent_2
     sql: (${count_of_sessions_not_logged_in_modal} * 1.00) / (${count_of_sessions} * 1.00)
 
   - measure: percent_sessions_not_logged_in_all
-    #description: Measurement to count the number of sessions
+    description: Measurement to count the number of sessions
     type: number
     value_format_name: percent_2
     sql: (${count_of_sessions_not_logged_in_all} * 1.00) / (${count_of_sessions} * 1.00)
 
   - measure: total_item_count
-    #description: Total item purchased during the session
+    description: Total item purchased during the session
     view_label: Orders
     type: sum
     sql: ${item_count}
 
   - measure: total_paid_item_orders
-    #description: Total paid item orders in the session
+    description: Total paid item orders in the session
     view_label: Orders
     type: sum
     sql: ${count_of_paid_item_orders}
 
   - measure: total_paid_item_orders_first_session
-    #description: Total paid item orders in the first session
+    description: Total paid item orders in the first session
     view_label: Orders
     type: sum
     sql: ${count_of_paid_item_orders}
@@ -491,13 +491,13 @@
 
 
   - measure: total_bag_orders
-    #description: Total orders with 1+ clean out bag during the session
+    description: Total orders with 1+ clean out bag during the session
     view_label: Orders
     type: sum
     sql: ${count_of_paid_bag_orders}
 
   - measure: total_add_to_cart_events
-    #description: Total add to cart events in the session
+    description: Total add to cart events in the session
     view_label: Cart
     type: sum
     sql: ${count_of_add_to_cart_events}
@@ -506,31 +506,31 @@
 # CREATE DUPLICATE to get into ATC data mart
 
   - measure: total_add_to_cart_events_for_atc_model
-    #description: Total add to cart events in the session
+    description: Total add to cart events in the session
     hidden: true
     type: sum
     sql: ${count_of_add_to_cart_events}
 
   - measure: total_remove_from_cart_events
-    #description: Total remove from cart events in the session
+    description: Total remove from cart events in the session
     view_label: Cart
     type: sum
     sql: ${count_of_remove_from_cart_events}
 
   - measure: total_view_cart_events
-    #description: Total /cart/edit page views in the session
+    description: Total /cart/edit page views in the session
     view_label: Cart
     type: sum
     sql: ${count_of_view_cart_events}
 
   - measure: total_searches_made
-    #description: Total searches made in a session
+    description: Total searches made in a session
     view_label: Searches
     type: sum
     sql: ${count_of_searches_made}
 
   - measure: total_checkout_events
-    #description: Total checkout page views in a session
+    description: Total checkout page views in a session
     view_label: Checkout
     type: sum
     sql: ${count_of_checkout_events}
@@ -552,26 +552,26 @@
     sql: ${count_of_back_to_school}
 
   - measure: total_boys_shortcuts
-    #description: Total Boy's shortcut views in a session
+    description: Total Boy's shortcut views in a session
     view_label: Shortcuts
     type: sum
     sql: ${count_of_boys_shortcuts}
 
 
   - measure: total_girls_shortcuts
-    #description: Total Girl's shortcut views in a session
+    description: Total Girl's shortcut views in a session
     view_label: Shortcuts
     type: sum
     sql: ${count_of_girls_shortcuts}
 
   - measure: total_womens_shortcuts
-    #description: Total Women's shortcut views in a session
+    description: Total Women's shortcut views in a session
     view_label: Shortcuts
     type: sum
     sql: ${count_of_women_shortcuts}
 
   - measure: total_home_page_visits
-    #description: Total homepage views in the session
+    description: Total homepage views in the session
     view_label: Homepage
     type: sum
     sql: ${count_of_home_page_visits}
@@ -579,67 +579,67 @@
 
 
   - measure: total_paid_orders
-    #description: Total paid (item or bag) orders in the session
+    description: Total paid (item or bag) orders in the session
     view_label: Orders
     type: sum
     sql: ${count_of_paid_orders}
 
   - measure: total_visits_pdp_boys
-    #description: Total Boy's PDP visits in a session
+    description: Total Boy's PDP visits in a session
     view_label: PDP
     type: sum
     sql: ${TABLE}.count_of_pdp_boys
 
   - measure: total_visits_pdp_girls
-    #description: Total Girl's PDP visits in a session
+    description: Total Girl's PDP visits in a session
     view_label: PDP
     type: sum
     sql: ${TABLE}.count_of_pdp_girls
 
   - measure: total_visits_pdp_handbags
-    #description: Total Handbag PDP visits in a session
+    description: Total Handbag PDP visits in a session
     view_label: PDP
     type: sum
     sql: ${TABLE}.count_of_pdp_handbags
 
   - measure: total_visits_pdp_juniors
-    #description: Total Junior's PDP visits in a session
+    description: Total Junior's PDP visits in a session
     view_label: PDP
     type: sum
     sql: ${TABLE}.count_of_pdp_juniors
 
   - measure: total_visits_pdp_maternity
-    #description: Total Maternity PDP visits in a session
+    description: Total Maternity PDP visits in a session
     view_label: PDP
     type: sum
     sql: ${TABLE}.count_of_pdp_maternity
 
   - measure: total_visits_pdp_plus
-    #description: Total Plus PDP visits in a session
+    description: Total Plus PDP visits in a session
     view_label: PDP
     type: sum
     sql: ${TABLE}.count_of_pdp_plus
 
   - measure: total_visits_pdp_women
-    #description: Total Women's PDP visits in a session
+    description: Total Women's PDP visits in a session
     view_label: PDP
     type: sum
     sql: ${TABLE}.count_of_pdp_women
 
   - measure: total_visits_pdp_women_shoes
-    #description: Total Women's Shoes PDP visits in a session
+    description: Total Women's Shoes PDP visits in a session
     view_label: PDP
     type: sum
     sql: ${TABLE}.count_of_pdp_women_shoes
 
   - measure: total_visits_pdp_x_collection
-    #description: Total X Collection PDP visits in a session
+    description: Total X Collection PDP visits in a session
     view_label: PDP
     type: sum
     sql: ${TABLE}.count_of_pdp_x
 
   - measure: total_visits_personal_shops
-    #description: Total personal shop views in the session
+    description: Total personal shop views in the session
     view_label: Personal Shops
     type: sum
     sql: ${TABLE}.count_of_personal_shops
@@ -647,63 +647,63 @@
 
   - measure: total_visits_shop_boys
     label: Total Visits to Boy's PLP
-    #description: Total Boy's PLP visits in a session
+    description: Total Boy's PLP visits in a session
     view_label: PLP
     type: sum
     sql: ${TABLE}.count_of_shop_boys
 
   - measure: total_visits_shop_girls
     label: Total Visits to Girl's PLP
-    #description: Total Girl's PLP visits in a session
+    description: Total Girl's PLP visits in a session
     view_label: PLP
     type: sum
     sql: ${TABLE}.count_of_shop_girls
 
   - measure: total_visits_shop_handbags
     label: Total Visits to Handbag PLP
-    #description: Total Handbag PLP visits in a session
+    description: Total Handbag PLP visits in a session
     view_label: PLP
     type: sum
     sql: ${TABLE}.count_of_shop_handbags
 
   - measure: total_visits_shop_maternity
     label: Total Visits to Maternity PLP
-    #description: Total Maternity PLP visits in a session
+    description: Total Maternity PLP visits in a session
     view_label: PLP
     type: sum
     sql: ${TABLE}.count_of_shop_maternity
 
   - measure: total_visits_shop_petite
     label: Total Visits to Petite PLP
-    #description: Total Petite PLP visits in a session
+    description: Total Petite PLP visits in a session
     view_label: PLP
     type: sum
     sql: ${TABLE}.count_of_shop_petite
 
   - measure: total_visits_shop_plus
     label: Total Visits to Tall PLP
-    #description: Total Plus PLP visits in a session
+    description: Total Plus PLP visits in a session
     view_label: PLP
     type: sum
     sql: ${TABLE}.count_of_shop_plus
 
   - measure: total_visits_shop_women
     label: Total Visits to Women's PLP
-    #description: Total Women's (non-tall, non-petite) PLP visits in a session
+    description: Total Women's (non-tall, non-petite) PLP visits in a session
     view_label: PLP
     type: sum
     sql: ${TABLE}.count_of_shop_women
 
   - measure: total_visits_shop_women_shoes
     label: Total Visits to Women's Shoes PLP
-    #description: Total Women's Shoe PLP visits in a session
+    description: Total Women's Shoe PLP visits in a session
     view_label: PLP
     type: sum
     sql: ${TABLE}.count_of_shop_women_shoes
 
   - measure: total_visits_shop_x_collection
     label: Total Visits to X Collection PLP
-    #description: Total X Collection PLP visits in a session
+    description: Total X Collection PLP visits in a session
     view_label: PLP
     type: sum
     sql: ${TABLE}.count_of_shop_x
@@ -722,19 +722,19 @@
 
 
   - dimension: count_of_events
-    #description: The number of events in the session
+    description: The number of events in the session
     type: number
     sql: ${TABLE}.count_of_events
 
   # 2017/07/07 : Commented the dim and added the measure total_no_of_events to remove lookml deprecation warnings by Gayatri P
 
 #   - dimension: total_no_of_events
-#     #description: The number of events in the session
+#     description: The number of events in the session
 #     type: sum
 #     sql: ${TABLE}.count_of_events
 
   - measure: total_no_of_events
-    #description: The number of events in the session
+    description: The number of events in the session
     type: sum
     sql: ${TABLE}.count_of_events
 
@@ -743,7 +743,7 @@
 
 # End of Addition
   - measure: total_visits_thredup_for_schools
-    #description: Total thredUP for Schools page views
+    description: Total thredUP for Schools page views
     view_label: Thredup for Schools
     type: sum
     sql: ${TABLE}.count_of_thredup_for_schools
@@ -771,7 +771,7 @@
 # Added by SR 11.3.15 to build out event data
 
   - dimension: indicator_for_add_to_cart
-    #description: Indicates if the session had 1+ add to cart
+    description: Indicates if the session had 1+ add to cart
     view_label: Cart
     label: Add to Cart Indicator (0/1)
     type: number
@@ -779,7 +779,7 @@
         CASE WHEN ${count_of_add_to_cart_events}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_add_to_cart_indicator
-    #description: Measurement to count sessions with 1+ add to cart
+    description: Measurement to count sessions with 1+ add to cart
     view_label: Cart
     label: Count Add to Cart Indicator (0/1)
     type: sum
@@ -787,7 +787,7 @@
         CASE WHEN ${count_of_add_to_cart_events}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_remove_from_cart
-    #description: Indicates if the session had 1+ remove from cart
+    description: Indicates if the session had 1+ remove from cart
     view_label: Cart
     label: Remove from Cart Indicator (0/1)
     type: number
@@ -795,7 +795,7 @@
         CASE WHEN ${count_of_remove_from_cart_events}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_remove_from_cart
-    #description: Measurement to count session with 1+ remove from cart
+    description: Measurement to count session with 1+ remove from cart
     view_label: Cart
     label: Count Remove from Cart Indicator (0/1)
     type: sum
@@ -804,7 +804,7 @@
 
 
   - dimension: indicator_for_view_cart_events
-    #description: Indicates if the session had 1+ /cart/edit page view
+    description: Indicates if the session had 1+ /cart/edit page view
     view_label: Cart
     label: View Cart Events Indicator (0/1)
     type: number
@@ -812,7 +812,7 @@
         CASE WHEN ${count_of_view_cart_events}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_view_cart_events_v1
-    #description: Measurement to count session with 1+ /cart/edit page view
+    description: Measurement to count session with 1+ /cart/edit page view
     view_label: Cart
     label: Count View Cart Events Indicator (0/1)
     type: sum
@@ -820,7 +820,7 @@
         CASE WHEN ${count_of_view_cart_events}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_check_out_events
-    #description: Indicates if the session had 1+ checkout page view
+    description: Indicates if the session had 1+ checkout page view
     view_label: Checkout
     label: Checkout Events Indicator (0/1)
     type: number
@@ -828,7 +828,7 @@
         CASE WHEN ${count_of_checkout_events}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_checkout_events_v1
-    #description: Measurement to count sessions with 1+ checkout page view
+    description: Measurement to count sessions with 1+ checkout page view
     view_label: Checkout
     label: Count Checkout Events Indicator (0/1)
     type: sum
@@ -836,7 +836,7 @@
         CASE WHEN ${count_of_checkout_events}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_home_page
-    #description: Indicates if the session had 1+ homepage view (don't use before 10/7/2015)
+    description: Indicates if the session had 1+ homepage view (don't use before 10/7/2015)
     view_label: Homepage
     label: Homepage Indicator (0/1)
     type: number
@@ -844,7 +844,7 @@
         CASE WHEN ${count_of_home_page_visits}>0 AND ${count_of_logged_in_indicator} >0 THEN 1 ELSE 0 END
 
   - measure: count_of_home_page
-    #description: Measurement to count sessions with 1+ homepage view
+    description: Measurement to count sessions with 1+ homepage view
     view_label: Homepage
     label: Count Homepage Indicator (0/1)
     type: sum
@@ -852,7 +852,7 @@
         CASE WHEN ${count_of_home_page_visits}>0 AND ${count_of_logged_in_indicator} >0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_home_page_nologin
-    #description: Indicates if the session had 1+ homepage view (no log in limitation)
+    description: Indicates if the session had 1+ homepage view (no log in limitation)
     view_label: Homepage
     label: Homepage Indicator Total Visits (0/1)
     type: number
@@ -860,7 +860,7 @@
         CASE WHEN ${count_of_home_page_visits}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_home_page_vists_nologin
-    #description: Measurement to count sessions with 1+ homepage view (no log in limitation)
+    description: Measurement to count sessions with 1+ homepage view (no log in limitation)
     view_label: Homepage
     label: Count Homepage Indicator Total Visits (0/1)
     type: sum
@@ -868,7 +868,7 @@
         CASE WHEN ${count_of_home_page_visits}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_paid_bag_orders
-    #description: Indicates if the session had 1+ clean out bag ordered
+    description: Indicates if the session had 1+ clean out bag ordered
     view_label: Orders
     label: Paid Bag Orders Indicator (0/1)
     type: number
@@ -876,7 +876,7 @@
         CASE WHEN ${count_of_paid_bag_orders}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_paid_bag_orders_v1
-    #description: Measurement to count sessions with 1+ clean out bag ordered
+    description: Measurement to count sessions with 1+ clean out bag ordered
     view_label: Orders
     label: Count Paid Bag Orders Indicator (0/1)
     type: sum
@@ -884,7 +884,7 @@
         CASE WHEN ${count_of_paid_bag_orders}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_paid_item_orders
-    #description: Indicates if the session had 1+ paid item orders
+    description: Indicates if the session had 1+ paid item orders
     view_label: Orders
     label: Paid Item Orders Indicator (0/1)
     type: number
@@ -892,7 +892,7 @@
         CASE WHEN ${count_of_paid_item_orders}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_paid_item_orders_v1
-    #description: Measurement to count sessions with 1+ paid item orders
+    description: Measurement to count sessions with 1+ paid item orders
     view_label: Orders
     label: Count Paid Item Orders Indicator (0/1)
     type: sum
@@ -913,7 +913,7 @@
  # 2017/07/07 : Commented the dim and added the measure total_no_plp_views to remove lookml deprecation warnings by Gayatri P
 
 #   - dimension: total_no_plp_views
-#     #description: The number of plp views in the session
+#     description: The number of plp views in the session
 #     type: sum
 #     sql: ${count_of_shop_women}+${count_of_shop_girls}+${count_of_shop_boys}+${count_of_shop_x}
 #          +${count_of_shop_women_shoes}+${count_of_shop_handbags}+${count_of_shop_maternity}+${count_of_shop_plus}
@@ -923,7 +923,7 @@
 #          +${count_of_shop_search_petite}+${count_of_shop_search_juniors}+${count_of_shop_search_tall}
 
   - measure: total_no_plp_views
-    #description: The number of plp views in the session
+    description: The number of plp views in the session
     type: sum
     sql: ${count_of_shop_women}+${count_of_shop_girls}+${count_of_shop_boys}+${count_of_shop_x}
          +${count_of_shop_women_shoes}+${count_of_shop_handbags}+${count_of_shop_maternity}+${count_of_shop_plus}
@@ -934,7 +934,7 @@
 
 
   - dimension: indicator_for_any_plp_page_view
-    #description: Indicates if the session has 1+ PLP view
+    description: Indicates if the session has 1+ PLP view
     view_label: PLP
     label: Any PLP Page View Indicator (0/1)
     type: number
@@ -955,7 +955,7 @@
         END
 
   - measure: count_of_any_plp_page_views
-    #description: Measurement to count sessions with 1+ PLP view
+    description: Measurement to count sessions with 1+ PLP view
     view_label: PLP
     label: Count Any PLP Page Views Indicator (0/1)
     type: sum
@@ -976,7 +976,7 @@
         END
 
   - dimension: indicator_for_boys_plp
-    #description: Indicates if the session has 1+ Boy's PLP view
+    description: Indicates if the session has 1+ Boy's PLP view
     view_label: PLP
     label: Indicator for Visit to Boys PLP (0/1)
     type: number
@@ -984,7 +984,7 @@
         CASE WHEN ${count_of_shop_boys}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_boys_plp
-    #description: Measurement to count sessions with 1+ Boy's PLP view
+    description: Measurement to count sessions with 1+ Boy's PLP view
     view_label: PLP
     label: Count Boys PLP Indicator (0/1)
     type: sum
@@ -992,7 +992,7 @@
         CASE WHEN ${count_of_shop_boys}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_girls_plp_view
-    #description: Indicates if the session has 1+ Girl's PLP view
+    description: Indicates if the session has 1+ Girl's PLP view
     view_label: PLP
     label: Indicator for Visit to Girls PLP (0/1)
     type: number
@@ -1000,7 +1000,7 @@
         CASE WHEN ${count_of_shop_girls}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_girls_plp
-    #description: Measurement to count sessions with 1+ Girl's PLP view
+    description: Measurement to count sessions with 1+ Girl's PLP view
     view_label: PLP
     label: Count Girls PLP Indicator (0/1)
     type: sum
@@ -1015,7 +1015,7 @@
         CASE WHEN (${count_of_shop_boys}>0 OR ${count_of_shop_girls}>0 OR ${count_of_boys_shortcuts}>0 OR ${count_of_girls_shortcuts}>0 OR ${TABLE}.count_of_pdp_boys>0 OR ${TABLE}.count_of_pdp_girls>0) THEN 1 ELSE 0 END
 
   - dimension: indicator_for_handbag_plp_view
-    #description: Indicates if the session has 1+ Handbag PLP view
+    description: Indicates if the session has 1+ Handbag PLP view
     view_label: PLP
     label: Indicator for Visit to Handbag PLP (0/1)
     type: number
@@ -1023,7 +1023,7 @@
         CASE WHEN ${count_of_shop_handbags}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_handbag_plp
-    #description: Measurement to count sessions with 1+ Handbag PLP view
+    description: Measurement to count sessions with 1+ Handbag PLP view
     view_label: PLP
     label: Count Handbag PLP Indicator (0/1)
     type: sum
@@ -1031,7 +1031,7 @@
         CASE WHEN ${count_of_shop_handbags}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_maternity_plp_view
-    #description: Indicates if the session has 1+ Maternity PLP view
+    description: Indicates if the session has 1+ Maternity PLP view
     view_label: PLP
     label: Indicator for Visit to Maternity PLP (0/1)
     type: number
@@ -1039,7 +1039,7 @@
         CASE WHEN ${count_of_shop_maternity}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_maternity_plp
-    #description: Measurement to count sessions with 1+ Maternity PLP view
+    description: Measurement to count sessions with 1+ Maternity PLP view
     view_label: PLP
     label: Count Maternity PLP Indicator (0/1)
     type: sum
@@ -1047,7 +1047,7 @@
         CASE WHEN ${count_of_shop_maternity}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_petite_plp_view
-    #description: Indicates if the session has 1+ Petite PLP view
+    description: Indicates if the session has 1+ Petite PLP view
     view_label: PLP
     label: Indicator for Visit to Petite PLP (0/1)
     type: number
@@ -1055,7 +1055,7 @@
         CASE WHEN ${count_of_shop_petite}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_petite_plp
-    #description: Measurement to count sessions with 1+ Petite PLP view
+    description: Measurement to count sessions with 1+ Petite PLP view
     view_label: PLP
     label: Count Petite PLP Indicator (0/1)
     type: sum
@@ -1063,7 +1063,7 @@
         CASE WHEN ${count_of_shop_petite}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_plus_plp_view
-    #description: Indicates if the session has 1+ Plus PLP view
+    description: Indicates if the session has 1+ Plus PLP view
     view_label: PLP
     label: Indicator for Visit to Plus PLP (0/1)
     type: number
@@ -1071,7 +1071,7 @@
         CASE WHEN ${count_of_shop_plus}>0 THEN 1 ELSE 0 END
 
   - measure: count_for_plus_plp
-    #description: Measurement to count sessions with 1+ Plus PLP view
+    description: Measurement to count sessions with 1+ Plus PLP view
     view_label: PLP
     label: Count Plus PLP Indicator (0/1)
     type: sum
@@ -1079,7 +1079,7 @@
         CASE WHEN ${count_of_shop_plus}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_womens_plp_view
-    #description: Indicates if the session has 1+ Women's (non-tall, non-Petite) PLP view
+    description: Indicates if the session has 1+ Women's (non-tall, non-Petite) PLP view
     view_label: PLP
     label: Indicator for Visit to Womens PLP (0/1)
     type: number
@@ -1087,7 +1087,7 @@
         CASE WHEN ${count_of_shop_women}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_womens_plp
-    #description: Measurement to count sessions with 1+ Women's (non-tall, non-petite) PLP view
+    description: Measurement to count sessions with 1+ Women's (non-tall, non-petite) PLP view
     view_label: PLP
     label: Count Womens PLP Indicator (0/1)
     type: sum
@@ -1095,7 +1095,7 @@
         CASE WHEN ${count_of_shop_women}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_womens_shoe_plp_view
-    #description: Indicates if the session has 1+ Women's Shoes PLP view
+    description: Indicates if the session has 1+ Women's Shoes PLP view
     view_label: PLP
     label: Indicator for Visit to Womens Shoe PLP (0/1)
     type: number
@@ -1103,7 +1103,7 @@
         CASE WHEN ${count_of_shop_women_shoes}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_womens_shoes_plp
-    #description: Measurement to count sessions with 1+ Women's Shoes PLP view
+    description: Measurement to count sessions with 1+ Women's Shoes PLP view
     view_label: PLP
     label: Count Womens Shoes PLP Indicator (0/1)
     type: sum
@@ -1111,7 +1111,7 @@
         CASE WHEN ${count_of_shop_women_shoes}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_x_collection_plp_view
-    #description: Indicates if the session has 1+ X Collection PLP view
+    description: Indicates if the session has 1+ X Collection PLP view
     view_label: PLP
     label: Indicator for Visit to X Collection PLP (0/1)
     type: number
@@ -1119,7 +1119,7 @@
         CASE WHEN ${count_of_shop_x}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_x_collection_plp
-    #description: Measurement to count sessions with 1+ X Collection PLP view
+    description: Measurement to count sessions with 1+ X Collection PLP view
     view_label: PLP
     label: Count X Collection PLP Indicator (0/1)
     type: sum
@@ -1127,7 +1127,7 @@
         CASE WHEN ${count_of_shop_x}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_tall_plp_view
-    #description: Indicates if the session has 1+ Women's Tall PLP view
+    description: Indicates if the session has 1+ Women's Tall PLP view
     view_label: PLP
     label: Indicator for Visit to Tall PLP (0/1)
     type: number
@@ -1135,7 +1135,7 @@
         CASE WHEN ${count_of_shop_tall}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_tall_plp
-    #description: Measurement to count sessions with 1+ Tall PLP view
+    description: Measurement to count sessions with 1+ Tall PLP view
     view_label: PLP
     label: Count Tall PLP Indicator (0/1)
     type: sum
@@ -1143,7 +1143,7 @@
         CASE WHEN ${count_of_shop_tall}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_juniors_plp_view
-    #description: Indicates if the session has 1+ Junior's PLP view
+    description: Indicates if the session has 1+ Junior's PLP view
     view_label: PLP
     label: Indicator for Visit to Juniors PLP (0/1)
     type: number
@@ -1151,7 +1151,7 @@
         CASE WHEN ${count_of_shop_juniors}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_juniors_plp
-    #description: Measurement to count sessions with 1+ Junior's PLP view
+    description: Measurement to count sessions with 1+ Junior's PLP view
     view_label: PLP
     label: Count Juniors PLP Indicator (0/1)
     type: sum
@@ -1177,7 +1177,7 @@
 ### PERSONAL SHOPS
 
   - dimension: indicator_for_personal_shop_view
-    #description: Indicates if the session had 1+ personal shop page view
+    description: Indicates if the session had 1+ personal shop page view
     view_label: Personal Shops
     label: Indicator for Visit to Personal Shop (0/1)
     type: number
@@ -1185,7 +1185,7 @@
         CASE WHEN ${count_of_personal_shops}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_personal_shop_visits
-    #description: Measurement to count sessions with 1+ personal shop page view
+    description: Measurement to count sessions with 1+ personal shop page view
     view_label: Personal Shops
     label: Count Personal Shops Indicator (0/1)
     type: sum
@@ -1201,7 +1201,7 @@
     sql: ${TABLE}.count_of_any_pdp
 
   - dimension: indicator_for_any_pdp_page_view
-    #description: Indicates if the session had 1+ PDP view
+    description: Indicates if the session had 1+ PDP view
     view_label: PDP
     label: Indicator for Any PDP Page View (0/1)
     type: number
@@ -1212,7 +1212,7 @@
         END
 
   - measure: count_for_any_pdp_page_view
-    #description: Measurement to count sessions with 1+ PDP view
+    description: Measurement to count sessions with 1+ PDP view
     view_label: PDP
     label: Count Any PDP Page View Indicator (0/1)
     type: sum
@@ -1223,7 +1223,7 @@
         END
 
   - dimension: indicator_for_pdp_boys_view
-    #description: Indicates if the session had 1+ Boy's PDP view
+    description: Indicates if the session had 1+ Boy's PDP view
     view_label: PDP
     label: Indicator for Visit to Boys PDP (0/1)
     type: number
@@ -1231,7 +1231,7 @@
         CASE WHEN ${count_of_pdp_boys}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_pdp_boys_view
-    #description: Measurement to count sessions with 1+ Boy's PDP view
+    description: Measurement to count sessions with 1+ Boy's PDP view
     view_label: PDP
     label: Count Boys PDP Indicator (0/1)
     type: sum
@@ -1239,7 +1239,7 @@
         CASE WHEN ${count_of_pdp_boys}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_pdp_girls_view
-    #description: Indicates if the session had 1+ Girl's PDP view
+    description: Indicates if the session had 1+ Girl's PDP view
     view_label: PDP
     label: Indicator for Visit to Girls PDP (0/1)
     type: number
@@ -1247,7 +1247,7 @@
         CASE WHEN ${count_of_pdp_girls}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_pdp_girls_view
-    #description: Measurement to count sessions with 1+ Girl's PDP view
+    description: Measurement to count sessions with 1+ Girl's PDP view
     view_label: PDP
     label: Count Girls PDP Indicator (0/1)
     type: sum
@@ -1255,7 +1255,7 @@
         CASE WHEN ${count_of_pdp_girls}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_pdp_handbags_view
-    #description: Indicates if the session had 1+ Handbag PDP view
+    description: Indicates if the session had 1+ Handbag PDP view
     view_label: PDP
     label: Indicator for Visit to Handbags PDP (0/1)
     type: number
@@ -1263,7 +1263,7 @@
         CASE WHEN ${count_of_pdp_handbags}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_pdp_handbags_view
-    #description: Measurement to count sessions with 1+ Handbag PDP view
+    description: Measurement to count sessions with 1+ Handbag PDP view
     view_label: PDP
     label: Count Handbags PDP Indicator (0/1)
     type: sum
@@ -1271,7 +1271,7 @@
         CASE WHEN ${count_of_pdp_handbags}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_pdp_juniors_view
-    #description: Indicates if the session had 1+ Junior's PDP view
+    description: Indicates if the session had 1+ Junior's PDP view
     view_label: PDP
     label: Indicator for Visit to Juniors PDP (0/1)
     type: number
@@ -1279,7 +1279,7 @@
         CASE WHEN ${count_of_pdp_juniors}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_pdp_juniors_view
-    #description: Measurement to count sessions with 1+ Junior's PDP view
+    description: Measurement to count sessions with 1+ Junior's PDP view
     view_label: PDP
     label: Count Juniors PDP Indicator (0/1)
     type: sum
@@ -1287,7 +1287,7 @@
         CASE WHEN ${count_of_pdp_juniors}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_pdp_maternity_view
-    #description: Indicates if the session had 1+ Maternity PDP view
+    description: Indicates if the session had 1+ Maternity PDP view
     view_label: PDP
     label: Indicator for Visit to Maternity PDP (0/1)
     type: number
@@ -1295,7 +1295,7 @@
         CASE WHEN ${count_of_pdp_maternity}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_pdp_maternity_view
-    #description: Measurement to count sessions with 1+ Maternity PDP view
+    description: Measurement to count sessions with 1+ Maternity PDP view
     view_label: PDP
     label: Count Maternity PDP Indicator (0/1)
     type: sum
@@ -1303,7 +1303,7 @@
         CASE WHEN ${count_of_pdp_maternity}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_pdp_plus_view
-    #description: Indicates if the session had 1+ Plus PDP view
+    description: Indicates if the session had 1+ Plus PDP view
     view_label: PDP
     label: Indicator for Visit to Plus PDP (0/1)
     type: number
@@ -1311,7 +1311,7 @@
         CASE WHEN ${count_of_pdp_plus}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_pdp_plus_view
-    #description: Measurement to count sessions with 1+ Plus PDP view
+    description: Measurement to count sessions with 1+ Plus PDP view
     view_label: PDP
     label: Count Plus PDP Indicator (0/1)
     type: sum
@@ -1319,7 +1319,7 @@
         CASE WHEN ${count_of_pdp_plus}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_pdp_womens_view
-    #description: Indicates if the session had 1+ Women's PDP view
+    description: Indicates if the session had 1+ Women's PDP view
     view_label: PDP
     label: Indicator for Visit to Womens PDP (0/1)
     type: number
@@ -1327,7 +1327,7 @@
         CASE WHEN ${count_of_pdp_women}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_pdp_womens_view
-    #description: Measurement to count sessions with Women's PDP view
+    description: Measurement to count sessions with Women's PDP view
     view_label: PDP
     label: Count Womens PDP Indicator (0/1)
     type: sum
@@ -1335,7 +1335,7 @@
         CASE WHEN ${count_of_pdp_women}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_pdp_womens_shoes_view
-    #description: Indicates if the session had 1+ Women's Shoes PDP view
+    description: Indicates if the session had 1+ Women's Shoes PDP view
     view_label: PDP
     label: Indicator for Visit to Womens Shoes PDP (0/1)
     type: number
@@ -1343,7 +1343,7 @@
         CASE WHEN ${count_of_pdp_women_shoes}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_pdp_womens_shoes_view
-    #description: Measurement to count sessions with Women's Shoes PDP view
+    description: Measurement to count sessions with Women's Shoes PDP view
     view_label: PDP
     label: Count Womens Shoes PDP Indicator (0/1)
     type: sum
@@ -1351,7 +1351,7 @@
         CASE WHEN ${count_of_pdp_women_shoes}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_pdp_x_collection_view
-    #description: Indicates if the session had 1+ X Collection PDP view
+    description: Indicates if the session had 1+ X Collection PDP view
     view_label: PDP
     label: Indicator for Visit to X Collection PDP (0/1)
     type: number
@@ -1359,7 +1359,7 @@
         CASE WHEN ${count_of_pdp_x}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_pdp_x_collection_view
-    #description: Measurement to count sessions with X Collection PDP view
+    description: Measurement to count sessions with X Collection PDP view
     view_label: PDP
     label: Count X Collection PDP Indicator (0/1)
     type: sum
@@ -1369,7 +1369,7 @@
 ### SHORTCUTS
 
   - dimension: indicator_for_boys_shortcut_view
-    #description: Indicates the session had 1+ Boy's shortcut view
+    description: Indicates the session had 1+ Boy's shortcut view
     view_label: Shortcuts
     label: Indicator for Visit to Boys Shortcut (0/1)
     type: number
@@ -1377,7 +1377,7 @@
         CASE WHEN ${count_of_boys_shortcuts}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_boys_shortcut_view
-    #description: Measurement to count sessions with 1+ Boy's shortcut view
+    description: Measurement to count sessions with 1+ Boy's shortcut view
     view_label: Shortcuts
     label: Count Boys Shortcuts Indicator (0/1)
     type: sum
@@ -1385,7 +1385,7 @@
         CASE WHEN ${count_of_boys_shortcuts}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_girls_shortcut_view
-    #description: Indicates the session had 1+ Girl's shortcut view
+    description: Indicates the session had 1+ Girl's shortcut view
     view_label: Shortcuts
     label: Indicator for Visit to Girls Shortcut (0/1)
     type: number
@@ -1393,7 +1393,7 @@
         CASE WHEN ${count_of_girls_shortcuts}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_girls_shortcut_view
-    #description: Measurement to count sessions with 1+ Girl's shortcut view
+    description: Measurement to count sessions with 1+ Girl's shortcut view
     view_label: Shortcuts
     label: Count Girls Shortcuts Indicator (0/1)
     type: sum
@@ -1401,7 +1401,7 @@
         CASE WHEN ${count_of_girls_shortcuts}>0 THEN 1 ELSE 0 END
 
   - dimension: indicator_for_womens_shortcut_view
-    #description: Indicates the session had 1+ Women's shortcut view
+    description: Indicates the session had 1+ Women's shortcut view
     view_label: Shortcuts
     label: Indicator for Visit to Womens Shortcut (0/1)
     type: number
@@ -1409,7 +1409,7 @@
         CASE WHEN ${count_of_women_shortcuts}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_womens_shortcut_view
-    #description: Measurement to count sessions with 1+ Women's shortcut view
+    description: Measurement to count sessions with 1+ Women's shortcut view
     view_label: Shortcuts
     label: Count Womens Shortcuts Indicator (0/1)
     type: sum
@@ -1422,7 +1422,7 @@
     sql: ${TABLE}.count_of_any_shortcuts
 
   - dimension: indicator_for_any_shortcut_view
-    #description: Indicates the session had 1+ shortcut view
+    description: Indicates the session had 1+ shortcut view
     view_label: Shortcuts
     label: Indicator for Visit to Any Shortcut (0/1)
     type: number
@@ -1430,7 +1430,7 @@
         CASE WHEN ${count_of_any_shortcuts}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_any_shortcut_view
-    #description: Measurement to count sessions with 1+ shortcut view
+    description: Measurement to count sessions with 1+ shortcut view
     view_label: Shortcuts
     label: Count Visit to Any Shortcut Indicator (0/1)
     type: sum
@@ -1458,7 +1458,7 @@
 ### thredUp For Schools
 
   - dimension: indicator_for_thredup_for_schools_view
-    #description: Indicates the session has 1+ thredUP for Schools page view
+    description: Indicates the session has 1+ thredUP for Schools page view
     view_label: Thredup for Schools
     label: Indicator for Visit to thredUp for Schools (0/1)
     type: number
@@ -1466,7 +1466,7 @@
         CASE WHEN ${count_of_thredup_for_schools}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_thredup_for_schools_view
-    #description: Measurement to count sessions with 1+ thredUP for Schools page view
+    description: Measurement to count sessions with 1+ thredUP for Schools page view
     view_label: Thredup for Schools
     label: Count ThredUp for Schools Indicator (0/1)
     type: sum
@@ -1477,7 +1477,7 @@
 ### NEW VISITORS
 
   - measure: count_of_new_visitors
-    #description: Measurement to count sessions that are the visitor's first time to thredUP.com
+    description: Measurement to count sessions that are the visitor's first time to thredUP.com
     view_label: User Types
 #    hidden: true
     label: Count of New Visitors
@@ -1486,7 +1486,7 @@
 
 
   - measure: count_of_new_visitors_to_sign_up
-    #description: Measurement to count sessions when a new visitor sign ups in the same session
+    description: Measurement to count sessions when a new visitor sign ups in the same session
     view_label: User Types
 #    hidden: true
     label: Count of New Visitor to Signup
@@ -1496,14 +1496,14 @@
       first_visit_indicator: '1'
 
   - measure: count_of_first_signups
-    #description: Measurement to count sessions with a first signup
+    description: Measurement to count sessions with a first signup
     view_label: User Types
     label: Count of First Signups
     type: sum
     sql: ${TABLE}.first_login_indicator
 
   - measure: new_visitor_to_signup_conversion
-    #description: The percent of new visitors that sign up in the same session
+    description: The percent of new visitors that sign up in the same session
     view_label: User Types
     label: New Visitor to Signup Conversion
     type: number
@@ -1528,7 +1528,7 @@
 ### Returning Visitor Indicator
 # # AMANE EXPIRED THE BELOW DIMENSION and renamed to old_ ON JAN 22/2017
 #   - dimension: old_returning_visitor_indicator
-#     #description: Indicates the session is by someone who has not previously signed in, but is not their first visit
+#     description: Indicates the session is by someone who has not previously signed in, but is not their first visit
 #     view_label: User Types
 # #    hidden: true
 #     label: Returning Visitor Indicator (0/1)
@@ -1608,7 +1608,7 @@
        first_signup_indicator: '1'
 
   - measure: count_distinct_of_returning_visitors
-    #description: Measurement to count sessions of unique returning visitors
+    description: Measurement to count sessions of unique returning visitors
     view_label: User Types
     label: Count Distinct of Returning Visitors (not sessions)
     type: count_distinct
@@ -1681,7 +1681,7 @@
 
   - dimension: is_part_of_active_cohort
     label: user is part of an active cohort
-    #description: users last item order occured within 365 days of session start time
+    description: users last item order occured within 365 days of session start time
     type: yesno
     sql: ${days_since_last_purchase} <= 365
 
@@ -1692,7 +1692,7 @@
 
   - dimension: funnel_position
     label: buyer funnel position
-    #description: vistor, 0TP, 2nd, 3rd, 4-9th, 10+
+    description: vistor, 0TP, 2nd, 3rd, 4-9th, 10+
     sql: |
          CASE
          WHEN ${item_order_sequence_for_model_1.returning_cohort} IN ('10+','4-9','3','2') then ${item_order_sequence_for_model_1.returning_cohort}
@@ -1706,7 +1706,7 @@
 
   - dimension: funnel_position_supplier
     label: supplier funnel position
-    #description: vistor, 0TP, 2nd, 3rd, 4-9th, 10+
+    description: vistor, 0TP, 2nd, 3rd, 4-9th, 10+
     sql: |
          CASE
          WHEN ${bag_processed_sequence.returning_cohort} IN ('10+ TB','4-9 TB','3TB','2TB') then ${bag_processed_sequence.returning_cohort}
@@ -1733,7 +1733,7 @@
 ### Returning USERS
 
 #   - dimension: returning_user_indicator
-#     #description: Indicates the session is by a someone who has previously created an account
+#     description: Indicates the session is by a someone who has previously created an account
 #     view_label: User Types
 #     label: Returning User Indicator (0/1)
 #     type: number
@@ -1756,7 +1756,7 @@
 #         END
 #
 #   - measure: count_of_returning_user_sessions
-#     #description: Measurement to count the number of sessions for returning users
+#     description: Measurement to count the number of sessions for returning users
 #     view_label: User Types
 #     label: Count of Returning User Sessions
 #     type: sum
@@ -1772,7 +1772,7 @@
 #         END
 # AMANE EXPIRED THE BELOW DIMENSION and renamed to old_ ON JAN 22/2017
 #   - dimension: old_returning_user_indicator
-#     #description: Indicates the session is by a someone who has previously created an account
+#     description: Indicates the session is by a someone who has previously created an account
 #     view_label: User Types
 #     label: Returning User Indicator (0/1)
 #     type: number
@@ -1787,7 +1787,7 @@
 #         ELSE 0
 #         END
   - dimension: returning_user_indicator
-    #description: Indicates the session is by a someone who has previously created an account
+    description: Indicates the session is by a someone who has previously created an account
     view_label: User Types
     label: Returning User Indicator (0/1)
     type: number
@@ -1801,7 +1801,7 @@
 
 
   - measure: count_of_returning_user_sessions
-    #description: Measurement to count the number of sessions for returning users
+    description: Measurement to count the number of sessions for returning users
     view_label: User Types
     label: Count of Returning User Sessions
     type: count_distinct
@@ -1813,7 +1813,7 @@
 
 # AMANE EXPIRED THE BELOW MEASURE ON JAN 22/2017
 #   - measure: count_of_returning_user_sessions
-#     #description: Measurement to count the number of sessions for returning users
+#     description: Measurement to count the number of sessions for returning users
 #     view_label: User Types
 #     label: Count of Returning User Sessions
 #     type: sum
@@ -1829,7 +1829,7 @@
 #         END
 
   - measure: count_of_distinct_returning_users
-    #description: Measurement to count sessions of unique returning users
+    description: Measurement to count sessions of unique returning users
     view_label: User Types
     label: Count Distinct of Returning Users (not sessions)
     type: count_distinct
@@ -1858,7 +1858,7 @@
 
 # AMANE DISABLED ON March 6/2017. Please get in touch with me if you need to use the dimension
   - dimension: user_warehouse_id
-    #description: The warehouse the visitor shopped (missing for sessions that don't go past modal)
+    description: The warehouse the visitor shopped (missing for sessions that don't go past modal)
     sql: ${warehouse_dim_fact_sessions.warehouse_code}
 
   - dimension: warehouse_code
@@ -1936,7 +1936,7 @@
     sql: ${TABLE}.total_order_discount_amount * 1.00
 
   - measure: total_discount_amount
-    #description: Total Discount received across all item orders during the session
+    description: Total Discount received across all item orders during the session
     view_label: Orders
     type: sum
     value_format: '$#,##0.00'
@@ -1947,7 +1947,7 @@
     sql: ${TABLE}.total_order_shipping_amount * 1.00
 
   - measure: total_shipping_amount
-    #description: Total shipping paid in all orders in the session
+    description: Total shipping paid in all orders in the session
     view_label: Orders
     type: sum
     value_format: '$#,##0.00'
@@ -1958,7 +1958,7 @@
     sql: ${TABLE}.total_order_tax_amount * 1.00
 
   - measure: total_tax_amount
-    #description: Total tax paid in all orders in the session
+    description: Total tax paid in all orders in the session
     view_label: Orders
     type: sum
     value_format: '$#,##0.00'
@@ -2001,7 +2001,7 @@
 #Sam you build Revenue fields and other fields below this
 
   - dimension: total_womens_search_indicator
-    #description: Indicates the session had 1+ Women's search
+    description: Indicates the session had 1+ Women's search
     label: Total Womens Search Indicator (0/1)
     view_label: Searches
     type: number
@@ -2020,7 +2020,7 @@
       END
 
   - measure: count_of_total_womens_search
-    #description: Measurement to count sessions with 1+ Women's search
+    description: Measurement to count sessions with 1+ Women's search
     view_label: Searches
     label: Count of Women's Search Indicator (0/1)
     type: sum
@@ -2039,7 +2039,7 @@
       END
 
   - dimension: total_boys_search_indicator
-    #description: Indicates the session had 1+ Boy's search
+    description: Indicates the session had 1+ Boy's search
     view_label: Searches
     label: Total Boys Search Indicator (0/1)
     type: number
@@ -2047,7 +2047,7 @@
        CASE WHEN ${count_of_shop_search_boys}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_boys_search
-    #description: Measurement to count sessions with 1+ Boy's search
+    description: Measurement to count sessions with 1+ Boy's search
     view_label: Searches
     label: Count of Boy's Search Indicator (0/1)
     type: sum
@@ -2055,7 +2055,7 @@
        CASE WHEN ${count_of_shop_search_boys}>0 THEN 1 ELSE 0 END
 
   - dimension: total_girls_search_indicator
-    #description: Indicates the session had 1+ Girl's search
+    description: Indicates the session had 1+ Girl's search
     view_label: Searches
     label: Total Girls Search Indicator (0/1)
     type: number
@@ -2063,7 +2063,7 @@
       CASE WHEN ${count_of_shop_search_girls}>0 THEN 1 ELSE 0 END
 
   - measure: count_of_girls_search
-    #description: Measurement to count sessions with 1+ Girl's search
+    description: Measurement to count sessions with 1+ Girl's search
     view_label: Searches
     label: Count of Girls Search Indicator (0/1)
     type: sum
@@ -2071,7 +2071,7 @@
       CASE WHEN ${count_of_shop_search_girls}>0 THEN 1 ELSE 0 END
 
   - dimension: count_of_any_search_indicator
-    #description: Indicates the session had 1+ search
+    description: Indicates the session had 1+ search
     view_label: Searches
     label: Any Search Indicator (0/1)
     type: number
@@ -2093,7 +2093,7 @@
       END
 
   - measure: count_of_any_search
-    #description: Measurement to count sessions with 1+ search
+    description: Measurement to count sessions with 1+ search
     view_label: Searches
     label: Count of Any Search Indicator (0/1)
     type: sum
@@ -2138,7 +2138,7 @@
          END
 
   -   dimension: session_channel
-      #description: The session's channel
+      description: The session's channel
       view_label: Session Channel
       label: Session Channel
       sql: |
@@ -2147,7 +2147,7 @@
         END
 
   -   dimension: session_subchannel
-      #description: The session's subchannel
+      description: The session's subchannel
       view_label: Session Channel
       label: Session Subchannel
       sql: |
@@ -2156,7 +2156,7 @@
         END
 
   -    dimension: session_referral_code
-       #description: The session's referral code
+       description: The session's referral code
 #       hidden: true
        view_label: Session Channel
        sql: ${TABLE}.referral_url_lp_referral_code
@@ -2165,14 +2165,14 @@
 ### Ray duplicate session_referral_code for filtering purpose
 
   -    dimension: session_referral_code_analysis
-       #description: The session's referral code for analytical purpose
+       description: The session's referral code for analytical purpose
 #       hidden: true
        view_label: Session Channel
        sql: ${TABLE}.referral_url_lp_referral_code
 
 
   -    dimension: session_referral_code_analysis_2
-       #description: The session's referral code for analytical purpose
+       description: The session's referral code for analytical purpose
 #       hidden: true
        view_label: Session Channel
        sql: ${TABLE}.referral_url_lp_referral_code
@@ -2182,7 +2182,7 @@
 ## CY changed dimension to a measure to resolve lookml deprecation error on Aug 9 2017
   -    measure: total_revenue
        label: Total Price
-       #description: Total price across all orders in the session
+       description: Total price across all orders in the session
        view_label: Orders
        type: number
        value_format: '$#,##0.00'
@@ -2192,7 +2192,7 @@
 
 # added by SRYU for MAC + marketing team
   - dimension: referring_url
-    #description: URL which the visit came from
+    description: URL which the visit came from
     view_label: Landing Page
     sql: CASE WHEN LENGTH(${TABLE}.referring_url)=0 THEN ${referral_url_lp} ELSE ${TABLE}.referring_url END
 
@@ -2328,7 +2328,7 @@
   - dimension: count_of_sort_by_filters_indicator
     label: Sort_by Filter Indicator (0/1)
     view_label: Filters
-    #description: Indicates the session had 1+ sort_by filter applied
+    description: Indicates the session had 1+ sort_by filter applied
     type: number
     sql: |
         CASE WHEN ${count_of_sort_filters}>0 THEN 1 ELSE 0 END
@@ -2336,7 +2336,7 @@
   - measure: count_of_sort_filters_by_session
     label: Count Sort_by Filter Indicator (0/1)
     view_label: Filters
-    #description: Measurement to count sessions with at least 1 sort_by filter applied
+    description: Measurement to count sessions with at least 1 sort_by filter applied
     type: sum
     sql: |
         CASE WHEN ${count_of_sort_filters}>0 THEN 1 ELSE 0 END
@@ -2351,7 +2351,7 @@
   - dimension: count_of_style_filters_indicator
     label: Style Filters Indicator (0/1)
     view_label: Filters
-    #description: Indicates the session had 1+ style filter applied
+    description: Indicates the session had 1+ style filter applied
     type: number
     sql: |
         CASE WHEN ${count_of_style_filters}>0 THEN 1 ELSE 0 END
@@ -2359,7 +2359,7 @@
   - measure: count_of_style_filters_by_session
     label: Count Style Filter Indicator (0/1)
     view_label: Filters
-    #description: Measurement to count sessions with at least 1 style filter applied
+    description: Measurement to count sessions with at least 1 style filter applied
     type: sum
     sql: |
         CASE WHEN ${count_of_style_filters}>0 THEN 1 ELSE 0 END
@@ -2374,7 +2374,7 @@
   - dimension: count_of_price_filters_indicator
     label: Price Filter Indicator (0/1)
     view_label: Filters
-    #description: Indicates the session had 1+ price filter applied
+    description: Indicates the session had 1+ price filter applied
     type: number
     sql: |
         CASE WHEN ${count_of_price_filters}>0 THEN 1 ELSE 0 END
@@ -2382,7 +2382,7 @@
   - measure: count_of_price_filters_by_session
     label: Count Price Filter Indicator (0/1)
     view_label: Filters
-    #description: Measurement to count sessions with at least 1 price filter applied
+    description: Measurement to count sessions with at least 1 price filter applied
     type: sum
     sql: |
         CASE WHEN ${count_of_price_filters}>0 THEN 1 ELSE 0 END
@@ -2397,7 +2397,7 @@
   - dimension: count_of_color_filters_indicator
     label: Color Filter Indicator (0/1)
     view_label: Filters
-    #description: Indicates the session had 1+ color filter applied
+    description: Indicates the session had 1+ color filter applied
     type: number
     sql: |
         CASE WHEN ${count_of_color_filters}>0 THEN 1 ELSE 0 END
@@ -2405,7 +2405,7 @@
   - measure: count_of_color_filters_by_session
     label: Count Color Filter Indicator (0/1)
     view_label: Filters
-    #description: Measurement to count sessions with at least 1 color filter applied
+    description: Measurement to count sessions with at least 1 color filter applied
     type: sum
     sql: |
         CASE WHEN ${count_of_color_filters}>0 THEN 1 ELSE 0 END
@@ -2420,7 +2420,7 @@
   - dimension: count_of_brand_filters_indicator
     label: Brand Filter Indicator (0/1)
     view_label: Filters
-    #description: Indicates the session had 1+ brand filter applied
+    description: Indicates the session had 1+ brand filter applied
     type: number
     sql: |
         CASE WHEN ${count_of_brand_filters}>0 THEN 1 ELSE 0 END
@@ -2428,7 +2428,7 @@
   - measure: count_of_brand_filters_by_session
     label: Count Brand Filter Indicator (0/1)
     view_label: Filters
-    #description: Measurement to count sessions with at least 1 brand filter applied
+    description: Measurement to count sessions with at least 1 brand filter applied
     type: sum
     sql: |
         CASE WHEN ${count_of_brand_filters}>0 THEN 1 ELSE 0 END
@@ -2443,7 +2443,7 @@
   - dimension: count_of_sizing_filters_indicator
     label: Sizing Filter Indicator (0/1)
     view_label: Filters
-    #description: Indicates the session had 1+ size filter applied
+    description: Indicates the session had 1+ size filter applied
     type: number
     sql: |
         CASE WHEN ${count_of_sizing_filters}>0 THEN 1 ELSE 0 END
@@ -2451,7 +2451,7 @@
   - measure: count_of_sizing_filters_by_session
     label: Count Sizing Filter Indicator (0/1)
     view_label: Filters
-    #description: Measurement to count sessions with at least 1 size filter applied
+    description: Measurement to count sessions with at least 1 size filter applied
     type: sum
     sql: |
         CASE WHEN ${count_of_sizing_filters}>0 THEN 1 ELSE 0 END
@@ -2475,7 +2475,7 @@
   - dimension: count_of_any_filters_indicator
     label: Any Filter Indicator (0/1)
     view_label: Filters
-    #description: Indicates the session had 1+ filter applied
+    description: Indicates the session had 1+ filter applied
     type: number
     sql: |
         CASE WHEN ${count_of_any_filters}>0 THEN 1 ELSE 0 END
@@ -2483,7 +2483,7 @@
   - measure: count_of_any_filters_by_session
     label: Count Any Filter Indicator (0/1)
     view_label: Filters
-    #description: Measurement to count sessions with at least 1 filter applied
+    description: Measurement to count sessions with at least 1 filter applied
     type: sum
     sql: |
         CASE WHEN ${count_of_any_filters}>0 THEN 1 ELSE 0 END
@@ -2491,13 +2491,13 @@
   # 2017/07/07 : Commented the dim and added the measure total_no_of_filters to remove lookml deprecation warnings by Gayatri P
 
 #   - dimension: total_no_of_filters
-#     #description: The number of filters applied in the session
+#     description: The number of filters applied in the session
 #     type: sum
 #     sql: ${count_of_sizing_filters}+${count_of_brand_filters}+${count_of_price_filters}
 #          +${count_of_sort_filters}+${count_of_style_filters}+${count_of_color_filters}
 
   - measure: total_no_of_filters
-    #description: The number of filters applied in the session
+    description: The number of filters applied in the session
     type: sum
     sql: ${count_of_sizing_filters}+${count_of_brand_filters}+${count_of_price_filters}
          +${count_of_sort_filters}+${count_of_style_filters}+${count_of_color_filters}
@@ -2514,7 +2514,7 @@
   - dimension: count_of_badassmoms_filters_indicator
     label: Badass Moms Indicator (0/1)
     view_label: Badass Moms
-    #description: Indicates the session had 1+ Badass Moms page load
+    description: Indicates the session had 1+ Badass Moms page load
     type: number
     sql: |
         CASE WHEN ${count_of_badassmoms}>0 THEN 1 ELSE 0 END
@@ -2522,7 +2522,7 @@
   - measure: count_of_badassmoms_filters_by_session
     label: Count Badass Mom Indicator (0/1)
     view_label: Badass Moms
-    #description: Measurement to count sessions with at least 1 Badass Mom page load
+    description: Measurement to count sessions with at least 1 Badass Mom page load
     type: sum
     sql: |
         CASE WHEN ${count_of_badassmoms}>0 THEN 1 ELSE 0 END
@@ -2539,19 +2539,19 @@
   # 2017/07/07 : Commented the dim and added the measure count_of_any_cleanout_navigation to remove lookml deprecation warnings by Gayatri P
 
 #   - dimension: count_of_any_cleanout_navigation
-#     #description: The number of cleanout navigation events in the session
+#     description: The number of cleanout navigation events in the session
 #     type: sum
 #     sql: ${TABLE}.count_of_any_cleanout_nav
 
   - measure: count_of_any_cleanout_navigation
-    #description: The number of cleanout navigation events in the session
+    description: The number of cleanout navigation events in the session
     type: sum
     sql: ${TABLE}.count_of_any_cleanout_nav
 
   - dimension: count_of_any_cleanout_nav_indicator
     label: Any Cleanout Page Indicator (0/1)
     view_label: Cleanout
-    #description: Indicates the session had 1+ Cleanout page views
+    description: Indicates the session had 1+ Cleanout page views
     type: number
     sql: |
         CASE WHEN ${count_of_any_cleanout_nav}>0 THEN 1 ELSE 0 END
@@ -2559,7 +2559,7 @@
   - measure: count_of_any_cleanout_nav_by_session
     label: Count Any Cleanout Page Indicator (0/1)
     view_label: Cleanout
-    #description: Measurement to count sessions with at least 1 cleanout page views
+    description: Measurement to count sessions with at least 1 cleanout page views
     type: sum
     sql: |
         CASE WHEN ${count_of_any_cleanout_nav}>0 THEN 1 ELSE 0 END
@@ -2578,7 +2578,7 @@
 #    hidden: true
     label: PDLP Indicator (0/1)
     view_label: PDLP
-    #description: Indicates the session had 1+ PDLP Views
+    description: Indicates the session had 1+ PDLP Views
     type: number
     sql: |
         CASE WHEN ${count_of_pdlp_page_views}>0 THEN 1 ELSE 0 END
@@ -2587,7 +2587,7 @@
 #    hidden: true
     label: Count PDLP Indicator (0/1)
     view_label: PDLP
-    #description: Measurement to count sessions with at least 1 PDLP view
+    description: Measurement to count sessions with at least 1 PDLP view
     type: sum
     sql: |
         CASE WHEN ${count_of_pdlp_page_views}>0 THEN 1 ELSE 0 END
@@ -2622,7 +2622,7 @@
 
   - dimension: is_bounced
     label: Bounced Session Indicator (0/1)
-    #description: Indicates if a user bounces from the site (spends 0 seconds)
+    description: Indicates if a user bounces from the site (spends 0 seconds)
     view_label: Fact Sessions
     type: number
     sql: |
@@ -2632,7 +2632,7 @@
 
   - measure: count_of_bounced_sessions
     label: Count of Bounced Sessions Indicator (0/1)
-    #description: Measurement to count sessions where a user bounces from the site
+    description: Measurement to count sessions where a user bounces from the site
     view_label: Fact Sessions
     type: sum
     sql: |
@@ -2649,7 +2649,7 @@
 
   - dimension: signup_modal_indicator
     label: Signup Modal Indicator (0/1)
-    #description: Indicates the session had at least 1 signup modal view
+    description: Indicates the session had at least 1 signup modal view
     view_label: Modal
     type: number
     sql: |
@@ -2657,7 +2657,7 @@
 
   - measure: signup_modal_count
     label: Count Signup Modal Indicator (0/1)
-    #description: Measurement to count sessions with at least 1 signup modal view
+    description: Measurement to count sessions with at least 1 signup modal view
     view_label: Modal
     type: sum
     sql: ${signup_modal_indicator}
