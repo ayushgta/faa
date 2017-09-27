@@ -1,4 +1,5 @@
 - view: accidents
+  sql_table_name: accidents_yo
   fields:
     
     - dimension: event_id
