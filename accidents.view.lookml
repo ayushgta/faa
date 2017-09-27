@@ -116,11 +116,6 @@
         amateur_built: "Yes"
       drill_fields: detail*
 
-    - measure: dion_test
-      label: Test of Sum-Count
-      sql: sum(${number_fatal_injuries})/sum({amateur_built_count}
-
-
     - measure: country_count
       type: count_distinct
       sql: ${country}

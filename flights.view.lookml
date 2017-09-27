@@ -23,6 +23,14 @@
       type: time
       timeframes: [time, date, hour, hour_of_day, day_of_week, day_of_week_index, time_of_day, week, month_num, month, year]
       sql: ${TABLE}.dep_time
+    
+    - measure: earliest_depart
+      type: date
+      sql: MIN(${TABLE}.dep_time)
+    
+    - measure: latest_depart
+      type: date
+      sql: MAX(${TABLE}.dep_time)
       
     - filter: date_filter
       
