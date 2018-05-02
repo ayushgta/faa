@@ -3,7 +3,9 @@
   fields:
     - dimension: code                   # sql defaults to ${TABLE}.code  
       primary_key: true
-      
+ 
+
+     
     - dimension: city                   # sql defaults to ${TABLE}.city
     - dimension: state
     - dimension: full_name
