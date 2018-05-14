@@ -49,8 +49,7 @@
       label: Total Fatalities
       type: sum
       sql: ${number_fatal_injuries}
-      
-      
+    
     - dimension: number_serious_injuries
       type: number
       sql: ${TABLE}.number_of_serious_injuries
@@ -73,12 +72,12 @@
     - dimension: latitude
       type: number
       value_format_name: decimal_4
-      hidden: true
+#       hidden: true
 
     - dimension: longitude
       type: number
       value_format_name: decimal_4
-      hidden: true
+#       hidden: true
       
     - dimension: coordinates
       type: location
@@ -104,7 +103,7 @@
 
     - dimension: amateur_built
       type: yesno
-      sql: amateur_built = "Yes"
+      sql: amateur_built = 'Yes'
 
     - measure: count
       type: count

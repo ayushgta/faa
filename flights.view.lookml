@@ -6,6 +6,7 @@
         FROM ontime 
         WHERE dep_time > '1960-01-01'
     sortkeys: [dep_time]
+    distkey: id2
     persist_for: 5000 hours
 #     sql_trigger_value: SELECT COUNT(*) FROM ontime
     
@@ -22,6 +23,14 @@
       type: time
       timeframes: [time, date, hour, hour_of_day, day_of_week, day_of_week_index, time_of_day, week, month_num, month, year]
       sql: ${TABLE}.dep_time
+    
+    - measure: earliest_depart
+      type: date
+      sql: MIN(${TABLE}.dep_time)
+    
+    - measure: latest_depart
+      type: date
+      sql: MAX(${TABLE}.dep_time)
       
     - filter: date_filter
       
@@ -153,7 +162,6 @@
 
     - measure: percent_verylate
       type: number
-      value_format: '#.00\%'
       sql: 100.0 * ${verylate_count}/NULLIF(${count},0)
       value_format_name: decimal_2
       
@@ -177,13 +185,11 @@
       type: number
       value_format_name: decimal_2
       sql: 100.00 * ${cancelled_count}/${count}
-      value_format: '#.00\%'
 
     - measure: percent_complete
       type: number
       value_format_name: decimal_2
       sql: 100.00 - ${percent_cancelled}
-      value_format: '#.00\%'
 
     - measure: diverted_count
       type: count

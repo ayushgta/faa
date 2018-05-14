@@ -1,6 +1,7 @@
 - view: commercial_airports
   derived_table:
     persist_for: 500 hours
+    distkey: code
     sortkeys: [code]
     sql:
       WITH codes AS (
