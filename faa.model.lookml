@@ -9,6 +9,17 @@
 - datagroup: faa_datagroup
   max_cache_age: "1 minute"
 
+- explore: aryeh
+  view: aryeh_view
+  
+- view: aryeh_view
+  derived_table:
+     sql: SELECT 1 as a,2 as b,3 as c UNION ALL SELECT 2,3,4 UNION ALL SELECT 3,4,5
+  fields:
+    - dimension: a
+    - dimension: b
+    - dimension: c
+
 - explore: flights
   suggestions: false
   view: flights

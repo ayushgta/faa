@@ -32,6 +32,7 @@
     - dimension: owner_name
       sql: ${TABLE}.name      
     - dimension: city
+      drill_fields: [state]
     - dimension: state
       
   sets:
