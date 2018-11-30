@@ -8,4 +8,4 @@
   - name: "hi"
     # explore: "stuff"
     # dimensions: ['stuff.issue_number']
-    # type: table
+    type: table
