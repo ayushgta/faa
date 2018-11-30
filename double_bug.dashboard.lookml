@@ -6,6 +6,6 @@
     height: 100
   elements:
   - name: "hi"
-    # explore: "stuff"
-    # dimensions: ['stuff.issue_number']
+    explore: flights
+    dimensions: flights.depart_hour_of_day
     type: table
