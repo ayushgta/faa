@@ -1,4 +1,4 @@
-- dashboard: double_bug
+- dashboard: double_bugger
   title: Double Bug
   layout: grid
   rows:
