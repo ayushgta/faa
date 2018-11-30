@@ -2,7 +2,7 @@
   title: Double Bug
   layout: grid
   rows:
-  - elements: ['hi', 'hi']
+  - elements: ['hi', 'hello']
     height: 100
   elements:
   - name: "hi"
