@@ -1,5 +1,5 @@
 - dashboard: double_bugger
-  title: Double Bug
+  title: Double Bugger
   layout: grid
   rows:
   - elements: ['hi', 'hello']
