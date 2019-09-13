@@ -66,7 +66,7 @@
       sql_on: ${aircraft.aircraft_model_code} = ${aircraft_models.aircraft_model_code}
       relationship: many_to_one
 
-    - join: aircraft_typesy
+    - join: aircraft_types
       sql_on: ${aircraft_models.aircraft_type_id} = ${aircraft_types.aircraft_type_id}
       relationship: many_to_one
 
