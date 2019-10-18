@@ -94,8 +94,8 @@
     - dimension: far_description      
     - dimension: schedule
     - dimension: purpose_of_flight
-    - dimension: air_carrier
-      sql: TRIM(${TABLE}.air_carrier)
+#     - dimension: air_carrier
+#       sql: TRIM(${TABLE}.air_carrier)
     - dimension: weather_condition
     - dimension: broad_phase_of_flight
     - dimension: report_status
