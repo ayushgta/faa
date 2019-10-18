@@ -10,7 +10,7 @@
   view: flights
   joins:
     - join: carriers
-      sql_on: ${flights.carrier} = ${carriers.name}  #${carriers.code}
+      sql_on: ${flights.carrier} = ${carriers.code}
       relationship: many_to_one
 
     - join: aircraft_models
