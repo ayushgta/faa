@@ -94,8 +94,8 @@
     - dimension: far_description      
     - dimension: schedule
     - dimension: purpose_of_flight
-#     - dimension: air_carrier
-#       sql: TRIM(${TABLE}.air_carrier)
+    - dimension: air_carrier
+      sql: TRIM(${TABLE}.air_carrier)
     - dimension: weather_condition
     - dimension: broad_phase_of_flight
     - dimension: report_status
@@ -105,54 +105,54 @@
       type: yesno
       sql: amateur_built = 'Yes'
 
-    - measure: count
-      type: count
-      drill_fields: detail*
-
-    - measure: amateur_built_count
-      type: count
-      filters: 
-        amateur_built: "Yes"
-      drill_fields: detail*
-
-    - measure: country_count
-      type: count_distinct
-      sql: ${country}
-      drill_fields: {base: [country, count, total_fatalities]}
-  
-    - measure: percent_amateur_built
-      type: number
-      sql: 100.0* ${amateur_built_count}/NULLIF(${count},0)
-
-    - measure: us_accidents_count
-      type: count
-      filters: 
-        country: United States
-      drill_fields: [detail*, -country]
-
-    - measure: minor_accidents_count
-      type: count
-      drill_fields: detail*
-      filters: 
-        severity: Minor
-
-    - measure: incident_accidents_count
-      type: count
-      drill_fields: detail*
-      filters: 
-        severity: Incident
-
-    - measure: serious_accidents_count
-      type: count
-      drill_fields: detail*
-      filters: 
-        severity: Serious
-
-    - measure: fatal_accidents_count
-      type: count
-      drill_fields: detail*
-      filters: 
-        severity: Fatal
+#     - measure: count
+#       type: count
+#       drill_fields: detail*
+# 
+#     - measure: amateur_built_count
+#       type: count
+#       filters: 
+#         amateur_built: "Yes"
+#       drill_fields: detail*
+# 
+#     - measure: country_count
+#       type: count_distinct
+#       sql: ${country}
+#       drill_fields: {base: [country, count, total_fatalities]}
+#   
+#     - measure: percent_amateur_built
+#       type: number
+#       sql: 100.0* ${amateur_built_count}/NULLIF(${count},0)
+# 
+#     - measure: us_accidents_count
+#       type: count
+#       filters: 
+#         country: United States
+#       drill_fields: [detail*, -country]
+# 
+#     - measure: minor_accidents_count
+#       type: count
+#       drill_fields: detail*
+#       filters: 
+#         severity: Minor
+# 
+#     - measure: incident_accidents_count
+#       type: count
+#       drill_fields: detail*
+#       filters: 
+#         severity: Incident
+# 
+#     - measure: serious_accidents_count
+#       type: count
+#       drill_fields: detail*
+#       filters: 
+#         severity: Serious
+# 
+#     - measure: fatal_accidents_count
+#       type: count
+#       drill_fields: detail*
+#       filters: 
+#         severity: Fatal
 
   sets: 
     detail: 
