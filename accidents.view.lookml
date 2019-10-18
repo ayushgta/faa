@@ -28,27 +28,14 @@
     - dimension: number_injured
       type: number
       sql: ${number_serious_injuries} + ${number_minor_injuries}
-
-    - measure: total_injured
-      type: sum
-      sql: ${number_injured}
-
+    
     - dimension: uninjured
       sql: ${TABLE}.number_of_uninjured
-
-    - measure: total_uninjured
-      type: sum
-      sql: ${uninjured}
 
     - dimension: number_fatal_injuries
       type: number
       sql: NULLIF(${TABLE}.number_of_fatalities, '')
 #       sql: ${TABLE}.number_of_fatalities
-
-    - measure: total_fatalities
-      label: Total Fatalities
-      type: sum
-      sql: ${number_fatal_injuries}
     
     - dimension: number_serious_injuries
       type: number
@@ -104,6 +91,19 @@
     - dimension: amateur_built
       type: yesno
       sql: amateur_built = 'Yes'
+      
+#     - measure: total_fatalities
+#       label: Total Fatalities
+#       type: sum
+#       sql: ${number_fatal_injuries}
+#       
+#     - measure: total_injured
+#       type: sum
+#       sql: ${number_injured}
+# 
+#     - measure: total_uninjured
+#       type: sum
+#       sql: ${uninjured}
 
 #     - measure: count
 #       type: count
