@@ -92,67 +92,67 @@
       type: yesno
       sql: amateur_built = 'Yes'
       
-#     - measure: total_fatalities
-#       label: Total Fatalities
-#       type: sum
-#       sql: ${number_fatal_injuries}
-#       
-#     - measure: total_injured
-#       type: sum
-#       sql: ${number_injured}
-# 
-#     - measure: total_uninjured
-#       type: sum
-#       sql: ${uninjured}
+    - measure: total_fatalities
+      label: Total Fatalities
+      type: sum
+      sql: ${number_fatal_injuries}
+      
+    - measure: total_injured
+      type: sum
+      sql: ${number_injured}
 
-#     - measure: count
-#       type: count
-#       drill_fields: detail*
-# 
-#     - measure: amateur_built_count
-#       type: count
-#       filters: 
-#         amateur_built: "Yes"
-#       drill_fields: detail*
-# 
-#     - measure: country_count
-#       type: count_distinct
-#       sql: ${country}
-#       drill_fields: {base: [country, count, total_fatalities]}
-#   
-#     - measure: percent_amateur_built
-#       type: number
-#       sql: 100.0* ${amateur_built_count}/NULLIF(${count},0)
-# 
-#     - measure: us_accidents_count
-#       type: count
-#       filters: 
-#         country: United States
-#       drill_fields: [detail*, -country]
-# 
-#     - measure: minor_accidents_count
-#       type: count
-#       drill_fields: detail*
-#       filters: 
-#         severity: Minor
-# 
-#     - measure: incident_accidents_count
-#       type: count
-#       drill_fields: detail*
-#       filters: 
-#         severity: Incident
-# 
-#     - measure: serious_accidents_count
-#       type: count
-#       drill_fields: detail*
-#       filters: 
-#         severity: Serious
-# 
-#     - measure: fatal_accidents_count
-#       type: count
-#       drill_fields: detail*
-#       filters: 
-#         severity: Fatal
+    - measure: total_uninjured
+      type: sum
+      sql: ${uninjured}
+
+    - measure: count
+      type: count
+      drill_fields: detail*
+
+    - measure: amateur_built_count
+      type: count
+      filters: 
+        amateur_built: "Yes"
+      drill_fields: detail*
+
+    - measure: country_count
+      type: count_distinct
+      sql: ${country}
+      drill_fields: {base: [country, count, total_fatalities]}
+  
+    - measure: percent_amateur_built
+      type: number
+      sql: 100.0* ${amateur_built_count}/NULLIF(${count},0)
+
+    - measure: us_accidents_count
+      type: count
+      filters: 
+        country: United States
+      drill_fields: [detail*, -country]
+
+    - measure: minor_accidents_count
+      type: count
+      drill_fields: detail*
+      filters: 
+        severity: Minor
+
+    - measure: incident_accidents_count
+      type: count
+      drill_fields: detail*
+      filters: 
+        severity: Incident
+
+    - measure: serious_accidents_count
+      type: count
+      drill_fields: detail*
+      filters: 
+        severity: Serious
+
+    - measure: fatal_accidents_count
+      type: count
+      drill_fields: detail*
+      filters: 
+        severity: Fatal
 
   sets: 
     detail: 
