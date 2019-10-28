@@ -19,7 +19,7 @@ To play along with this analysis start by selecting **[Explore Flights](/explore
 
 Let's count Flights and Seats.
 
-<look height="100" width="300">
+<look height="100" width="300" name="look1">
   model: faa
   explore: flights
   measures: [flights.count, flights.total_seats]
@@ -29,11 +29,18 @@ In our database, we have 38M flights with a total seating capacity of 4B seats. 
 
 The SQL that Looker creates for this query is:
 
-<sql height="200" width="100%">
-  model: faa #-
-  explore: flights
-  measures: [flights.count, flights.total_seats]
-</sql>
+```sql
+-- use existing flights in looker_scratch1.LR$KZTEL36IXL1CYCGQ0UNOD_flights
+SELECT 
+  COUNT(*) AS "flights.count",
+  COALESCE(SUM(aircraft_models.seats),0) AS "flights.total_seats"
+FROM looker_scratch1.LR$KZTEL36IXL1CYCGQ0UNOD_flights AS flights
+LEFT JOIN aircraft ON flights.tail_num = aircraft.tail_num
+LEFT JOIN aircraft_models ON aircraft.aircraft_model_code = aircraft_models.aircraft_model_code
+
+ORDER BY 1 DESC
+LIMIT 500
+```
 
 ## How do we find airports?
 
@@ -85,7 +92,7 @@ We see that Saturday has the most activity, and flights look like they gear up t
 
 ## Do seasons matter?
 
-Vale is a ski resort, right? That means we should see seasonal variation in the flight capacities. Let's add in the month number to look at flights for the whole year. Test your pivoting skills by applying pivots for the day of week. Your results should look like the below:
+Vail is a ski resort, right? That means we should see seasonal variation in the flight capacities. Let's add in the month number to look at flights for the whole year. Test your pivoting skills by applying pivots for the day of week. Your results should look like the below:
 
 
 <look height="350" width="100%">
@@ -118,7 +125,7 @@ There you go!  We can clearly see that December, January, Febuary and March are 
 
 ## Where are all those skiiers coming from?
 
-Let's take a look at where all these Vail lovers come from.  The best way to start a new exploration. We'll select origin city (a dimension) and continue to use flight counts as our measure. By not including a filter that specifies a year, we're inherently looking at all-time data from our database. This means we have a multi year look.
+Let's take a look at where all these Vail lovers come from.  The best way is to start a new exploration. We'll select origin city (a dimension) and continue to use flight counts as our measure. By not including a filter that specifies a year, we're inherently looking at all-time data from our database. This means we have a multi year look.
 
 <look height="350" width="100%">
   model: faa

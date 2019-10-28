@@ -3,10 +3,10 @@
     
     - dimension: event_id
       primary_key: true
-      html: |
-        {{ linked_value }}
-        <a href="http://www.ntsb.gov/aviationquery/brief.aspx?ev_id={{ value }}" >
-           <img src=/images/arrow-black-right.png></a>
+     # html: |
+    #    {{ linked_value }}
+    #    <a href="http://www.ntsb.gov/aviationquery/brief.aspx?ev_id={{ value }}" >
+    #       <img src=/images/arrow-black-right.png></a>
 
     - dimension: registration_number
     - dimension: investigation_type
@@ -29,30 +29,16 @@
     - dimension: number_injured
       type: number
       sql: ${number_serious_injuries} + ${number_minor_injuries}
-
-    - measure: total_injured
-      type: sum
-      sql: ${number_injured}
-
+    
     - dimension: uninjured
       type: number
       sql: ${TABLE}.number_of_uninjured
-
-    - measure: total_uninjured
-      type: sum
-      sql: ${uninjured}
 
     - dimension: number_fatal_injuries
       type: number
       sql: NULLIF(${TABLE}.number_of_fatalities, '')
 #       sql: ${TABLE}.number_of_fatalities
-
-    - measure: total_fatalities
-      label: Total Fatalities
-      type: sum
-      sql: ${number_fatal_injuries}
-      
-      
+    
     - dimension: number_serious_injuries
       type: number
       sql: ${TABLE}.number_of_serious_injuries
@@ -74,13 +60,13 @@
 
     - dimension: latitude
       type: number
-      decimals: 4
-      hidden: true
+      value_format_name: decimal_4
+#       hidden: true
 
     - dimension: longitude
       type: number
-      decimals: 4
-      hidden: true
+      value_format_name: decimal_4
+#       hidden: true
       
     - dimension: coordinates
       type: location
@@ -108,7 +94,20 @@
 
     - dimension: amateur_built
       type: yesno
-      sql: amateur_built = "Yes"
+      sql: amateur_built = 'Yes'
+      
+    - measure: total_fatalities
+      label: Total Fatalities
+      type: sum
+      sql: ${number_fatal_injuries}
+      
+    - measure: total_injured
+      type: sum
+      sql: ${number_injured}
+
+    - measure: total_uninjured
+      type: sum
+      sql: ${uninjured}
 
     - measure: count
       type: count

@@ -1,23 +1,29 @@
-
 #--------------------------------------------------
 
 - dashboard: faa_demo
   title: Travel Overview
   layout: tile
   tile_size: 100
-    
+
   filters:
   - name: date
     title: "Date"
     type: date_filter
     default_value: 2005
-    
+
   - name: state
     title: "Origin State"
     type: field_filter
     explore: airports
     field: airports.state
-     
+    
+  - name: city_filter
+    title: "Origin City"
+    type: field_filter
+    explore: airports
+    field: airports.city
+    listens_to_filters: [state]
+
 
   elements:
 
@@ -45,7 +51,7 @@
       date: flights.depart_date
     width: 4
     height: 3
-      
+
   - name: total_routes
     title: Total Routes
     type: single_value
@@ -60,7 +66,7 @@
       date: flights.depart_date
     width: 4
     height: 3
-  
+
   - name: add_a_unique_name_869
     title: Monthly Flights by Status
     type: looker_area
@@ -72,7 +78,7 @@
     colors: ['#485963','#fcd15c','#00b2d8','#446c80',orange, redorange]
     listen:
       date: flights.depart_date
-      state: origin.state 
+      state: origin.state
     sorts: [flights.depart_month desc]
     limit: 500
     total: false
@@ -98,9 +104,9 @@
     dimensions: [flights.depart_month]
     measures: [flights.count]
     sorts: [flights.depart_month]
-    listen: 
+    listen:
       date: flights.depart_date
-      state: origin.state 
+      state: origin.state
     limit: 500
     reference_lines:
       - value: [median]
@@ -130,9 +136,9 @@
     dimensions: [origin.state]
     measures: [flights.count]
     sorts: [flights.count desc]
-    listen: 
+    listen:
       date: flights.depart_date
-      state: origin.state 
+      state: origin.state
     colors: orange
     limit: 500
     total: false
@@ -141,7 +147,7 @@
     quantize_colors: false
     loading: false
     outer_border_color: orange
-  
+
   - name: airport_count_location_geomap
     title: Airport Count by Location
     type: looker_geo_coordinates
@@ -187,7 +193,7 @@
     x_axis_scale: auto
     show_null_labels: false
 
-  
+
   - name: add_a_unique_name_820
     title: Carrier Stats
     type: table
@@ -201,9 +207,6 @@
       state: origin.state
       date: flights.depart_date
     total: false
-
-
-
 
 
 

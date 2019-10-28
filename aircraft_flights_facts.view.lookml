@@ -8,6 +8,7 @@
       FROM ontime AS f
       GROUP BY tail_num
     sortkeys: [tail_num]
+    distkey: tail_num
     persist_for: 2000 hours
  
   fields:
@@ -15,14 +16,14 @@
       primary_key: true
     
     - dimension: lifetime_distance
-      type: int
+      type: number
     
     - dimension: lifetime_flights
-      type: int
+      type: number
     
     - dimension: distance_per_flight
       type: number
-      decimals: 2
+      value_format_name: decimal_2
       sql: 1.0 * ${lifetime_distance}/NULLIF(${lifetime_flights},0)
     
     - dimension: lifetime_distance_tier
